@@ -57,6 +57,7 @@ nav {
 .nav-button-wrapper {
     position: relative;
     display: inline-block;
+    border-radius: 20px;
 }
 
 .nav-button-wrapper::before {
@@ -90,6 +91,13 @@ nav button {
     border-radius: 20px;
     overflow: hidden;
     z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.4s ease;
+}
+
+/* Smooth lift on hover */
+.nav-button-wrapper:hover button {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 
 /* Contact dropdown */
@@ -177,10 +185,11 @@ nav button {
     animation: gradient-shift 5s linear infinite;
 }
 .feed-item:hover {
-    transform: translateY(-5px) scale(1.02);
+    transform: scale(1.02);
     box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 
+/* Gradient animation keyframes */
 @keyframes gradient-shift {
     0% { background-position: 0% 50%; }
     100% { background-position: 400% 50%; }
