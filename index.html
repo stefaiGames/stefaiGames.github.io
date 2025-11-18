@@ -272,7 +272,7 @@ nav button {
     .feature.reverse, .product-card.reverse { flex-direction: column; }
     .feature img, .product-card img { width:90%; height:auto; }
     header { padding:12px 18px }
-    nav { gap:10px }
+    nav { gap:10px; flex-wrap: wrap; justify-content: center; }
 }
 </style>
 </head>
@@ -292,8 +292,7 @@ nav button {
         <!-- Asset Store icon -->
         <div class="nav-button-wrapper"><button class="icon-button" aria-label="Unity Asset Store" onclick="location.href='mailto:stefai.games.unity@gmail.com'"><img src="unity.png" alt="Unity"></button></div>
         <!-- Email icon -->
-        <div class="nav-button-wrapper"><button class="icon-button" aria-label="Support Email" onclick="location.href='mailto:stefai.games.unity@gmail.com'"><img src="g
-		mail.png" alt="Email"></button></div>
+        <div class="nav-button-wrapper"><button class="icon-button" aria-label="Support Email" onclick="location.href='mailto:stefai.games.unity@gmail.com'"><img src="gmail.png" alt="Email"></button></div>
         <!-- More contacts dropdown -->
         <div class="nav-button-wrapper other-contacts-wrapper">
             <button id="otherBtn" class="other-contacts-button">More contacts</button>
@@ -310,7 +309,7 @@ nav button {
 <!-- Banner -->
 <section class="banner">
     <img src="banner.png" alt="Stefai Games Banner">
-    <p>We build tools that remove friction from game development. Everything we create exists to make Unity simpler, faster, and more enjoyable.</p>
+    <p>Whether you want to build or play games, we’ve got you covered. Our tools make development easier, while our games help you unwind.</p>
 </section>
 
 <!-- Assets section -->
@@ -357,11 +356,11 @@ nav button {
     <div class="container">
         <h2 class="h1">Newest Product</h2>
         <a href="https://newest.stefaigames.com" class="backlight-wrapper">
-            <div class="product-card" style="padding: 50px 40px;">
+            <div class="product-card reverse" style="padding: 50px 40px;">
+                <img src="newest.png" alt="Newest product">
                 <div class="product-text">
                     <p>MiniTool — small helper utility focused on ergonomic tools and rapid iteration.</p>
                 </div>
-                <img src="newest.png" alt="Newest product">
             </div>
         </a>
     </div>
