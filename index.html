@@ -70,7 +70,6 @@ nav {
     align-items: center;
     gap: 14px;
     justify-content: flex-end;
-    position: relative;
 }
 
 /* Generic button wrapper for underglow */
@@ -111,63 +110,6 @@ nav button {
     transform: scale(1.06);
     box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
-
-/* Icon-only buttons */
-.icon-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    border-radius: 50px;
-    background: rgba(16,27,43,0.9);
-    border: none;
-    cursor: pointer;
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
-}
-.icon-button img { width: 22px; height: 22px; }
-.icon-button:hover {
-    transform: scale(1.04);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
-}
-
-/* Dropdown for more contacts */
-.other-contacts-wrapper { position: relative; display: inline-block; }
-.other-contacts-button {
-    padding: 8px 14px;
-    border-radius: 30px;
-    background: rgba(16,27,43,0.9);
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 0.95rem;
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
-}
-.other-contacts-button:hover { transform: scale(1.04); box-shadow:0 8px 20px rgba(0,0,0,0.45); }
-
-.dropdown {
-    position: absolute;
-    top: calc(100%);
-    right: 0;
-    min-width: 160px;
-    background: var(--dark-blue-header);
-    border-radius: 10px;
-    overflow: hidden;
-    max-height: 0;
-    pointer-events: none;
-    transition: max-height 0.36s ease;
-    z-index: 2000;
-}
-.dropdown.show { max-height: 420px; pointer-events: auto; }
-.dropdown a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 14px;
-    text-decoration: none;
-    color: white;
-}
-.dropdown a img { width: 20px; height: 20px; }
-.dropdown a:hover { background: rgba(255,255,255,0.06); }
 
 /* Banner section */
 .banner {
@@ -237,8 +179,6 @@ nav button {
 }
 .feature img { width: 200px; height: auto; flex-shrink:0; }
 .feature .text { flex:1; }
-
-/* Reverse blocks */
 .feature.reverse { flex-direction: row-reverse; }
 
 /* Product cards */
@@ -255,15 +195,73 @@ nav button {
 }
 .product-card img { width:200px; height:auto; flex-shrink:0; }
 .product-card .product-text { flex:1; }
-
-/* Reverse product */
 .product-card.reverse { flex-direction: row-reverse; }
+
+/* Footer */
+footer {
+    background-color: var(--dark-blue-header);
+    padding: 40px 20px;
+    margin-top: 40px;
+}
+footer .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+footer a {
+    text-decoration: none;
+    color: white;
+}
+footer .footer-button-wrapper {
+    position: relative;
+    display: inline-block;
+    border-radius: 20px;
+}
+footer .footer-button-wrapper::before {
+    content:"";
+    position: absolute;
+    top:-5px; left:-5px;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    border-radius: 20px;
+    background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink));
+    background-size: 400%;
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index:-1;
+}
+footer .footer-button-wrapper:hover::before {
+    opacity:0.85;
+    animation: gradient-shift 10s linear infinite;
+}
+footer .footer-button {
+    padding: 12px 24px;
+    border-radius: 20px;
+    background: rgba(16,27,43,0.9);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    z-index: 1;
+}
+footer .footer-button-wrapper:hover .footer-button {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+footer p {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #aaa;
+}
 
 /* Utilities */
 .h1 { font-size:1.8rem; text-align:center; margin:12px 0 6px; }
 .lead { color:#ddd; text-align:center; margin-bottom:8px; }
 
-/* Gradient animation */
 @keyframes gradient-shift { 0% { background-position:0% 50%; } 100% { background-position:400% 50%; } }
 
 /* Responsive */
@@ -279,40 +277,20 @@ nav button {
 <body>
 
 <header>
-    <!-- Logo -->
     <div class="logo-wrapper">
         <a href="https://stefaigames.github.io/"><img src="logo.png" alt="Stefai Games logo"></a>
     </div>
-
     <nav>
-        <!-- Assets button -->
         <div class="nav-button-wrapper"><button onclick="location.href='https://assets.stefaigames.com'">Assets</button></div>
-        <!-- Games button -->
         <div class="nav-button-wrapper"><button onclick="location.href='https://games.stefaigames.com'">Games</button></div>
-        <!-- Asset Store icon -->
-        <div class="nav-button-wrapper"><button class="icon-button" aria-label="Unity Asset Store" onclick="location.href='mailto:stefai.games.unity@gmail.com'"><img src="unity.png" alt="Unity"></button></div>
-        <!-- Email icon -->
-        <div class="nav-button-wrapper"><button class="icon-button" aria-label="Support Email" onclick="location.href='mailto:stefai.games.unity@gmail.com'"><img src="gmail.png" alt="Email"></button></div>
-        <!-- More contacts dropdown -->
-        <div class="nav-button-wrapper other-contacts-wrapper">
-            <button id="otherBtn" class="other-contacts-button">More contacts</button>
-            <div class="dropdown" id="otherDropdown">
-                <a href="https://www.instagram.com/stefaigames/"><img src="instagram.png" alt="IG"> Instagram</a>
-                <a href="https://www.youtube.com/@StefaiGames"><img src="youtube.png" alt="YT"> YouTube</a>
-                <a href="#"><img src="linkedin.png" alt="LI"> LinkedIn</a>
-                <a href="https://www.reddit.com/user/stefai_games/"><img src="reddit.png" alt="RD"> Reddit</a>
-            </div>
-        </div>
     </nav>
 </header>
 
-<!-- Banner -->
 <section class="banner">
     <img src="banner.png" alt="Stefai Games Banner">
     <p>Whether you want to build or play games, we’ve got you covered. Our tools make development easier, while our games help you unwind.</p>
 </section>
 
-<!-- Assets section -->
 <section class="section">
     <div class="container">
         <h2 class="h1">Build With Us</h2>
@@ -325,7 +303,6 @@ nav button {
     </div>
 </section>
 
-<!-- Games section -->
 <section class="section">
     <div class="container">
         <h2 class="h1">Play With Us</h2>
@@ -338,7 +315,6 @@ nav button {
     </div>
 </section>
 
-<!-- Hero product -->
 <section class="section">
     <div class="container">
         <h2 class="h1">Hero Product</h2>
@@ -351,7 +327,6 @@ nav button {
     </div>
 </section>
 
-<!-- Newest product -->
 <section class="section">
     <div class="container">
         <h2 class="h1">Newest Product</h2>
@@ -366,17 +341,16 @@ nav button {
     </div>
 </section>
 
-<script>
-// More contacts dropdown
-const otherBtn = document.getElementById('otherBtn');
-const otherDropdown = document.getElementById('otherDropdown');
-const otherWrapper = otherDropdown.parentElement;
-
-otherBtn.addEventListener('click', () => { otherDropdown.classList.toggle('show'); });
-otherWrapper.addEventListener('mouseenter', () => { /* hover keeps it open */ });
-otherWrapper.addEventListener('mouseleave', () => { otherDropdown.classList.remove('show'); });
-document.addEventListener('click', e => { if (!otherWrapper.contains(e.target)) otherDropdown.classList.remove('show'); });
-</script>
+<footer>
+    <div class="footer-container">
+        <div class="footer-button-wrapper"><a href="mailto:stefai.games.unity@gmail.com"><div class="footer-button">Email</div></a></div>
+        <div class="footer-button-wrapper"><a href="https://www.instagram.com/stefaigames/"><div class="footer-button">Instagram</div></a></div>
+        <div class="footer-button-wrapper"><a href="https://www.youtube.com/@StefaiGames"><div class="footer-button">YouTube</div></a></div>
+        <div class="footer-button-wrapper"><a href="https://www.reddit.com/user/stefai_games/"><div class="footer-button">Reddit</div></a></div>
+        <div class="footer-button-wrapper"><a href="#"><div class="footer-button">LinkedIn</div></a></div>
+    </div>
+    <p>© 2025 Stefai Games. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
