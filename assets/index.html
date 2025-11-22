@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stefai Games Assets</title>
 <link rel="icon" href="../Images/logo.png" type="image/png">
+
 <style>
 :root {
     --pink: #ff3366;
@@ -13,12 +14,14 @@
     --dark-blue-header: #0B1522;
     --dark-blue-feed: #101b2b;
     --dark-blue-alt: #121f33;
+    --intro-bg: #0f1a27;
+    --category-bg: #0d1622;
     --card-bg: rgba(16,27,43,0.9);
     --button-bg: rgba(16,27,43,0.9);
 }
 
-/* Reset */
 * { margin:0; padding:0; box-sizing:border-box; }
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: var(--dark-blue-feed);
@@ -26,7 +29,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Header */
+/* HEADER (unchanged) */
 header {
     position: sticky;
     top: 0;
@@ -42,32 +45,13 @@ header {
 .logo-wrapper {
     position: relative;
     display: inline-block;
-    border-radius: 20px;
 }
-.logo-wrapper::before {
-    content:"";
-    position: absolute;
-    top:-10px; left:-10px;
-    width: calc(100% + 20px);
-    height: calc(100% + 20px);
-    border-radius: 20px;
-    background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink));
-    background-size: 400%;
-    filter: blur(10px);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index:-1;
+.logo-wrapper img {
+    width:50px; height:50px; border-radius:8px; transition: transform 0.25s ease;
 }
-.logo-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
-.logo-wrapper img { width:50px; height:50px; border-radius:8px; transition: transform 0.25s ease; }
 .logo-wrapper:hover img { transform: scale(1.08); }
 
-nav {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    justify-content: flex-end;
-}
+/* NAV BUTTON GRADIENT GLOW */
 .gradient-wrapper {
     position: relative;
     display: inline-block;
@@ -85,249 +69,215 @@ nav {
     filter: blur(10px);
     opacity: 0;
     transition: opacity 0.6s ease;
-    z-index: -1;
 }
-.gradient-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
+.gradient-wrapper:hover::before {
+    opacity: 0.9;
+    animation: gradient-shift 10s linear infinite;
+}
 a.button {
-    display: inline-block;
     padding: 10px 20px;
     background: var(--button-bg);
     color: white;
-    text-decoration: none;
     border-radius: 20px;
+    text-decoration: none;
     font-size: 1rem;
-    transition: transform 0.25s ease, box-shadow 0.3s ease;
     position: relative;
     z-index: 1;
+    transition: 0.25s ease;
 }
-.gradient-wrapper:hover a.button { transform: scale(1.06); box-shadow:0 8px 20px rgba(0,0,0,0.5); }
-
-/* Sections */
-.section {
-    width: 100%;
-    padding: 42px 20px;
-    display: flex;
-    justify-content: center;
-}
-.container {
-    width: 100%;
-    max-width: 1100px;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
+.gradient-wrapper:hover a.button {
+    transform: scale(1.06);
 }
 
-/* Backlight wrapper for cards */
+/* INTRO SECTION */
+.intro {
+    padding: 80px 20px;
+    background: var(--intro-bg);
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 2px solid rgba(255,255,255,0.06);
+}
+.intro h1 {
+    font-size: 2.6rem;
+    margin-bottom: 18px;
+    background: linear-gradient(120deg, var(--pink), var(--purp), var(--sky-blue));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.intro p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: auto;
+    opacity: 0.85;
+}
+
+/* CATEGORY TITLE */
+.category-title {
+    font-size: 1.8rem;
+    margin: 40px 0 18px;
+    text-align: left;
+    padding-left: 10px;
+    border-left: 4px solid var(--sky-blue);
+    opacity: 0.9;
+}
+
+/* CATEGORY WRAPPER */
+.category-block {
+    background: var(--category-bg);
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 50px;
+    box-shadow: 0 0 45px rgba(0,0,0,0.35);
+}
+
+/* CARD WRAPPER */
 .backlight-wrapper {
-    position: relative;
+    margin: 30px 0;
     display: block;
+    position: relative;
     border-radius: 12px;
-    transition: transform 0.3s ease;
-    width: 100%;
-    margin-bottom: 30px;
+    transition: 0.3s;
 }
 .backlight-wrapper::before {
     content:"";
-    position: absolute;
-    top:0; left:0;
-    width: 100%;
-    height: 100%;
-    border-radius:16px;
-    background: linear-gradient(120deg, var(--pink), var(--purp), var(--sky-blue), var(--purp), var(--pink));
-    background-size: 400%;
-    filter: blur(20px);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index:0;
+    position:absolute;
+    inset:0;
+    border-radius: 16px;
+    background: linear-gradient(120deg, var(--pink), var(--purp), var(--sky-blue), var(--purp));
+    background-size:400%;
+    filter: blur(22px);
+    opacity:0;
+    transition:0.6s;
 }
-.backlight-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
-.backlight-wrapper > * { transition: transform 0.28s ease; position: relative; z-index: 1; }
-.backlight-wrapper:hover > * { transform: translateY(-3px) scale(1.01); }
+.backlight-wrapper:hover::before {
+    opacity:0.8;
+    animation: gradient-shift 10s linear infinite;
+}
 
-/* Card */
+/* CARD */
 .card {
-    display: flex;
-    gap: 18px;
-    align-items: center;
-    background: var(--card-bg);
-    padding: 50px 40px;
-    border-radius: 12px;
-    text-decoration: none;
-    color: white;
-    transition: transform 0.28s ease;
-    position: relative;
-    z-index: 1;
+    display:flex;
+    gap:20px;
+    align-items:center;
+    background:var(--card-bg);
+    padding:50px 40px;
+    border-radius:12px;
+    text-decoration:none;
+    color:white;
 }
 .card.reverse { flex-direction: row-reverse; }
-.card img { width: 220px; height:auto; flex-shrink:0; border-radius:6px; }
-.card .text { flex:1; }
-.card .mini-preview {
-    width: 100px; height: 60px; object-fit:cover; border-radius:6px; margin-right:10px; flex-shrink:0;
+.card img { width:220px; border-radius:6px; }
+
+/* MINI PREVIEWS */
+.mini-preview {
+    width: 100px;
+    height: 60px;
+    border-radius: 6px;
+    object-fit: cover;
+    margin-right: 8px;
 }
 
-/* Footer */
+@keyframes gradient-shift {
+ 0% { background-position: 0% 50%; }
+ 100% { background-position: 400% 50%; }
+}
+
+/* FOOTER same as before */
 footer {
     background-color: var(--dark-blue-header);
     padding: 50px 20px;
     margin-top: 40px;
 }
-footer .footer-container {
-    max-width: 1000px;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-footer .footer-button-wrapper { position: relative; display: inline-block; border-radius: 20px; }
-footer .footer-button-wrapper::before {
-    content:"";
-    position: absolute;
-    top:-5px; left:-5px;
-    width: calc(100% + 10px);
-    height: calc(100% + 10px);
-    border-radius: 20px;
-    background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink));
-    background-size: 400%;
-    filter: blur(12px);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index: 0;
-}
-footer .footer-button-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
-footer .footer-button {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    position: relative;
-    z-index: 1;
-    padding: 12px 24px;
-    border-radius: 20px;
-    background: var(--button-bg);
-    color: white;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-footer .footer-button-wrapper:hover .footer-button {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-}
-footer p { margin-top: 20px; font-size:0.9rem; text-align:center; color:#aaa; }
-
-@keyframes gradient-shift { 0% { background-position:0% 50%; } 100% { background-position:400% 50%; } }
-
-@media (max-width:900px){
-    .card { flex-direction: column; text-align:center; padding:40px 30px; }
-    .card.reverse { flex-direction: column; }
-    .card img { width:90%; height:auto; }
-    header { padding:12px 18px }
-    nav { gap:10px; flex-wrap: wrap; justify-content:center; }
-}
 </style>
 </head>
+
 <body>
 
 <header>
     <div class="logo-wrapper">
-        <a href="https://stefaigames.github.io/"><img src="../Images/logo.png" alt="Stefai Games logo"></a>
+        <a href="https://stefaigames.github.io/"><img src="../Images/logo.png"></a>
     </div>
     <nav>
-        <div class="gradient-wrapper"><a href="https://stefaigames.github.io/assets/" class="button">Assets</a></div>
-        <div class="gradient-wrapper"><a href="https://stefaigames.github.io/games/" class="button">Games</a></div>
+        <div class="gradient-wrapper"><a class="button" href="https://stefaigames.github.io/assets/">Assets</a></div>
+        <div class="gradient-wrapper"><a class="button" href="https://stefaigames.github.io/games/">Games</a></div>
     </nav>
 </header>
 
+<!-- INTRO SECTION -->
+<section class="intro">
+    <h1>Asset Collection</h1>
+    <p>
+        High-quality, production-ready tools and systems built for Unity developers.
+        Fully optimized, visually polished, and designed for studios of any scale.
+    </p>
+</section>
+
 <section class="section">
-    <div class="container" id="assets-container">
-        <!-- Cards will be injected here via JS -->
-    </div>
+    <div class="container" id="assets-container"></div>
 </section>
 
 <footer>
-    <div class="footer-container">
-        <div class="footer-button-wrapper">
-            <a href="mailto:stefai.games.unity@gmail.com" class="footer-button">
-                <img src="../Images/gmail.png" alt="Gmail" style="width:20px;"> Email
-            </a>
-        </div>
-        <div class="footer-button-wrapper">
-            <a href="https://www.instagram.com/stefaigames/" class="footer-button">
-                <img src="../Images/instagram.png" alt="Instagram" style="width:20px;"> Instagram
-            </a>
-        </div>
-        <div class="footer-button-wrapper">
-            <a href="https://www.youtube.com/@StefaiGames" class="footer-button">
-                <img src="../Images/youtube.png" alt="YouTube" style="width:20px;"> YouTube
-            </a>
-        </div>
-        <div class="footer-button-wrapper">
-            <a href="https://www.reddit.com/user/stefai_games/" class="footer-button">
-                <img src="../Images/reddit.png" alt="Reddit" style="width:20px;"> Reddit
-            </a>
-        </div>
-        <div class="footer-button-wrapper">
-            <a href="#" class="footer-button">
-                <img src="../Images/linkedin.png" alt="LinkedIn" style="width:20px;"> LinkedIn
-            </a>
-        </div>
-    </div>
     <p>© 2025 Stefai Games. All rights reserved.</p>
 </footer>
 
 <script>
-fetch('assets.json')
+fetch("assets.json")
 .then(res => res.json())
 .then(data => {
-    const container = document.getElementById('assets-container');
+    const container = document.getElementById("assets-container");
 
-    data.assets.forEach((asset, index) => {
-        const wrapper = document.createElement('a');
-        wrapper.href = asset.link;
-        wrapper.className = 'backlight-wrapper';
+    data.categories.forEach(category => {
+        const block = document.createElement("div");
+        block.className = "category-block";
 
-        const card = document.createElement('div');
-        card.className = 'card';
+        const title = document.createElement("h2");
+        title.className = "category-title";
+        title.textContent = category.name;
 
-        // ALTERNATE LAYOUT
-        if (index % 2 === 1) {
-            card.classList.add('reverse');
-        }
+        block.appendChild(title);
 
-        const img = document.createElement('img');
-        img.src = asset.image;
-        img.alt = asset.name;
+        category.assets.forEach((asset, idx) => {
+            const wrap = document.createElement("a");
+            wrap.href = asset.link;
+            wrap.className = "backlight-wrapper";
 
-        const textDiv = document.createElement('div');
-        textDiv.className = 'text';
+            const card = document.createElement("div");
+            card.className = "card";
+            if (idx % 2 === 1) card.classList.add("reverse");
 
-        const desc = document.createElement('p');
-        desc.textContent = asset.description;
+            const img = document.createElement("img");
+            img.src = asset.image;
 
-        textDiv.appendChild(desc);
+            const text = document.createElement("div");
+            const p = document.createElement("p");
+            p.textContent = asset.description;
 
-        if (asset.mini && asset.mini.length > 0) {
-            const miniDiv = document.createElement('div');
-            miniDiv.style.display = 'flex';
-            miniDiv.style.marginTop = '12px';
+            text.appendChild(p);
 
-            asset.mini.forEach(src => {
-                const m = document.createElement('img');
-                m.className = 'mini-preview';
-                m.src = src;
-                m.alt = "Mini preview";
-                miniDiv.appendChild(m);
-            });
+            if (asset.mini && asset.mini.length > 0) {
+                const miniRow = document.createElement("div");
+                miniRow.style.marginTop = "12px";
+                miniRow.style.display = "flex";
 
-            textDiv.appendChild(miniDiv);
-        }
+                asset.mini.forEach(src => {
+                    const m = document.createElement("img");
+                    m.className = "mini-preview";
+                    m.src = src;
+                    miniRow.appendChild(m);
+                });
 
-        card.appendChild(img);
-        card.appendChild(textDiv);
-        wrapper.appendChild(card);
-        container.appendChild(wrapper);
+                text.appendChild(miniRow);
+            }
+
+            card.appendChild(img);
+            card.appendChild(text);
+            wrap.appendChild(card);
+            block.appendChild(wrap);
+        });
+
+        container.appendChild(block);
     });
-})
-.catch(err => console.error('Failed to load assets JSON:', err));
+});
 </script>
 
 </body>
