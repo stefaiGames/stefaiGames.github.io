@@ -275,50 +275,56 @@ footer p { margin-top: 20px; font-size:0.9rem; text-align:center; color:#aaa; }
 </footer>
 
 <script>
-// Fetch the JSON and generate cards dynamically
 fetch('assets.json')
 .then(res => res.json())
 .then(data => {
     const container = document.getElementById('assets-container');
-    data.assets.forEach(asset => {
-        const cardWrapper = document.createElement('a');
-        cardWrapper.href = asset.link;
-        cardWrapper.className = 'backlight-wrapper';
+
+    data.assets.forEach((asset, index) => {
+        const wrapper = document.createElement('a');
+        wrapper.href = asset.link;
+        wrapper.className = 'backlight-wrapper';
 
         const card = document.createElement('div');
         card.className = 'card';
 
-        // Main image
+        // ALTERNATE LAYOUT
+        if (index % 2 === 1) {
+            card.classList.add('reverse');
+        }
+
         const img = document.createElement('img');
         img.src = asset.image;
         img.alt = asset.name;
 
-        // Text container
         const textDiv = document.createElement('div');
         textDiv.className = 'text';
+
         const desc = document.createElement('p');
         desc.textContent = asset.description;
+
         textDiv.appendChild(desc);
 
-        // Optional mini previews
-        if(asset.mini && asset.mini.length > 0){
+        if (asset.mini && asset.mini.length > 0) {
             const miniDiv = document.createElement('div');
             miniDiv.style.display = 'flex';
             miniDiv.style.marginTop = '12px';
-            asset.mini.forEach(miniImg => {
-                const miniEl = document.createElement('img');
-                miniEl.className = 'mini-preview';
-                miniEl.src = miniImg;
-                miniEl.alt = 'Mini preview';
-                miniDiv.appendChild(miniEl);
+
+            asset.mini.forEach(src => {
+                const m = document.createElement('img');
+                m.className = 'mini-preview';
+                m.src = src;
+                m.alt = "Mini preview";
+                miniDiv.appendChild(m);
             });
+
             textDiv.appendChild(miniDiv);
         }
 
         card.appendChild(img);
         card.appendChild(textDiv);
-        cardWrapper.appendChild(card);
-        container.appendChild(cardWrapper);
+        wrapper.appendChild(card);
+        container.appendChild(wrapper);
     });
 })
 .catch(err => console.error('Failed to load assets JSON:', err));
