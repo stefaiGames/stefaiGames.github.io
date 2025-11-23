@@ -130,27 +130,41 @@ a.button {
     position: relative;
     display: block;
     border-radius: 12px;
+    max-width: 1000px;
+    margin: 0 auto 40px;
     transition: transform 0.3s ease;
-    max-width: 1000px;   /* constrain width to prevent stretch */
-    margin: 0 auto; /* center the card */
 }
+
 .backlight-wrapper::before {
     content:"";
     position: absolute;
-    top:0; left:0;
-    width: 105%;
-    height: 105%;
-    border-radius:16px;
+    top:-10px;
+    left:-10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    border-radius: 16px;
     background: linear-gradient(120deg, var(--pink), var(--purp), var(--sky-blue), var(--purp), var(--pink));
     background-size: 400%;
-    filter: blur(20px);
+    filter: blur(25px);
     opacity: 0;
     transition: opacity 0.6s ease;
-    z-index:0;
+    z-index: 0;
 }
-.backlight-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
-.backlight-wrapper > * { transition: transform 0.28s ease; position: relative; z-index: 1; }
-.backlight-wrapper:hover > * { transform: translateY(-3px) scale(1.01); }
+
+.backlight-wrapper:hover::before {
+    opacity:0.85;
+    animation:gradient-shift 10s linear infinite;
+}
+
+.backlight-wrapper > * {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.28s ease;
+}
+
+.backlight-wrapper:hover > * {
+    transform: translateY(-3px) scale(1.01);
+}
 
 /* CARD */
 .card {
@@ -162,12 +176,17 @@ a.button {
     border-radius:12px;
     text-decoration:none;
     color:white;
-    position: relative;
-    box-sizing: border-box;
     transition: transform 0.3s ease;
 }
-.card.reverse { flex-direction: row-reverse; }
-.card img { width:220px; border-radius:6px; }
+
+.card.reverse {
+    flex-direction: row-reverse;
+}
+
+.card img {
+    width:220px;
+    border-radius:6px;
+}
 
 /* Hover scale effect */
 .backlight-wrapper:hover .card {
@@ -202,7 +221,11 @@ footer {
     justify-content: center;
     gap: 20px;
 }
-.footer-button-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.footer-button-wrapper {
+    position: relative;
+    display: inline-block;
+    border-radius: 20px;
+}
 .footer-button-wrapper::before {
     content:"";
     position: absolute;
