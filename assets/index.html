@@ -23,7 +23,7 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family: 'Arial', sans-serif; background-color: var(--dark-blue-feed); color: white; overflow-x: hidden; line-height: 1.6; }
 
-/* Header - BRANDED CONSISTENCY */
+/* Header */
 header { position: sticky; top: 0; width: 100%; background-color: var(--dark-blue-header); display: flex; justify-content: space-between; align-items: center; padding: 10px 50px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 .logo-wrapper { position: relative; display: inline-block; border-radius: 20px; }
 .logo-wrapper::before { content:""; position: absolute; top:-10px; left:-10px; width: calc(100% + 20px); height: calc(100% + 20px); border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index:-1; }
@@ -51,7 +51,7 @@ a.button { display: inline-block; padding: 10px 20px; background: var(--button-b
     width: calc(100% + 40px); height: calc(100% + 40px);
     border-radius: 24px; background: linear-gradient(120deg, var(--pink), var(--purp), var(--sky-blue), var(--purp), var(--pink));
     background-size: 400%; filter: blur(35px); 
-    opacity: 0.25; /* Persistent faint glow ONLY for hero */
+    opacity: 0.25; 
     transition: opacity 0.8s ease; z-index: 0;
 }
 .hero-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
@@ -74,13 +74,18 @@ a.button { display: inline-block; padding: 10px 20px; background: var(--button-b
     width: calc(100% + 20px); height: calc(100% + 20px);
     border-radius: 16px; background: linear-gradient(120deg, var(--pink), var(--purp), var(--sky-blue));
     background-size: 400%; filter: blur(20px); 
-    opacity: 0; /* NO AMBIENT GLOW FOR GRID */
+    opacity: 0; 
     transition: opacity 0.4s ease; z-index: 0;
 }
 .grid-card-wrapper.active:hover::before { opacity: 0.7; animation: gradient-shift 10s linear infinite; }
 .grid-card-wrapper:hover { transform: scale(1.05); }
 
-.mini-card { position: relative; z-index: 1; background: var(--card-bg); padding: 25px; border-radius: 12px; height: 100%; }
+.mini-card { 
+    position: relative; z-index: 1; background: var(--card-bg); padding: 25px; 
+    border-radius: 12px; height: 100%; display: flex; flex-direction: column;
+}
+
+/* HOVER OVERLAY - ONLY ACTIVE */
 .hover-overlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(11, 21, 34, 0.8); display: flex; align-items: center; justify-content: center;
@@ -88,6 +93,15 @@ a.button { display: inline-block; padding: 10px 20px; background: var(--button-b
     font-weight: bold; color: var(--sky-blue); text-transform: uppercase; letter-spacing: 1px;
 }
 .grid-card-wrapper.active:hover .hover-overlay { opacity: 1; }
+
+/* STATUS BADGE - ANCHORED BOTTOM RIGHT */
+.status-badge {
+    position: absolute; bottom: 15px; right: 15px; 
+    padding: 5px 12px; border-radius: 20px; 
+    background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255,255,255,0.1);
+    color: #718096; font-size: 0.75rem; font-weight: bold; 
+    text-transform: uppercase; z-index: 3;
+}
 
 /* UPCOMING STATE */
 .grid-card-wrapper.upcoming { opacity: 0.5; }
@@ -101,7 +115,7 @@ a.button { display: inline-block; padding: 10px 20px; background: var(--button-b
 
 @keyframes gradient-shift { 0% { background-position: 0% 50%; } 100% { background-position: 400% 50%; } }
 
-/* Footer - RESTORED ORIGINAL */
+/* Footer */
 footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-top: 40px; text-align: center; }
 .footer-container { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
 .footer-button-wrapper { position: relative; display: inline-block; border-radius: 20px; }
@@ -155,7 +169,6 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 
         data.assets.forEach((asset, index) => {
             if (index === 0) {
-                // RENDER "LIGHTHOUSE" HERO CARD
                 heroContainer.innerHTML = `
                     <div class="hero-wrapper">
                         <div class="featured-card">
@@ -167,9 +180,9 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
                                 <h2 style="font-size: 2.5rem; margin-bottom: 15px;">${asset.name}</h2>
                                 <p style="color: #a0aec0; font-size: 1.1rem;">${asset.description}</p>
                                 <div class="stats-bar">
-                                    <div class="stat-item"><span>Size</span><strong>${asset.size || '644 KB'}</strong></div>
-                                    <div class="stat-item"><span>Logic</span><strong>${asset.logic || '0 Code'}</strong></div>
-                                    <div class="stat-item"><span>Perf</span><strong>${asset.perf || 'Ultra'}</strong></div>
+                                    <div class="stat-item"><span>Size</span><strong>${asset.size}</strong></div>
+                                    <div class="stat-item"><span>Logic</span><strong>${asset.logic}</strong></div>
+                                    <div class="stat-item"><span>Perf</span><strong>${asset.perf}</strong></div>
                                 </div>
                                 <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                                     <div class="gradient-wrapper"><a href="${asset.link}" class="button">Get on Asset Store</a></div>
@@ -180,13 +193,12 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
                         </div>
                     </div>`;
             } else {
-                // RENDER GRID CARDS
                 const isUpcoming = asset.status === 'upcoming';
                 const cardHtml = `
                     <div class="grid-card-wrapper ${isUpcoming ? 'upcoming' : 'active'}">
                         <a href="${isUpcoming ? '#' : asset.link}" style="text-decoration:none; cursor: ${isUpcoming ? 'default' : 'pointer'};">
                             <div class="mini-card">
-                                ${!isUpcoming ? '<div class="hover-overlay">Click to View on Store</div>' : '<div class="hover-overlay" style="opacity: 1; background: transparent; color: #718096;">Coming Soon</div>'}
+                                ${!isUpcoming ? '<div class="hover-overlay">View on Store</div>' : '<div class="status-badge">Coming Soon</div>'}
                                 <img src="${asset.image}" style="width:100%; border-radius:8px; margin-bottom: 15px;">
                                 <h3 style="color:white; margin-bottom: 10px;">${asset.name}</h3>
                                 <p style="font-size: 0.9rem; color: #718096;">${asset.description}</p>
