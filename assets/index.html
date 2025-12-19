@@ -172,28 +172,31 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
         data.assets.forEach((asset, index) => {
             if (index === 0) {
                 heroContainer.innerHTML = `
-                    <div class="hero-wrapper">
-                        <div class="featured-card">
-                            <div class="asset-visuals">
-                                <img src="${asset.image}" class="main-preview" alt="${asset.name}">
-                            </div>
-                            <div class="asset-info">
-                                <div class="badge">Featured Flagship</div>
-                                <h2 style="font-size: 2.5rem; margin-bottom: 15px;">${asset.name}</h2>
-                                <p style="color: #a0aec0; font-size: 1.1rem;">${asset.description}</p>
-                                <div class="stats-bar">
-                                    <div class="stat-item"><span>Size</span><strong>${asset.size}</strong></div>
-                                    <div class="stat-item"><span>Logic</span><strong>${asset.logic}</strong></div>
-                                    <div class="stat-item"><span>Perf</span><strong>${asset.perf}</strong></div>
-                                </div>
-                                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                                    <div class="gradient-wrapper"><a href="${asset.link}" class="button">Get on Asset Store</a></div>
-                                    <div class="gradient-wrapper disabled"><a href="#" class="button" style="opacity: 0.5; cursor: default;">View Docs</a></div>
-                                    <div class="gradient-wrapper disabled"><a href="#" class="button" style="opacity: 0.5; cursor: default;">WebGL Demo</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
+    <div class="hero-wrapper">
+        <div class="featured-card">
+            <div class="asset-visuals">
+                <img src="${asset.image}" class="main-preview" alt="${asset.name}">
+            </div>
+            <div class="asset-info">
+                <div class="badge">Featured Flagship</div>
+                <h2 style="font-size: 2.5rem; margin-bottom: 15px;">${asset.name}</h2>
+                <p style="color: #a0aec0; font-size: 1.1rem;">${asset.description}</p>
+                <div class="stats-bar">
+                    <div class="stat-item"><span>Size</span><strong>${asset.size}</strong></div>
+                    <div class="stat-item"><span>Logic</span><strong>${asset.logic}</strong></div>
+                    <div class="stat-item"><span>Perf</span><strong>${asset.perf}</strong></div>
+                </div>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <div class="gradient-wrapper">
+                        <a href="${asset.link}" class="button">Get on Asset Store</a>
+                    </div>
+                    
+                    <a href="#" class="button" style="opacity: 0.4; cursor: not-allowed; border: 1px solid rgba(255,255,255,0.1);">View Docs</a>
+                    <a href="#" class="button" style="opacity: 0.4; cursor: not-allowed; border: 1px solid rgba(255,255,255,0.1);">WebGL Demo</a>
+                </div>
+            </div>
+        </div>
+    </div>`;
             } else {
                 const isUpcoming = asset.status === 'upcoming';
                 const cardHtml = `
