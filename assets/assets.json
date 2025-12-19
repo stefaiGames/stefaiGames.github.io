@@ -59,6 +59,16 @@
       "size": "450 KB",
       "logic": "C# Native",
       "perf": "Optimized"
+    },
+    {
+      "name": "Generic Tool E",
+      "status": "active",
+      "image": "../Images/placeholder.png",
+      "description": "High-performance data serialization wrapper designed for rapid save/load cycles in mobile and console environments.",
+      "link": "https://assetstore.unity.com",
+      "size": "450 KB",
+      "logic": "C# Native",
+      "perf": "Optimized"
     }
   ]
 }
