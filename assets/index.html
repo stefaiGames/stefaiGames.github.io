@@ -172,6 +172,7 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
         data.assets.forEach((asset, index) => {
             if (index === 0) {
                 heroContainer.innerHTML = `
+    <div class="hero-wrapper">
         <div class="featured-card">
             <div class="asset-visuals">
                 <img src="${asset.image}" class="main-preview" alt="${asset.name}">
@@ -194,6 +195,7 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
                     <a href="#" class="button" style="opacity: 0.4; cursor: not-allowed; border: 1px solid rgba(255,255,255,0.1);">WebGL Demo</a>
                 </div>
             </div>
+        </div>
     </div>`;
             } else {
                 const isUpcoming = asset.status === 'upcoming';
