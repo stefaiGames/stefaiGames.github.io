@@ -40,7 +40,7 @@
       "logic": "C# Native",
       "perf": "Optimized"
     },
-	{
+    {
       "name": "Generic Tool C",
       "status": "upcoming",
       "image": "../Images/placeholder.png",
@@ -50,7 +50,7 @@
       "logic": "C# Native",
       "perf": "Optimized"
     },
-	{
+    {
       "name": "Generic Tool D",
       "status": "upcoming",
       "image": "../Images/placeholder.png",
