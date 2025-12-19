@@ -32,14 +32,35 @@ header { position: sticky; top: 0; width: 100%; background-color: var(--dark-blu
 .logo-wrapper:hover img { transform: scale(1.08); }
 
 nav { display: flex; align-items: center; gap: 14px; }
+
+/* GLOW WRAPPER: For buttons that need the underglow (Nav and Primary Hero) */
 .gradient-wrapper { position: relative; display: inline-block; border-radius: 20px; }
 .gradient-wrapper::before { content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index: -1; }
-.gradient-wrapper:not(.disabled):hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
+.gradient-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
 
-a.button { display: inline-block; padding: 10px 20px; background: var(--button-bg); color: white; text-decoration: none; border-radius: 20px; font-size: 1rem; position: relative; z-index: 1; transition: transform 0.25s ease; }
-.gradient-wrapper:hover a.button { transform: scale(1.06); }
+/* BUTTON BASE: Controls scaling and core look */
+a.button { 
+    display: inline-block; 
+    padding: 10px 20px; 
+    background: var(--button-bg); 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 20px; 
+    font-size: 1rem; 
+    position: relative; 
+    z-index: 1; 
+    transition: transform 0.25s ease, opacity 0.3s ease; 
+}
+a.button:hover { transform: scale(1.06); }
 
-/* Asset Hero */
+/* DISABLED STATE: No glow, just translucent */
+a.button.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Asset Hero Section */
 .asset-hero { padding: 100px 20px; background: var(--intro-bg); text-align: center; border-bottom: 2px solid rgba(255,255,255,0.06); margin-bottom: 80px; }
 .asset-hero h1 { font-size: 3.5rem; background: linear-gradient(to right, var(--sky-blue), var(--pink)); -webkit-background-clip: text; color: transparent; font-weight: 800; }
 
@@ -55,7 +76,6 @@ a.button { display: inline-block; padding: 10px 20px; background: var(--button-b
     transition: opacity 0.8s ease; z-index: 0;
 }
 .hero-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
-
 
 .featured-card { 
     position: relative; z-index: 1; background: var(--card-bg); border-radius: 21px; 
@@ -86,14 +106,13 @@ a.button { display: inline-block; padding: 10px 20px; background: var(--button-b
     border-radius: 12px; height: 100%; display: flex; flex-direction: column;
 }
 
-/* ACTION/STATUS BADGE - UNIFIED STYLE */
+/* ACTION/STATUS BADGE */
 .action-label {
     position: absolute; bottom: 15px; right: 15px; 
     padding: 5px 12px; border-radius: 20px; 
     background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255,255,255,0.15);
     color: var(--sky-blue); font-size: 0.7rem; font-weight: bold; 
     text-transform: uppercase; z-index: 3; opacity: 0; transition: opacity 0.3s ease;
-    letter-spacing: 0.5px;
 }
 .grid-card-wrapper.active:hover .action-label { opacity: 1; }
 
@@ -104,10 +123,6 @@ a.button { display: inline-block; padding: 10px 20px; background: var(--button-b
     color: #718096; font-size: 0.7rem; font-weight: bold; 
     text-transform: uppercase; z-index: 3;
 }
-
-/* UPCOMING STATE */
-.grid-card-wrapper.upcoming { opacity: 0.5; }
-.grid-card-wrapper.upcoming:hover::before { display: none; }
 
 /* STATS */
 .stats-bar { display: flex; gap: 10px; margin: 25px 0; }
@@ -171,30 +186,36 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 
         data.assets.forEach((asset, index) => {
             if (index === 0) {
+                // FEATURED HERO CARD
                 heroContainer.innerHTML = `
-    <div class="hero-wrapper">
-        <div class="featured-card">
-            <div class="asset-visuals">
-                <img src="${asset.image}" class="main-preview" alt="${asset.name}">
-            </div>
-            <div class="asset-info">
-                <div class="badge">Featured Flagship</div>
-                <h2 style="font-size: 2.5rem; margin-bottom: 15px;">${asset.name}</h2>
-                <p style="color: #a0aec0; font-size: 1.1rem;">${asset.description}</p>
-                <div class="stats-bar">
-                    <div class="stat-item"><span>Size</span><strong>${asset.size}</strong></div>
-                    <div class="stat-item"><span>Logic</span><strong>${asset.logic}</strong></div>
-                    <div class="stat-item"><span>Perf</span><strong>${asset.perf}</strong></div>
-                </div>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                    <a href="${asset.link}" class="button">Get on Asset Store</a>
-                    <a href="#" class="button" style="opacity: 0.4; cursor: not-allowed; border: 1px solid rgba(255,255,255,0.1);">View Docs</a>
-                    <a href="#" class="button" style="opacity: 0.4; cursor: not-allowed; border: 1px solid rgba(255,255,255,0.1);">WebGL Demo</a>
-                </div>
-            </div>
-        </div>
-    </div>`;
+                <div class="hero-wrapper">
+                    <div class="featured-card">
+                        <div class="asset-visuals">
+                            <img src="${asset.image}" class="main-preview" alt="${asset.name}">
+                        </div>
+                        <div class="asset-info">
+                            <div class="badge">Featured Flagship</div>
+                            <h2 style="font-size: 2.5rem; margin-bottom: 15px;">${asset.name}</h2>
+                            <p style="color: #a0aec0; font-size: 1.1rem;">${asset.description}</p>
+                            <div class="stats-bar">
+                                <div class="stat-item"><span>Size</span><strong>${asset.size}</strong></div>
+                                <div class="stat-item"><span>Logic</span><strong>${asset.logic}</strong></div>
+                                <div class="stat-item"><span>Perf</span><strong>${asset.perf}</strong></div>
+                            </div>
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                                <div class="gradient-wrapper">
+                                    <a href="${asset.link}" class="button">Get on Asset Store</a>
+                                </div>
+                                <a href="#" class="button disabled">View Docs</a>
+                                <a href="#" class="button disabled">WebGL Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
             } else {
+                // SECONDARY GRID CARDS (Limit to 6 to hit your 7 total cap)
+                if(index > 6) return; 
+
                 const isUpcoming = asset.status === 'upcoming';
                 const cardHtml = `
                     <div class="grid-card-wrapper ${isUpcoming ? 'upcoming' : 'active'}">
