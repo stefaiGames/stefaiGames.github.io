@@ -1,9 +1,12 @@
 {
   "assets": [
     {
+      "id": "tree-ui",
       "name": "TreeUI System",
+      "version": "1.0",
       "status": "active",
-      "image": "../Images/assets.png",
+      "hasDocs": true,
+      "image": "Images/assets.png",
       "description": "Manage complex UI hierarchies via string-paths. A lightweight, ultra-scalable solution for dynamic navigation and automated UI management.",
       "link": "https://assetstore.unity.com",
       "size": "644 KB",
@@ -11,9 +14,12 @@
       "perf": "Ultra Scalable"
     },
     {
+      "id": "custom-components",
       "name": "CustomComponents",
+      "version": "0.8",
       "status": "active",
-      "image": "../Images/placeholder.png",
+      "hasDocs": false,
+      "image": "Images/placeholder.png",
       "description": "A suite of highly optimized, modular UI components designed to extend the default Unity toolkit with premium visual feedback.",
       "link": "#",
       "size": "TBD",
@@ -21,9 +27,12 @@
       "perf": "High"
     },
     {
+      "id": "generic-tool-a",
       "name": "Generic Tool A",
+      "version": "1.0",
       "status": "upcoming",
-      "image": "../Images/placeholder.png",
+      "hasDocs": false,
+      "image": "Images/placeholder.png",
       "description": "An essential utility for streamlining internal editor workflows and reducing repetitive manual tasks in the Unity Inspector.",
       "link": "https://assetstore.unity.com",
       "size": "1.2 MB",
@@ -31,39 +40,12 @@
       "perf": "Stable"
     },
     {
+      "id": "generic-tool-b",
       "name": "Generic Tool B",
+      "version": "1.0",
       "status": "upcoming",
-      "image": "../Images/placeholder.png",
-      "description": "High-performance data serialization wrapper designed for rapid save/load cycles in mobile and console environments.",
-      "link": "https://assetstore.unity.com",
-      "size": "450 KB",
-      "logic": "C# Native",
-      "perf": "Optimized"
-    },
-    {
-      "name": "Generic Tool C",
-      "status": "upcoming",
-      "image": "../Images/placeholder.png",
-      "description": "High-performance data serialization wrapper designed for rapid save/load cycles in mobile and console environments.",
-      "link": "https://assetstore.unity.com",
-      "size": "450 KB",
-      "logic": "C# Native",
-      "perf": "Optimized"
-    },
-    {
-      "name": "Generic Tool D",
-      "status": "upcoming",
-      "image": "../Images/placeholder.png",
-      "description": "High-performance data serialization wrapper designed for rapid save/load cycles in mobile and console environments.",
-      "link": "https://assetstore.unity.com",
-      "size": "450 KB",
-      "logic": "C# Native",
-      "perf": "Optimized"
-    },
-    {
-      "name": "Generic Tool E",
-      "status": "active",
-      "image": "../Images/placeholder.png",
+      "hasDocs": false,
+      "image": "Images/placeholder.png",
       "description": "High-performance data serialization wrapper designed for rapid save/load cycles in mobile and console environments.",
       "link": "https://assetstore.unity.com",
       "size": "450 KB",

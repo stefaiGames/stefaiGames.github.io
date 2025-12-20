@@ -34,7 +34,7 @@ body {
     background-size: 60px 60px;
 }
 
-/* HEADER (SAME AS LANDING) */
+/* HEADER */
 header { position: sticky; top: 0; width: 100%; background-color: var(--dark-blue-header); display: flex; justify-content: space-between; align-items: center; padding: 10px 50px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 .logo-wrapper { position: relative; display: inline-block; border-radius: 20px; }
 .logo-wrapper img { width:50px; height:50px; border-radius:8px; transition: transform 0.25s ease; }
@@ -69,7 +69,7 @@ a.button:hover { transform: scale(1.06); }
     padding: 0 20px;
 }
 
-/* REUSABLE DOC CARD STYLE */
+/* CARD STYLES */
 .doc-card {
     text-decoration: none;
     color: white;
@@ -118,63 +118,25 @@ a.button:hover { transform: scale(1.06); }
     gap: 8px;
 }
 
-/* FOOTER (SAME AS LANDING) */
+/* FOOTER */
 footer { background-color: var(--dark-blue-header); padding: 50px 20px; text-align: center; margin-top: 40px; }
 .footer-container { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
 .footer-button { display: flex; align-items: center; gap: 6px; padding: 12px 24px; border-radius: 20px; background: var(--button-bg); color: white; text-decoration: none; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.05); }
 .footer-button:hover { transform: scale(1.06); }
 
 @keyframes gradient-shift { 0% { background-position:0% 50%; } 100% { background-position:400% 50%; } }
-
-@media (max-width: 700px) {
-    header { padding: 10px 20px; }
-    .hub-hero h1 { font-size: 2rem; }
-}
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="logo-wrapper">
-        <a href="https://stefaigames.github.io/"><img src="../Images/logo.png" alt="Stefai Games logo"></a>
-    </div>
-    <nav>
-        <div class="gradient-wrapper"><a href="https://stefaigames.github.io/assets/" class="button">Assets</a></div>
-        <div class="gradient-wrapper"><a href="https://stefaigames.github.io/games/" class="button">Games</a></div>
-    </nav>
-</header>
-
-<section class="hub-hero">
+<header id="main-header"></header> <section class="hub-hero">
     <h1>Documentation Hub</h1>
     <p>Technical specifications, workflow guides, and API references for the Stefai Games modernization ecosystem.</p>
 </section>
 
-<div class="docs-grid">
-    <a href="tree-ui/index.html" class="doc-card">
-        <div class="card-header">
-            <img src="../Images/tree-ui-icon.png" class="asset-icon" alt="TreeUI">
-            <span class="version-tag">v1.0 - Stable</span>
-        </div>
-        <h2>TreeUI</h2>
-        <p>A modular, event-driven UI framework designed to bypass the rigidity of legacy Unity Canvas systems through visual scripting and zero-allocation logic.</p>
-        <div class="card-footer">
-            <span>Explore Manual →</span>
-        </div>
-    </a>
-
-    <div class="doc-card" style="opacity: 0.5; cursor: not-allowed; border-style: dashed;">
-        <div class="card-header">
-            <div class="asset-icon" style="background: #2a3d5a;"></div>
-            <span class="version-tag">In Development</span>
-        </div>
-        <h2>InputPro</h2>
-        <p>Advanced input modernization system focused on frame-perfect precision and multi-platform rebindability.</p>
-        <div class="card-footer">
-            <span>Coming Soon</span>
-        </div>
+<div class="docs-grid" id="docs-container">
     </div>
-</div>
 
 <footer>
     <div class="footer-container">
@@ -182,8 +144,82 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; text-ali
         <a href="https://www.instagram.com/stefaigames/" class="footer-button"><img src="../Images/instagram.png" alt="Instagram" style="width:20px;"> Instagram</a>
         <a href="https://www.youtube.com/@StefaiGames" class="footer-button"><img src="../Images/youtube.png" alt="YouTube" style="width:20px;"> YouTube</a>
     </div>
-    <p style="margin-top: 25px; font-size: 0.9rem; color: #718096;">© 2025 Stefai Games. All rights reserved.</p>
+    <p style="margin-top: 25px; font-size: 0.9rem; color: #718096; text-align: center;">© 2025 Stefai Games. All rights reserved.</p>
 </footer>
+
+<script>
+    // SSOT Fetcher Logic
+    async function loadDocs() {
+        const container = document.getElementById('docs-container');
+        
+        try {
+            // Path adjusted to root as requested
+            const response = await fetch('../assets.json');
+            const data = await response.json();
+            
+            data.assets.forEach(asset => {
+                // Only render if the asset has dedicated web docs
+                if(asset.hasDocs) {
+                    const card = document.createElement('a');
+                    card.href = `${asset.id}/index.html`;
+                    card.className = 'doc-card';
+                    
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <img src="../${asset.icon}" class="asset-icon" alt="${asset.name}">
+                            <span class="version-tag">v${asset.version} - ${asset.status}</span>
+                        </div>
+                        <h2>${asset.name}</h2>
+                        <p>${asset.description}</p>
+                        <div class="card-footer">
+                            <span>Explore Manual →</span>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                }
+            });
+
+            // Logic to add the "Planned" card at the end of the dynamic list
+            const plannedCard = document.createElement('div');
+            plannedCard.className = 'doc-card';
+            plannedCard.style.cssText = "opacity: 0.5; cursor: not-allowed; border-style: dashed;";
+            plannedCard.innerHTML = `
+                <div class="card-header">
+                    <div class="asset-icon" style="background: #2a3d5a;"></div>
+                    <span class="version-tag">In Development</span>
+                </div>
+                <h2>InputPro</h2>
+                <p>Advanced input modernization system focused on frame-perfect precision and multi-platform rebindability.</p>
+                <div class="card-footer">
+                    <span>Coming Soon</span>
+                </div>
+            `;
+            container.appendChild(plannedCard);
+
+        } catch (error) {
+            console.error("Critical: Could not load SSOT JSON", error);
+        }
+    }
+
+    // Manual Header Injection to maintain 1:1 Parity
+    function injectHeader() {
+        const header = document.getElementById('main-header');
+        header.innerHTML = `
+            <div class="logo-wrapper">
+                <a href="https://stefaigames.github.io/"><img src="../Images/logo.png" alt="Stefai Games logo"></a>
+            </div>
+            <nav>
+                <div class="gradient-wrapper"><a href="https://stefaigames.github.io/assets/" class="button">Assets</a></div>
+                <div class="gradient-wrapper"><a href="https://stefaigames.github.io/games/" class="button">Games</a></div>
+            </nav>
+        `;
+    }
+
+    window.onload = () => {
+        injectHeader();
+        loadDocs();
+    };
+</script>
 
 </body>
 </html>
