@@ -69,7 +69,7 @@ a.button:hover { transform: scale(1.06); }
     padding: 0 20px;
 }
 
-/* CARD STYLES */
+/* ACTIVE CARD STYLES */
 .doc-card {
     text-decoration: none;
     color: white;
@@ -83,9 +83,17 @@ a.button:hover { transform: scale(1.06); }
     position: relative;
     overflow: hidden;
 }
-.doc-card:hover {
+.doc-card.active:hover {
     transform: translateY(-5px) scale(1.02);
     border-color: var(--sky-blue);
+}
+
+/* DISABLED/PLANNED CARD STYLES */
+.doc-card.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-style: dashed;
+    pointer-events: none; /* Disables click and hover scaling */
 }
 
 .card-header {
@@ -94,7 +102,7 @@ a.button:hover { transform: scale(1.06); }
     align-items: flex-start;
     margin-bottom: 20px;
 }
-.asset-icon { width: 60px; height: 60px; border-radius: 12px; }
+.asset-icon { width: 60px; height: 60px; border-radius: 12px; background: #2a3d5a; }
 .version-tag {
     background: rgba(126, 200, 227, 0.1);
     color: var(--sky-blue);
@@ -150,7 +158,6 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; text-ali
 </footer>
 
 <script>
-    // SSOT Fetcher Logic - Pure Dynamic Generation
     async function loadDocs() {
         const container = document.getElementById('docs-container');
         
@@ -159,25 +166,29 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; text-ali
             const data = await response.json();
             
             data.assets.forEach(asset => {
-                // Render ONLY if the asset is explicitly flagged for docs in the JSON
-                if(asset.hasDocs) {
-                    const card = document.createElement('a');
+                // Rule 1 & 2: All assets generated, hasDocs determines state
+                const card = document.createElement('a');
+                
+                if (asset.hasDocs) {
                     card.href = `${asset.id}/index.html`;
-                    card.className = 'doc-card';
-                    
-                    card.innerHTML = `
-                        <div class="card-header">
-                            <img src="../${asset.icon}" class="asset-icon" alt="${asset.name}">
-                            <span class="version-tag">v${asset.version} - ${asset.status}</span>
-                        </div>
-                        <h2>${asset.name}</h2>
-                        <p>${asset.description}</p>
-                        <div class="card-footer">
-                            <span>Explore Manual →</span>
-                        </div>
-                    `;
-                    container.appendChild(card);
+                    card.className = 'doc-card active';
+                } else {
+                    card.href = "#"; // Prevent navigation
+                    card.className = 'doc-card disabled';
                 }
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <img src="../${asset.icon || asset.image.replace('../', '')}" class="asset-icon" alt="${asset.name}">
+                        <span class="version-tag">${asset.hasDocs ? 'v' + asset.version : 'In Development'}</span>
+                    </div>
+                    <h2>${asset.name}</h2>
+                    <p>${asset.description}</p>
+                    <div class="card-footer">
+                        <span>${asset.hasDocs ? 'Explore Manual →' : 'Documentation Coming Soon'}</span>
+                    </div>
+                `;
+                container.appendChild(card);
             });
 
         } catch (error) {
@@ -185,7 +196,6 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; text-ali
         }
     }
 
-    // Manual Header Injection
     function injectHeader() {
         const header = document.getElementById('main-header');
         header.innerHTML = `
