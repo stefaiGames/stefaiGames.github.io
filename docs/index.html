@@ -53,10 +53,7 @@ a.button {
 a.button:hover { transform: scale(1.06); }
 
 /* HUB CONTENT SECTION */
-.hub-hero {
-    padding: 80px 20px 40px;
-    text-align: center;
-}
+.hub-hero { padding: 80px 20px 40px; text-align: center; }
 .hub-hero h1 { font-size: 2.8rem; margin-bottom: 10px; color: var(--sky-blue); }
 .hub-hero p { color: #a0aec0; max-width: 600px; margin: 0 auto; }
 
@@ -69,7 +66,7 @@ a.button:hover { transform: scale(1.06); }
     padding: 0 20px;
 }
 
-/* ACTIVE CARD STYLES */
+/* UNIFIED CARD STYLE */
 .doc-card {
     text-decoration: none;
     color: white;
@@ -77,31 +74,31 @@ a.button:hover { transform: scale(1.06); }
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     padding: 30px;
-    transition: transform 0.25s ease, border-color 0.25s ease;
     display: flex;
     flex-direction: column;
     position: relative;
     overflow: hidden;
+    /* Maintain brand-consistent scale animation */
+    transition: transform 0.25s ease, border-color 0.25s ease;
 }
+
+/* Rule 1 & 2: Scale-only hover for ALL cards */
+.doc-card:hover {
+    transform: scale(1.02);
+}
+
+/* Interaction Logic */
 .doc-card.active:hover {
-    transform: translateY(-5px) scale(1.02);
     border-color: var(--sky-blue);
 }
 
-/* DISABLED/PLANNED CARD STYLES */
 .doc-card.disabled {
     opacity: 0.5;
-    cursor: not-allowed;
+    cursor: wait; /* Visual cue for "In-Development" */
     border-style: dashed;
-    pointer-events: none; /* Disables click and hover scaling */
 }
 
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
 .asset-icon { width: 60px; height: 60px; border-radius: 12px; background: #2a3d5a; }
 .version-tag {
     background: rgba(126, 200, 227, 0.1);
@@ -166,21 +163,20 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; text-ali
             const data = await response.json();
             
             data.assets.forEach(asset => {
-                // Rule 1 & 2: All assets generated, hasDocs determines state
                 const card = document.createElement('a');
                 
                 if (asset.hasDocs) {
                     card.href = `${asset.id}/index.html`;
                     card.className = 'doc-card active';
                 } else {
-                    card.href = "#"; // Prevent navigation
+                    card.href = "javascript:void(0)"; // Non-functional link
                     card.className = 'doc-card disabled';
                 }
                 
                 card.innerHTML = `
                     <div class="card-header">
                         <img src="../${asset.icon || asset.image.replace('../', '')}" class="asset-icon" alt="${asset.name}">
-                        <span class="version-tag">${asset.hasDocs ? 'v' + asset.version : 'In Development'}</span>
+                        <span class="version-tag">${asset.hasDocs ? 'v' + asset.version : 'Planned'}</span>
                     </div>
                     <h2>${asset.name}</h2>
                     <p>${asset.description}</p>
