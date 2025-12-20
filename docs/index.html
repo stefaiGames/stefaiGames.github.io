@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentation Hub | Stefai Games</title>
+<link rel="icon" href="../Images/logo.png" type="image/png">
+
+<style>
+/* 1:1 PARITY WITH LANDING PAGE ROOT & GLOBALS */
+:root {
+    --pink: #ff3366;
+    --purp: #7a3fd1;
+    --sky-blue: #7ec8e3;
+    --dark-blue-header: #0B1522;
+    --dark-blue-feed: #101b2b;
+    --dark-blue-alt: #121f33;
+    --intro-bg: #0f1a27;
+    --card-bg: #16243a;
+    --button-bg: rgba(16,27,43,0.9);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body { 
+    font-family: 'Arial', sans-serif; 
+    background-color: var(--dark-blue-feed); 
+    color: white; 
+    overflow-x: hidden; 
+    line-height: 1.6;
+    background-image: 
+        linear-gradient(rgba(126, 200, 227, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126, 200, 227, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+}
+
+/* HEADER (SAME AS LANDING) */
+header { position: sticky; top: 0; width: 100%; background-color: var(--dark-blue-header); display: flex; justify-content: space-between; align-items: center; padding: 10px 50px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.logo-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.logo-wrapper img { width:50px; height:50px; border-radius:8px; transition: transform 0.25s ease; }
+.logo-wrapper:hover img { transform: scale(1.08); }
+
+nav { display: flex; align-items: center; gap: 14px; }
+.gradient-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.gradient-wrapper::before { content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index: -1; }
+.gradient-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
+
+a.button { 
+    display: inline-block; padding: 10px 20px; background: var(--button-bg); color: white; 
+    text-decoration: none; border-radius: 20px; font-size: 1rem; position: relative; z-index: 1; 
+    transition: transform 0.25s ease; border: 1px solid rgba(255,255,255,0.05);
+}
+a.button:hover { transform: scale(1.06); }
+
+/* HUB CONTENT SECTION */
+.hub-hero {
+    padding: 80px 20px 40px;
+    text-align: center;
+}
+.hub-hero h1 { font-size: 2.8rem; margin-bottom: 10px; color: var(--sky-blue); }
+.hub-hero p { color: #a0aec0; max-width: 600px; margin: 0 auto; }
+
+.docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 40px auto 100px;
+    padding: 0 20px;
+}
+
+/* REUSABLE DOC CARD STYLE */
+.doc-card {
+    text-decoration: none;
+    color: white;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+.doc-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: var(--sky-blue);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+.asset-icon { width: 60px; height: 60px; border-radius: 12px; }
+.version-tag {
+    background: rgba(126, 200, 227, 0.1);
+    color: var(--sky-blue);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border: 1px solid rgba(126, 200, 227, 0.2);
+}
+
+.doc-card h2 { font-size: 1.5rem; margin-bottom: 10px; }
+.doc-card p { color: #a0aec0; font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
+
+.card-footer {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 15px;
+    font-size: 0.85rem;
+    color: var(--sky-blue);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* FOOTER (SAME AS LANDING) */
+footer { background-color: var(--dark-blue-header); padding: 50px 20px; text-align: center; margin-top: 40px; }
+.footer-container { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+.footer-button { display: flex; align-items: center; gap: 6px; padding: 12px 24px; border-radius: 20px; background: var(--button-bg); color: white; text-decoration: none; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.05); }
+.footer-button:hover { transform: scale(1.06); }
+
+@keyframes gradient-shift { 0% { background-position:0% 50%; } 100% { background-position:400% 50%; } }
+
+@media (max-width: 700px) {
+    header { padding: 10px 20px; }
+    .hub-hero h1 { font-size: 2rem; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo-wrapper">
+        <a href="https://stefaigames.github.io/"><img src="../Images/logo.png" alt="Stefai Games logo"></a>
+    </div>
+    <nav>
+        <div class="gradient-wrapper"><a href="https://stefaigames.github.io/assets/" class="button">Assets</a></div>
+        <div class="gradient-wrapper"><a href="https://stefaigames.github.io/games/" class="button">Games</a></div>
+    </nav>
+</header>
+
+<section class="hub-hero">
+    <h1>Documentation Hub</h1>
+    <p>Technical specifications, workflow guides, and API references for the Stefai Games modernization ecosystem.</p>
+</section>
+
+<div class="docs-grid">
+    <a href="tree-ui/index.html" class="doc-card">
+        <div class="card-header">
+            <img src="../Images/tree-ui-icon.png" class="asset-icon" alt="TreeUI">
+            <span class="version-tag">v1.2.0 - Stable</span>
+        </div>
+        <h2>TreeUI</h2>
+        <p>A modular, event-driven UI framework designed to bypass the rigidity of legacy Unity Canvas systems through visual scripting and zero-allocation logic.</p>
+        <div class="card-footer">
+            <span>Explore Manual →</span>
+        </div>
+    </a>
+
+    <div class="doc-card" style="opacity: 0.5; cursor: not-allowed; border-style: dashed;">
+        <div class="card-header">
+            <div class="asset-icon" style="background: #2a3d5a;"></div>
+            <span class="version-tag">In Development</span>
+        </div>
+        <h2>InputPro</h2>
+        <p>Advanced input modernization system focused on frame-perfect precision and multi-platform rebindability.</p>
+        <div class="card-footer">
+            <span>Coming Soon</span>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <a href="mailto:stefai.games.unity@gmail.com" class="footer-button"><img src="../Images/gmail.png" alt="Gmail" style="width:20px;"> Email</a>
+        <a href="https://www.instagram.com/stefaigames/" class="footer-button"><img src="../Images/instagram.png" alt="Instagram" style="width:20px;"> Instagram</a>
+        <a href="https://www.youtube.com/@StefaiGames" class="footer-button"><img src="../Images/youtube.png" alt="YouTube" style="width:20px;"> YouTube</a>
+    </div>
+    <p style="margin-top: 25px; font-size: 0.9rem; color: #718096;">© 2025 Stefai Games. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
