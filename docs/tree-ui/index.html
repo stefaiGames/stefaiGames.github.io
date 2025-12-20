@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TreeUI Documentation | Stefai Games</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sky-blue: #0ea5e9;
+            --purp: #8b5cf6;
+            --pink: #ec4899;
+            --dark-bg: #0b1120;
+            --card-bg: rgba(16, 27, 43, 0.9);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+            color: #f1f5f9;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, var(--sky-blue), var(--purp), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stefai-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .stefai-card:hover {
+            border-color: var(--purp);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+        }
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            color: var(--sky-blue);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="sticky top-0 z-50 border-b border-white/10 bg-dark-bg/80 backdrop-blur-md p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-items-2">
+                <div class="w-8 h-8 rounded-md bg-gradient-to-tr from-sky-500 to-pink-500 flex items-center justify-center font-bold text-white">S</div>
+                <span class="ml-3 font-bold text-xl tracking-tight uppercase">Stefai <span class="gradient-text">Games</span></span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-400 uppercase tracking-widest">
+                <a href="#" class="hover:text-sky-400 transition">Products</a>
+                <a href="#" class="text-white border-b-2 border-purp pb-1">Documentation</a>
+                <a href="#" class="hover:text-pink-400 transition">Support</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="max-w-4xl mx-auto pt-20 pb-12 text-center px-4">
+        <h1 class="text-5xl md:text-6xl font-extrabold mb-4">TreeUI <span class="gradient-text">Manual</span></h1>
+        <p class="text-lg text-slate-400">Systematic Modernization of Unity UI Workflows. v1.1.0 (Production Ready)</p>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 pb-32 space-y-4">
+
+        <div x-data="{ open: false }" class="stefai-card rounded-2xl overflow-hidden">
+            <button @click="open = !open" class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition">
+                <div>
+                    <h2 class="text-xl font-bold">01. Overview & Architecture</h2>
+                    <p class="text-sm text-slate-500">The philosophy behind the O(n) search and 0-GC logic.</p>
+                </div>
+                <svg :class="open ? 'rotate-180' : ''" class="w-6 h-6 transition-transform duration-300 text-purp" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div x-show="open" x-collapse x-cloak class="p-6 border-t border-white/5 bg-black/20 text-slate-300 space-y-4">
+                <p>TreeUI extends Unity's native parent-child hierarchy to create a high-performance tree structure. Unlike traditional systems that rely on recursive searches, TreeUI uses <strong>Dictionary-based traversal</strong>, achieving O(n) search time relative only to tree depth.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div class="p-4 bg-white/5 rounded-lg border border-white/10">
+                        <h4 class="font-bold text-sky-400 mb-2">Technical Elite</h4>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>0 Runtime GC Allocation</li>
+                            <li>985 Lines of Lean Logic</li>
+                            <li>Full Undo/Redo Support</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-white/5 rounded-lg border border-white/10">
+                        <h4 class="font-bold text-pink-400 mb-2">Safety Built-in</h4>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>Self-Healing Hierarchy</li>
+                            <li>Fuzzy Search Error Handling</li>
+                            <li>Structural Enforcement Logic</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div x-data="{ open: false }" class="stefai-card rounded-2xl overflow-hidden">
+            <button @click="open = !open" class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition">
+                <div>
+                    <h2 class="text-xl font-bold text-sky-400">02. Quick Start: One-Click Setup</h2>
+                    <p class="text-sm text-slate-500">From zero to a functional UI network in seconds.</p>
+                </div>
+                <svg :class="open ? 'rotate-180' : ''" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div x-show="open" x-collapse x-cloak class="p-6 border-t border-white/5 bg-black/20 text-slate-300 space-y-6">
+                <div class="space-y-2">
+                    <h3 class="font-bold text-white">1. Create the Network</h3>
+                    <p>Right-click in the Hierarchy or go to <code>GameObject -> UI -> TreeUI -> Menu Network</code>. This automatically creates the <strong>MenuManager</strong>, <strong>Transitions</strong> root, and initial <strong>Canvas</strong>.</p>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-bold text-white">2. Launch the Setup Wizard</h3>
+                    <p>Select your parent (MenuManager or a Menu) and choose <code>UI -> TreeUI -> Menu</code>. A popup will appear allowing you to name the object and define its search path.</p>
+                </div>
+                <div class="bg-blue-900/20 p-4 border-l-4 border-sky-500 rounded-r-lg">
+                    <p class="text-sm font-semibold">Realist Tip: The system will automatically undo any illegal parenting (placing a menu outside the network) and alert you in the console.</p>
+                </div>
+            </div>
+        </div>
+
+        <div x-data="{ open: false }" class="stefai-card rounded-2xl overflow-hidden">
+            <button @click="open = !open" class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition">
+                <div>
+                    <h2 class="text-xl font-bold text-purp">03. Animator-Based Transitions</h2>
+                    <p class="text-sm text-slate-500">Designer-friendly juice without writing a single line of code.</p>
+                </div>
+                <svg :class="open ? 'rotate-180' : ''" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div x-show="open" x-collapse x-cloak class="p-6 border-t border-white/5 bg-black/20 text-slate-300 space-y-6">
+                <p>TreeUI uses the <strong>Standard Animator Workflow</strong>. Every transition is an Animator state, making it trivial to move keyframes or change timings.</p>
+                <div class="space-y-2">
+                    <h4 class="font-bold text-white uppercase text-xs tracking-widest">The Mandatory Parameter</h4>
+                    <p>In your Animator Controller, you <strong>must</strong> add a Trigger named <code>StartTransition</code> (case sensitive). The system uses this to kick off your animation.</p>
+                </div>
+                <div class="space-y-2">
+                    <h4 class="font-bold text-white uppercase text-xs tracking-widest">The Transition Event</h4>
+                    <p>On the specific frame where you want the old menu to disappear and the new one to appear, add an <strong>Animation Event</strong> and select <code>Transition -> OpenMenu</code>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div x-data="{ open: false }" class="stefai-card rounded-2xl overflow-hidden">
+            <button @click="open = !open" class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition">
+                <div>
+                    <h2 class="text-xl font-bold text-pink-400">04. Enterprise Integration</h2>
+                    <p class="text-sm text-slate-500">Additive loading, Persistence, and C# Events.</p>
+                </div>
+                <svg :class="open ? 'rotate-180' : ''" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div x-show="open" x-collapse x-cloak class="p-6 border-t border-white/5 bg-black/20 text-slate-300 space-y-6">
+                <div class="space-y-2">
+                    <h3 class="font-bold text-white">Additive Scene Loading</h3>
+                    <p>Transition between menus across scene boundaries. Support for <code>LoadSceneMode.Additive</code> ensures your UI persistent throughout the gameplay session.</p>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-bold text-white">Load Last Menu</h3>
+                    <p>Use <code>MenuManager.Instance.LoadLastMenu()</code> to automatically return the user to their previous state, including nested menu positions.</p>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-bold text-white">Contextual Events</h3>
+                    <p>Every menu contains <code>OnMenuOpen</code> and <code>OnMenuClose</code> UnityEvents. Hook in specific logic like pausing time, playing sounds, or updating player data directly in the Inspector.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="border-t border-white/10 py-12 bg-black/40 text-center">
+        <p class="text-slate-500 text-sm">© 2025 Stefai Games. Redefining Unity Workflows through Systematic Modernization.</p>
+    </footer>
+
+</body>
+</html>
