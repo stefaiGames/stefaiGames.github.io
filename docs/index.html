@@ -130,7 +130,9 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; text-ali
 
 <body>
 
-<header id="main-header"></header> <section class="hub-hero">
+<header id="main-header"></header>
+
+<section class="hub-hero">
     <h1>Documentation Hub</h1>
     <p>Technical specifications, workflow guides, and API references for the Stefai Games modernization ecosystem.</p>
 </section>
@@ -148,17 +150,16 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; text-ali
 </footer>
 
 <script>
-    // SSOT Fetcher Logic
+    // SSOT Fetcher Logic - Pure Dynamic Generation
     async function loadDocs() {
         const container = document.getElementById('docs-container');
         
         try {
-            // Path adjusted to root as requested
             const response = await fetch('../assets.json');
             const data = await response.json();
             
             data.assets.forEach(asset => {
-                // Only render if the asset has dedicated web docs
+                // Render ONLY if the asset is explicitly flagged for docs in the JSON
                 if(asset.hasDocs) {
                     const card = document.createElement('a');
                     card.href = `${asset.id}/index.html`;
@@ -179,29 +180,12 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; text-ali
                 }
             });
 
-            // Logic to add the "Planned" card at the end of the dynamic list
-            const plannedCard = document.createElement('div');
-            plannedCard.className = 'doc-card';
-            plannedCard.style.cssText = "opacity: 0.5; cursor: not-allowed; border-style: dashed;";
-            plannedCard.innerHTML = `
-                <div class="card-header">
-                    <div class="asset-icon" style="background: #2a3d5a;"></div>
-                    <span class="version-tag">In Development</span>
-                </div>
-                <h2>InputPro</h2>
-                <p>Advanced input modernization system focused on frame-perfect precision and multi-platform rebindability.</p>
-                <div class="card-footer">
-                    <span>Coming Soon</span>
-                </div>
-            `;
-            container.appendChild(plannedCard);
-
         } catch (error) {
             console.error("Critical: Could not load SSOT JSON", error);
         }
     }
 
-    // Manual Header Injection to maintain 1:1 Parity
+    // Manual Header Injection
     function injectHeader() {
         const header = document.getElementById('main-header');
         header.innerHTML = `
