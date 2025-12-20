@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stefai Games</title>
+<title>Stefai Games | Redefining Unity Workflows</title>
 <link rel="icon" href="Images/logo.png" type="image/png">
+
 <style>
 :root {
     --pink: #ff3366;
@@ -13,281 +14,147 @@
     --dark-blue-header: #0B1522;
     --dark-blue-feed: #101b2b;
     --dark-blue-alt: #121f33;
-    --card-bg: rgba(16,27,43,0.9);
-    --card-bg-light: rgba(16,27,43,0.9);
+    --intro-bg: #0f1a27;
+    --card-bg: #16243a;
     --button-bg: rgba(16,27,43,0.9);
-    /* New colors for second card effect */
-    --card-bg-second: rgba(26,36,53,0.95); /* lighter card */
-    --section-bg-second: #0f1825; /* darker surrounding section */
 }
 
 /* Reset */
 * { margin:0; padding:0; box-sizing:border-box; }
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: var(--dark-blue-feed);
-    color: white;
-    overflow-x: hidden;
+
+body { 
+    font-family: 'Arial', sans-serif; 
+    background-color: var(--dark-blue-feed); 
+    color: white; 
+    overflow-x: hidden; 
+    line-height: 1.6;
+    background-image: 
+        linear-gradient(rgba(126, 200, 227, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126, 200, 227, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
 }
 
 /* Header */
-header {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    background-color: var(--dark-blue-header);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 50px;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
-.logo-wrapper {
-    position: relative;
-    display: inline-block;
-    border-radius: 20px;
-}
-.logo-wrapper::before {
-    content:"";
-    position: absolute;
-    top:-10px; left:-10px;
-    width: calc(100% + 20px);
-    height: calc(100% + 20px);
-    border-radius: 20px;
-    background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink));
-    background-size: 400%;
-    filter: blur(10px);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index:-1;
-}
+header { position: sticky; top: 0; width: 100%; background-color: var(--dark-blue-header); display: flex; justify-content: space-between; align-items: center; padding: 10px 50px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.logo-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.logo-wrapper::before { content:""; position: absolute; top:-10px; left:-10px; width: calc(100% + 20px); height: calc(100% + 20px); border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index:-1; }
 .logo-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
 .logo-wrapper img { width:50px; height:50px; border-radius:8px; transition: transform 0.25s ease; }
 .logo-wrapper:hover img { transform: scale(1.08); }
 
-nav {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    justify-content: flex-end;
-}
-.gradient-wrapper {
-    position: relative;
-    display: inline-block;
-    border-radius: 20px;
-}
-.gradient-wrapper::before {
-    content:"";
-    position: absolute;
-    top:-5px; left:-5px;
-    width: calc(100% + 10px);
-    height: calc(100% + 10px);
-    border-radius: 20px;
-    background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink));
-    background-size: 400%;
-    filter: blur(10px);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index: -1;
-}
+nav { display: flex; align-items: center; gap: 14px; }
+.gradient-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.gradient-wrapper::before { content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index: -1; }
 .gradient-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
-a.button {
-    display: inline-block;
-    padding: 10px 20px;
-    background: var(--button-bg);
-    color: white;
-    text-decoration: none;
-    border-radius: 20px;
-    font-size: 1rem;
-    transition: transform 0.25s ease, box-shadow 0.3s ease;
-    position: relative;
-    z-index: 1;
-}
-.gradient-wrapper:hover a.button { transform: scale(1.06); box-shadow:0 8px 20px rgba(0,0,0,0.5); }
 
-/* Banner */
-.banner {
+a.button { 
+    display: inline-block; padding: 10px 20px; background: var(--button-bg); color: white; 
+    text-decoration: none; border-radius: 20px; font-size: 1rem; position: relative; z-index: 1; 
+    transition: transform 0.25s ease; border: 1px solid rgba(255,255,255,0.05);
+}
+a.button:hover { transform: scale(1.06); }
+
+/* HERO */
+.hero-vanta {
+    padding: 100px 20px 40px;
+    background: radial-gradient(circle at center, var(--intro-bg) 0%, transparent 80%);
     text-align: center;
-    padding: 60px 20px;
-    background-color: var(--dark-blue-header);
+}
+.hero-vanta img.main-banner { width: 450px; max-width: 80%; margin-bottom: 30px; filter: drop-shadow(0 0 15px rgba(126, 200, 227, 0.2)); }
+.hero-vanta h1 { font-size: 3.5rem; font-weight: 800; background: linear-gradient(to right, var(--sky-blue), var(--pink)); -webkit-background-clip: text; color: transparent; margin-bottom: 15px; }
+.hero-vanta p { max-width: 850px; margin: 0 auto; color: #a0aec0; font-size: 1.15rem; }
+
+/* TRUST RIBBON */
+.trust-ribbon {
+    background: rgba(11, 21, 34, 0.8);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 25px 0;
+    margin: 40px 0 60px;
+    backdrop-filter: blur(10px);
+}
+.ribbon-container {
+    max-width: 900px;
+    margin: 0 auto;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    position: relative;
-}
-.banner::after {
-    content:"";
-    position:absolute;
-    width: 120%;
-    height: 120%;
-    top: -10%;
-    left:-10%;
-    background: radial-gradient(circle at center, rgba(255,51,102,0.05), transparent 70%);
-    pointer-events:none;
-    z-index:0;
-}
-.banner img { width: 420px; max-width: 90%; height: auto; border-radius:6px; z-index:1; }
-.banner p { max-width: 900px; color:#ddd; line-height:1.5; font-size:1.1rem; z-index:1; }
-
-.banner .tagline {
-    font-weight: bold;
-    font-size:1.2rem;
-    color: var(--sky-blue);
-    opacity:0;
-    animation: fadeIn 1.5s forwards;
-}
-@keyframes fadeIn { 0%{opacity:0; transform: translateY(10px);} 100%{opacity:1; transform: translateY(0);} }
-
-/* About section */
-.about {
-    text-align:center;
-    max-width:800px;
-    margin: 40px auto 60px auto;
-    color:#ccc;
-    line-height:1.5;
-    font-size:1.05rem;
-}
-
-/* Backlight wrapper for sections/cards */
-.backlight-wrapper {
-    position: relative;
-    display: block;
-    border-radius: 12px;
-    transition: transform 0.3s ease;
-    width: 100%;
-    margin-bottom: 30px;
-}
-.backlight-wrapper::before {
-    content:"";
-    position: absolute;
-    top:0; left:0;
-    width: 100%;
-    height: 100%;
-    border-radius:16px;
-    background: linear-gradient(120deg, var(--pink), var(--purp), var(--sky-blue), var(--purp), var(--pink));
-    background-size: 400%;
-    filter: blur(20px);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index:0;
-}
-.backlight-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
-.backlight-wrapper > * { transition: transform 0.28s ease; position: relative; z-index: 1; }
-.backlight-wrapper:hover > * { transform: translateY(-3px) scale(1.01); }
-
-/* Sections */
-.section {
-    width: 100%;
-    padding: 42px 20px;
-    display: flex;
-    justify-content: center;
-}
-.section:nth-child(even) { background-color: var(--dark-blue-alt); }
-.section.games { background-color: var(--section-bg-second); } /* second card section */
-.container {
-    width: 100%;
-    max-width: 1100px;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-}
-
-/* Feature cards */
-.card {
-    display: flex;
-    gap: 18px;
-    align-items: center;
-    background: var(--card-bg);
-    padding: 50px 40px;
-    border-radius: 12px;
-    text-decoration: none;
-    color: white;
-    transition: transform 0.28s ease;
-    position: relative;
-    z-index: 1;
-}
-.card.reverse { flex-direction: row-reverse; }
-.card img { width: 220px; height:auto; flex-shrink:0; border-radius:6px; }
-.card .text { flex:1; }
-.card.assets { background: var(--card-bg); }
-.card.games { background: var(--card-bg-second); } /* lighter card for contrast */
-
-/* Mini-previews inside sections */
-.card .mini-preview {
-    width: 100px;
-    height: 60px;
-    border-radius:6px;
-    object-fit:cover;
-    margin-right:10px;
-    flex-shrink:0;
-}
-
-/* Typography */
-.h1 { font-size:2rem; text-align:center; margin:12px 0 6px; }
-.lead { color:#ddd; text-align:center; margin-bottom:8px; }
-
-/* Footer */
-footer {
-    background-color: var(--dark-blue-header);
-    padding: 50px 20px;
-    margin-top: 40px;
-}
-footer .footer-container {
-    max-width: 1000px;
-    margin: auto;
-    display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    gap: 30px;
 }
-footer .footer-button-wrapper { position: relative; display: inline-block; border-radius: 20px; }
-footer .footer-button-wrapper::before {
-    content:"";
-    position: absolute;
-    top:-5px; left:-5px;
-    width: calc(100% + 10px);
-    height: calc(100% + 10px);
-    border-radius: 20px;
-    background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink));
-    background-size: 400%;
-    filter: blur(12px);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index: 0;
+.stat-box { text-align: center; flex: 1; min-width: 200px; }
+.stat-box span { display: block; color: var(--sky-blue); font-weight: bold; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+.stat-box strong { font-size: 1.2rem; color: white; }
+
+/* TRINITY SECTION - Scale Only */
+.trinity-section {
+    max-width: 1100px;
+    margin: 0 auto 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 0 20px;
 }
-footer .footer-button-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
-footer .footer-button {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    position: relative;
-    z-index: 1;
-    padding: 12px 24px;
-    border-radius: 20px;
-    background: var(--button-bg);
-    color: white;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
+.trinity-card {
+    background: rgba(16, 27, 43, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 40px 25px;
+    border-radius: 16px;
+    text-align: center;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease;
+    cursor: default;
 }
-footer .footer-button-wrapper:hover .footer-button {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+.trinity-card:hover {
+    transform: scale(1.05);
+    background: rgba(16, 27, 43, 0.9);
+    border-color: rgba(126, 200, 227, 0.2);
 }
-footer p { margin-top: 20px; font-size:0.9rem; text-align:center; color:#aaa; }
+.trinity-card h3 { color: var(--sky-blue); font-size: 1.1rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1.5px; }
+.trinity-card p { font-size: 0.9rem; color: #a0aec0; }
+
+/* PORTALS - Scale + Glow */
+.section-tag { text-align: center; margin-bottom: 30px; }
+.badge {
+    display: inline-block; padding: 6px 18px; background: rgba(126, 200, 227, 0.1);
+    color: var(--sky-blue); border-radius: 20px; font-size: 0.8rem; font-weight: bold;
+    border: 1px solid rgba(126, 200, 227, 0.2); letter-spacing: 1px;
+}
+.portal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto 100px; padding: 0 20px; }
+.portal-link { text-decoration: none; color: white; }
+.backlight-card { position: relative; border-radius: 24px; height: 100%; transition: transform 0.3s ease; }
+.backlight-card::before {
+    content:""; position: absolute; top:-15px; left:-15px; width: calc(100% + 30px); height: calc(100% + 30px);
+    border-radius: 24px; background: linear-gradient(120deg, var(--pink), var(--purp), var(--sky-blue), var(--purp), var(--pink));
+    background-size: 400%; filter: blur(35px); opacity: 0; transition: opacity 0.6s ease; z-index: 0;
+}
+.backlight-card:hover::before { opacity: 0.7; animation: gradient-shift 10s linear infinite; }
+.backlight-card:hover { transform: translateY(-8px) scale(1.02); }
+
+.inner-card {
+    position: relative; z-index: 1; background: var(--card-bg); border-radius: 20px;
+    padding: 50px 30px; text-align: center; border: 1px solid rgba(255,255,255,0.05);
+    height: 100%; display: flex; flex-direction: column; align-items: center;
+}
+.inner-card img { width: 180px; height: auto; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+.inner-card h2 { font-size: 2.2rem; margin-bottom: 15px; }
+.inner-card p { color: #a0aec0; margin-bottom: 30px; flex-grow: 1; }
+
+/* FOOTER */
+footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-top: 40px; text-align: center; position: relative; z-index: 10; }
+.footer-container { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+.footer-button-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.footer-button-wrapper::before { content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); background-size: 400%; filter: blur(12px); opacity: 0; transition: opacity 0.6s ease; z-index: 0; }
+.footer-button-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
+.footer-button { display: flex; align-items: center; gap: 6px; position: relative; z-index: 1; padding: 12px 24px; border-radius: 20px; background: var(--button-bg); color: white; text-decoration: none; transition: transform 0.2s; }
 
 @keyframes gradient-shift { 0% { background-position:0% 50%; } 100% { background-position:400% 50%; } }
 
-@media (max-width:900px){
-    .card { flex-direction: column; text-align:center; padding:40px 30px; }
-    .card.reverse { flex-direction: column; }
-    .card img { width:90%; height:auto; }
-    header { padding:12px 18px }
-    nav { gap:10px; flex-wrap: wrap; justify-content:center; }
+@media (max-width: 850px) {
+    .portal-grid, .trinity-section { grid-template-columns: 1fr; }
+    .stat-box { min-width: 100%; }
 }
 </style>
 </head>
+
 <body>
 
 <header>
@@ -300,87 +167,72 @@ footer p { margin-top: 20px; font-size:0.9rem; text-align:center; color:#aaa; }
     </nav>
 </header>
 
-<section class="banner">
-    <img src="Images/banner.png" alt="Stefai Games Banner">
-    <div class="tagline">Tools for Devs. Fun for Players.</div>
-    <p>
-        Stefai Games is a small studio dedicated to making tools for developers and games for players. We focus on quality, creativity, and a smooth experience.
-    </p>
+<section class="hero-vanta">
+    <img src="Images/banner.png" class="main-banner" alt="Stefai Games Banner">
+    <h1>Stefai Games</h1>
+    <p>Systematically bridging engine gaps through professional-grade frameworks—modernizing Unity's legacy systems for the high-performance titles of tomorrow.</p>
 </section>
 
-<section class="about">
-    <p>
-        Whether you want to build or play games, we’ve got you covered. Our tools make development easier, while our games help you unwind.
-    </p>
-</section>
-
-<section class="section">
-    <div class="container">
-        <h2 class="h1">Build With Us</h2>
-        <a href="https://stefaigames.github.io/assets" class="backlight-wrapper">
-            <div class="card assets">
-                <img src="Images/assets.png" alt="Assets preview">
-                <div class="text">
-                    <p>High-quality Unity tools and workflow helpers to speed up development.</p>
-                    <div style="display:flex; margin-top:12px;">
-                        <img src="Images/assets-mini1.png" class="mini-preview" alt="Mini preview 1">
-                        <img src="Images/assets-mini2.png" class="mini-preview" alt="Mini preview 2">
-                        <img src="Images/assets-mini3.png" class="mini-preview" alt="Mini preview 3">
-                    </div>
-                </div>
-            </div>
-        </a>
+<div class="trust-ribbon">
+    <div class="ribbon-container">
+        <div class="stat-box"><span>Mission</span><strong>Engine Modernization</strong></div>
+        <div class="stat-box"><span>Focus</span><strong>Workflow Freedom</strong></div>
+        <div class="stat-box"><span>Performance</span><strong>Zero GC Alloc</strong></div>
     </div>
-</section>
+</div>
 
-<section class="section games">
-    <div class="container">
-        <h2 class="h1">Play With Us</h2>
-        <a href="https://games.stefaigames.com" class="backlight-wrapper">
-            <div class="card games reverse">
-                <img src="Images/games.png" alt="Games preview">
-                <div class="text">
-                    <p>Our racing games were made with love and passion, created by car guys, for car guys.</p>
-                    <div style="display:flex; margin-top:12px;">
-                        <img src="Images/games-mini1.png" class="mini-preview" alt="Mini preview 1">
-                        <img src="Images/games-mini2.png" class="mini-preview" alt="Mini preview 2">
-                        <img src="Images/games-mini3.png" class="mini-preview" alt="Mini preview 3">
-                    </div>
-                </div>
-            </div>
-        </a>
+<div class="trinity-section">
+    <div class="trinity-card">
+        <h3>Event Driven</h3>
+        <p>Decoupled logic for designers. Pro-grade implementation via native Unity Events.</p>
     </div>
-</section>
+    <div class="trinity-card">
+        <h3>Visual Scripting</h3>
+        <p>Full support for node-based logic. Complex systems made readable and accessible.</p>
+    </div>
+    <div class="trinity-card">
+        <h3>C# Script Based</h3>
+        <p>Documented API for engineers. Extend, override, or build custom logic from the core.</p>
+    </div>
+</div>
+
+<div class="section-tag">
+    <div class="badge">MISSION SELECTION</div>
+</div>
+
+<div class="portal-grid">
+    <a href="https://stefaigames.github.io/assets/" class="portal-link">
+        <div class="backlight-card">
+            <div class="inner-card">
+                <img src="Images/assets.png" alt="Stefai Assets">
+                <h2>Build</h2>
+                <p>Deploy frameworks that extend Unity's core capabilities, starting with our comprehensive UI ecosystem.</p>
+                <span class="button">Browse Assets</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="https://games.stefaigames.com" class="portal-link">
+        <div class="backlight-card">
+            <div class="inner-card">
+                <img src="Images/games.png" alt="Stefai Games">
+                <h2>Play</h2>
+                <p>Our studio branch serves as the production benchmark for every framework we build. See where we're headed next.</p>
+                <span class="button">Studio Roadmap</span>
+            </div>
+        </div>
+    </a>
+</div>
 
 <footer>
     <div class="footer-container">
-        <div class="footer-button-wrapper">
-            <a href="mailto:stefai.games.unity@gmail.com" class="footer-button">
-                <img src="Images/gmail.png" alt="Gmail" style="width:20px;"> Email
-            </a>
-        </div>
-        <div class="footer-button-wrapper">
-            <a href="https://www.instagram.com/stefaigames/" class="footer-button">
-                <img src="Images/instagram.png" alt="Instagram" style="width:20px;"> Instagram
-            </a>
-        </div>
-        <div class="footer-button-wrapper">
-            <a href="https://www.youtube.com/@StefaiGames" class="footer-button">
-                <img src="Images/youtube.png" alt="YouTube" style="width:20px;"> YouTube
-            </a>
-        </div>
-        <div class="footer-button-wrapper">
-            <a href="https://www.reddit.com/user/stefai_games/" class="footer-button">
-                <img src="Images/reddit.png" alt="Reddit" style="width:20px;"> Reddit
-            </a>
-        </div>
-        <div class="footer-button-wrapper">
-            <a href="#" class="footer-button">
-                <img src="Images/linkedin.png" alt="LinkedIn" style="width:20px;"> LinkedIn
-            </a>
-        </div>
+        <div class="footer-button-wrapper"><a href="mailto:stefai.games.unity@gmail.com" class="footer-button"><img src="Images/gmail.png" alt="Gmail" style="width:20px;"> Email</a></div>
+        <div class="footer-button-wrapper"><a href="https://www.instagram.com/stefaigames/" class="footer-button"><img src="Images/instagram.png" alt="Instagram" style="width:20px;"> Instagram</a></div>
+        <div class="footer-button-wrapper"><a href="https://www.youtube.com/@StefaiGames" class="footer-button"><img src="Images/youtube.png" alt="YouTube" style="width:20px;"> YouTube</a></div>
+        <div class="footer-button-wrapper"><a href="https://www.reddit.com/user/stefai_games/" class="footer-button"><img src="Images/reddit.png" alt="Reddit" style="width:20px;"> Reddit</a></div>
+        <div class="footer-button-wrapper"><a href="#" class="footer-button"><img src="Images/linkedin.png" alt="LinkedIn" style="width:20px;"> LinkedIn</a></div>
     </div>
-    <p>© 2025 Stefai Games. All rights reserved.</p>
+    <p style="margin-top: 25px; font-size: 0.9rem; color: #718096; text-align: center;">© 2025 Stefai Games. All rights reserved.</p>
 </footer>
 
 </body>
