@@ -241,7 +241,18 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
                 </div>
             </div>
         </div>
-
+		
+		<div x-data="{ open: false }" class="doc-card">
+            <div @click="open = !open" class="section-header">
+                <h2 class="section-title"><span class="section-number">10.</span> Dev Notes</h2>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
+            </div>
+            <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
+                <div class="p-8 text-slate-300 space-y-4">
+                    <p class="text-sm">If you found any bugs, or want to suggest a feature, you can contact us via our <a href="mailto:stefai.games.unity@gmail.com">support email</a></p>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
