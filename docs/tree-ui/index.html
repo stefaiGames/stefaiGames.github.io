@@ -9,6 +9,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <style>
+/* --- CORE VARIABLES FROM INDEX.HTML --- */
 :root {
     --pink: #ff3366;
     --purp: #7a3fd1;
@@ -21,57 +22,104 @@
     --button-bg: rgba(16,27,43,0.9);
 }
 
-/* Reset & Base from index.html */
+/* --- RESET & BODY --- */
 * { margin:0; padding:0; box-sizing:border-box; }
+
 body { 
     font-family: 'Arial', sans-serif; 
     background-color: var(--dark-blue-feed); 
     color: white; 
     line-height: 1.6;
-    background-image: linear-gradient(rgba(126, 200, 227, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(126, 200, 227, 0.03) 1px, transparent 1px);
+    /* Grid Pattern */
+    background-image: 
+        linear-gradient(rgba(126, 200, 227, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126, 200, 227, 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
 }
 
-/* --- HEADER (EXACT PORT FROM INDEX.HTML) --- */
+/* --- HEADER & GLOW BUTTONS (PORTED EXACTLY) --- */
 header {
     background-color: var(--dark-blue-header);
-    padding: 20px 0;
-    text-align: center;
-    border-bottom: 2px solid;
-    border-image: linear-gradient(to right, var(--pink), var(--purp), var(--sky-blue)) 1;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: sticky;
     top: 0;
     z-index: 1000;
-}
-.header-container { display: flex; justify-content: center; align-items: center; gap: 20px; }
-.logo-img { width: 50px; height: 50px; }
-.header-text h1 { font-size: 24px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-style: italic; }
-.header-text h1 span {
-    background: linear-gradient(to right, var(--pink), var(--purp), var(--sky-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* --- HERO SECTION (RESTORED FONT STYLING) --- */
+.logo-wrapper img { 
+    width: 50px; 
+    height: 50px; 
+    border-radius: 8px; 
+}
+
+/* The Magic Wrapper for Glow + Scale */
+.gradient-wrapper {
+    position: relative;
+    display: inline-block;
+    border-radius: 20px;
+    transition: transform 0.25s ease;
+    z-index: 1;
+}
+
+/* The Gradient Glow Behind */
+.gradient-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: -2px; /* 2px larger than the button */
+    border-radius: 22px; 
+    background: linear-gradient(45deg, var(--pink), var(--purp), var(--sky-blue));
+    z-index: -1;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease;
+}
+
+/* Hover States */
+.gradient-wrapper:hover {
+    transform: scale(1.05); /* Scale Up */
+}
+
+.gradient-wrapper:hover::before {
+    opacity: 1; /* Glow On */
+}
+
+/* The Actual Button Style */
+a.button, .footer-button {
+    display: block; /* Fills wrapper */
+    padding: 10px 20px;
+    background: var(--button-bg);
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* --- HERO SECTION --- */
 .hero-label {
+    display: block;
     color: var(--sky-blue);
-    font-weight: bold;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.3em;
-    font-size: 12px;
+    font-size: 13px;
+    margin-bottom: 10px;
 }
+
 .hero-title {
     font-size: 64px;
-    font-weight: 900;
-    font-style: italic;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
+    font-weight: 800;
     text-transform: uppercase;
+    line-height: 1.1;
+    color: white;
 }
 
 .gradient-text {
-    background: linear-gradient(to right, var(--sky-blue), var(--purp), var(--pink));
+    background: linear-gradient(to right, var(--sky-blue), var(--pink));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -82,136 +130,193 @@ header {
     border: 1px solid rgba(255,255,255,0.05);
     border-radius: 12px;
     margin-bottom: 16px;
-    transition: 0.3s;
+    overflow: hidden;
 }
-.doc-card:hover { border-color: var(--purp); }
-.section-number { color: var(--purp); font-family: monospace; font-style: italic; margin-right: 12px; }
-code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; }
 
-/* --- FOOTER (EXACT PORT FROM INDEX.HTML) --- */
+.section-header {
+    cursor: pointer;
+    user-select: none;
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.02);
+    transition: background 0.2s;
+}
+
+.section-header:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.section-number {
+    color: var(--purp);
+    font-family: monospace;
+    font-weight: bold;
+    margin-right: 12px;
+    font-size: 1.1em;
+}
+
+.section-title {
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.25rem;
+}
+
+code {
+    background: #0b1522;
+    color: var(--sky-blue);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Consolas', monospace;
+    font-size: 0.9em;
+}
+
+/* --- FOOTER (PORTED EXACTLY) --- */
 footer {
     background-color: var(--dark-blue-header);
-    padding: 40px 20px;
+    padding: 50px 20px;
     text-align: center;
     border-top: 1px solid rgba(255,255,255,0.1);
     margin-top: 100px;
 }
-.footer-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; }
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto 30px auto;
+}
+
 .footer-button {
-    background-color: var(--button-bg);
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 14px;
     display: flex;
     align-items: center;
     gap: 8px;
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: 0.3s;
+    font-size: 14px;
 }
-.footer-button:hover { background-color: var(--purp); }
-.footer-button img { width: 20px; }
 
+.footer-button img {
+    width: 20px;
+    height: 20px;
+}
+
+.copyright {
+    color: #555;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 </style>
 </head>
 <body>
 
     <header>
-        <div class="header-container">
-            <img src="Images/logo.png" alt="Stefai Games Logo" class="logo-img">
-            <div class="header-text">
-                <h1>STEFAI <span>GAMES</span></h1>
-            </div>
+        <div class="logo-wrapper">
+            <a href="index.html"><img src="Images/logo.png" alt="Stefai Games Logo"></a>
         </div>
+        <nav style="display: flex; gap: 15px;">
+            <div class="gradient-wrapper"><a href="assets.html" class="button">Assets</a></div>
+            <div class="gradient-wrapper"><a href="games.html" class="button">Games</a></div>
+        </nav>
     </header>
 
-    <div class="max-w-4xl mx-auto pt-20 pb-12 text-center px-4">
+    <div class="max-w-4xl mx-auto pt-24 pb-16 text-center px-4">
         <span class="hero-label">Technical Manual</span>
-        <h1 class="hero-title tracking-tighter">TreeUI <span class="gradient-text">Documentation</span></h1>
-        <p class="text-slate-400 max-w-2xl mx-auto">The service book for the TreeUI ecosystem. Structured for quick reference and deep production integration.</p>
+        <h1 class="hero-title">TreeUI <span class="gradient-text">Manual</span></h1>
+        <p class="text-slate-400 mt-6 max-w-xl mx-auto font-medium">The comprehensive service book for the TreeUI framework. Structured for rapid implementation and production-grade stability.</p>
     </div>
 
-    <main class="max-w-4xl mx-auto px-6 pb-20 space-y-4">
+    <main class="max-w-4xl mx-auto px-6 pb-20">
 
-        <div x-data="{ open: true }" class="doc-card overflow-hidden">
-            <button @click="open = !open" class="w-full p-6 text-left flex justify-between items-center bg-white/5">
-                <h2 class="font-bold text-xl uppercase italic"><span class="section-number">01.</span> Overview</h2>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform">▼</span>
-            </button>
+        <div x-data="{ open: true }" class="doc-card">
+            <div @click="open = !open" class="section-header">
+                <h2 class="section-title"><span class="section-number">01.</span> Overview</h2>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
+            </div>
             <div x-show="open" x-collapse class="p-8 text-slate-300 space-y-4 border-t border-white/5">
                 <p>TreeUI handles menu navigation using a high-performance tree structure. It extends Unity's native parent-child hierarchy to create a modular system with <strong>Dictionary-based O(n) traversal</strong>.</p>
-                <ul class="list-disc list-inside text-sm space-y-2">
-                    <li>Zero-GC runtime for mobile/VR stability.</li>
-                    <li>Integrated Scene Management (Additive Support).</li>
-                    <li>Self-Healing Hierarchy Guardrails.</li>
-                </ul>
+                <p>Features include Zero-GC runtime, integrated Scene Management, and self-healing hierarchy guardrails.</p>
             </div>
         </div>
 
-        <div x-data="{ open: false }" class="doc-card overflow-hidden">
-            <button @click="open = !open" class="w-full p-6 text-left flex justify-between items-center bg-white/5">
-                <h2 class="font-bold text-xl uppercase italic"><span class="section-number">02.</span> Quick Start</h2>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform">▼</span>
-            </button>
+        <div x-data="{ open: false }" class="doc-card">
+            <div @click="open = !open" class="section-header">
+                <h2 class="section-title"><span class="section-number">02.</span> Menu System Quick Start</h2>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
+            </div>
             <div x-show="open" x-collapse class="p-8 text-slate-300 space-y-6 border-t border-white/5">
                 <div>
-                    <h4 class="text-white font-bold mb-1 italic">Create the Network</h4>
-                    <p class="text-sm"><code>GameObject -> UI -> TreeUI -> Menu Network</code>. This automates the creation of the Manager, Canvas, and Transitions root.</p>
+                    <h4 class="text-white font-bold uppercase text-xs tracking-widest mb-2">Creating the Network</h4>
+                    <p class="text-sm">Right-click in Hierarchy: <code>GameObject -> UI -> TreeUI -> Menu Network</code>. This automates the creation of the Manager, Canvas, and Transitions root.</p>
                 </div>
                 <div>
-                    <h4 class="text-white font-bold mb-1 italic">Add Menus</h4>
+                    <h4 class="text-white font-bold uppercase text-xs tracking-widest mb-2">Adding Menus</h4>
                     <p class="text-sm">Select a parent and use <code>UI -> TreeUI -> Menu</code>. A setup wizard will manage naming and internal references.</p>
                 </div>
             </div>
         </div>
 
-        <div x-data="{ open: false }" class="doc-card overflow-hidden">
-            <button @click="open = !open" class="w-full p-6 text-left flex justify-between items-center bg-white/5">
-                <h2 class="font-bold text-xl uppercase italic"><span class="section-number">03.</span> Transitions</h2>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform">▼</span>
-            </button>
+        <div x-data="{ open: false }" class="doc-card">
+            <div @click="open = !open" class="section-header">
+                <h2 class="section-title"><span class="section-number">03.</span> Transitions</h2>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
+            </div>
             <div x-show="open" x-collapse class="p-8 text-slate-300 space-y-4 border-t border-white/5">
                 <p class="text-sm">Designer-friendly Animator workflow:</p>
-                <ol class="list-decimal list-inside text-sm space-y-2">
+                <ol class="list-decimal list-inside text-sm space-y-2 pl-2">
                     <li>Add a <code>StartTransition</code> Trigger to your Animator.</li>
                     <li>Call <code>Transition.OpenMenu</code> via an Animation Event on your swap frame.</li>
                 </ol>
             </div>
         </div>
 
-        <div x-data="{ open: false }" class="doc-card overflow-hidden">
-            <button @click="open = !open" class="w-full p-6 text-left flex justify-between items-center bg-white/5">
-                <h2 class="font-bold text-xl uppercase italic"><span class="section-number">04.</span> Interactions</h2>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform">▼</span>
-            </button>
+        <div x-data="{ open: false }" class="doc-card">
+            <div @click="open = !open" class="section-header">
+                <h2 class="section-title"><span class="section-number">04.</span> Interactions</h2>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
+            </div>
             <div x-show="open" x-collapse class="p-8 text-slate-300 space-y-4 border-t border-white/5">
-                <p class="text-sm">Access <code>OnMenuOpen</code> and <code>OnMenuClose</code> UnityEvents to trigger logic specifically for individual menus.</p>
+                <p class="text-sm">The system provides event hooks for modular logic. You can hook into <code>OnMenuOpen</code> and <code>OnMenuClose</code> via the Inspector to trigger sounds, analytics, or gameplay state changes.</p>
             </div>
         </div>
 
-        <div x-data="{ open: false }" class="doc-card overflow-hidden">
-            <button @click="open = !open" class="w-full p-6 text-left flex justify-between items-center bg-white/5">
-                <h2 class="font-bold text-xl uppercase italic"><span class="section-number">05.</span> Script Reference</h2>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform">▼</span>
-            </button>
+        <div x-data="{ open: false }" class="doc-card">
+            <div @click="open = !open" class="section-header">
+                <h2 class="section-title"><span class="section-number">05.</span> MenuManager - Script</h2>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
+            </div>
             <div x-show="open" x-collapse class="p-8 text-slate-300 space-y-6 border-t border-white/5">
                 <div>
-                    <h4 class="text-sky-400 font-bold mb-2 uppercase text-xs tracking-widest">MenuManager.cs</h4>
-                    <p class="text-xs"><code>OpenMenu(string path, int sceneIndex)</code>: Standard navigation.</p>
-                    <p class="text-xs mt-2"><code>LoadLastMenu()</code>: Restore previous state.</p>
+                    <h4 class="text-sky-400 font-bold uppercase text-xs tracking-widest mb-2">Core API</h4>
+                    <p class="text-xs mb-2"><code>OpenMenu(string path, int sceneIndex)</code>: The primary navigation method.</p>
+                    <p class="text-xs text-gray-400 italic">Update: Now supports additive scene loading for complex UI setups.</p>
+                </div>
+                <div>
+                    <h4 class="text-sky-400 font-bold uppercase text-xs tracking-widest mb-2">History API</h4>
+                    <p class="text-xs"><code>LoadLastMenu()</code>: Automatically traverses back one step in the navigation history stack.</p>
                 </div>
             </div>
         </div>
 
-        <div x-data="{ open: false }" class="doc-card overflow-hidden">
-            <button @click="open = !open" class="w-full p-6 text-left flex justify-between items-center bg-white/5">
-                <h2 class="font-bold text-xl uppercase italic text-sky-400"><span class="section-number">★</span> Best Practices</h2>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform">▼</span>
-            </button>
-            <div x-show="open" x-collapse class="p-8 text-slate-400 text-sm space-y-3 italic border-t border-white/5">
-                <p>1. Dedicated scenes for DDOL objects prevent singleton duplication.</p>
-                <p>2. Keep naming consistent using PascalCase conventions.</p>
+        <div x-data="{ open: false }" class="doc-card">
+            <div @click="open = !open" class="section-header">
+                <h2 class="section-title"><span class="section-number">06.</span> Menu Script</h2>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
+            </div>
+            <div x-show="open" x-collapse class="p-8 text-slate-300 space-y-4 border-t border-white/5">
+                <p class="text-sm">Attached to every UI Page. Handles visibility state and stores references to children/parents for the search algorithm.</p>
+                <p class="text-xs font-mono text-pink-400">public UnityEvent OnMenuOpen;</p>
+            </div>
+        </div>
+
+        <div x-data="{ open: false }" class="doc-card">
+            <div @click="open = !open" class="section-header">
+                <h2 class="section-title"><span class="section-number">07.</span> Transition - Script</h2>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
+            </div>
+            <div x-show="open" x-collapse class="p-8 text-slate-300 space-y-4 border-t border-white/5">
+                <p class="text-sm">Acts as the bridge between Unity's Animator state machine and the MenuManager. Must be placed under the 'Transitions' root object.</p>
             </div>
         </div>
 
@@ -219,13 +324,13 @@ footer {
 
     <footer>
         <div class="footer-container">
-            <div class="footer-button-wrapper"><a href="mailto:stefai.games.unity@gmail.com" class="footer-button"><img src="Images/gmail.png" alt="Gmail"> Email</a></div>
-            <div class="footer-button-wrapper"><a href="https://www.instagram.com/stefaigames/" class="footer-button"><img src="Images/instagram.png" alt="Instagram"> Instagram</a></div>
-            <div class="footer-button-wrapper"><a href="https://www.youtube.com/@StefaiGames" class="footer-button"><img src="Images/youtube.png" alt="YouTube"> YouTube</a></div>
-            <div class="footer-button-wrapper"><a href="https://www.reddit.com/user/stefai_games/" class="footer-button"><img src="Images/reddit.png" alt="Reddit"> Reddit</a></div>
-            <div class="footer-button-wrapper"><a href="#" class="footer-button"><img src="Images/linkedin.png" alt="LinkedIn"> LinkedIn</a></div>
+            <div class="gradient-wrapper"><a href="mailto:stefai.games.unity@gmail.com" class="footer-button"><img src="Images/gmail.png" alt="Gmail"> Email</a></div>
+            <div class="gradient-wrapper"><a href="https://www.instagram.com/stefaigames/" class="footer-button"><img src="Images/instagram.png" alt="Instagram"> Instagram</a></div>
+            <div class="gradient-wrapper"><a href="https://www.youtube.com/@StefaiGames" class="footer-button"><img src="Images/youtube.png" alt="YouTube"> YouTube</a></div>
+            <div class="gradient-wrapper"><a href="https://www.reddit.com/user/stefai_games/" class="footer-button"><img src="Images/reddit.png" alt="Reddit"> Reddit</a></div>
+            <div class="gradient-wrapper"><a href="#" class="footer-button"><img src="Images/linkedin.png" alt="LinkedIn"> LinkedIn</a></div>
         </div>
-        <p style="margin-top: 20px; color: #555; font-size: 12px;">© 2025 STEFAI GAMES. ALL RIGHTS RESERVED.</p>
+        <p class="copyright">© 2025 STEFAI GAMES. ALL RIGHTS RESERVED.</p>
     </footer>
 
 </body>
