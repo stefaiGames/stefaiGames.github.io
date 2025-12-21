@@ -11,7 +11,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <style>
-/* --- CORE VARIABLES FROM INDEX.HTML --- */
+/* --- CORE VARIABLES --- */
 :root {
     --pink: #ff3366;
     --purp: #7a3fd1;
@@ -19,12 +19,10 @@
     --dark-blue-header: #0B1522;
     --dark-blue-feed: #101b2b;
     --dark-blue-alt: #121f33;
-    --intro-bg: #0f1a27;
     --card-bg: #16243a;
     --button-bg: rgba(16,27,43,0.9);
 }
 
-/* --- RESET & BODY --- */
 * { margin:0; padding:0; box-sizing:border-box; }
 
 body { 
@@ -38,173 +36,78 @@ body {
     background-size: 60px 60px;
 }
 
-/* --- HEADER & GLOW BUTTONS (PORTED EXACTLY) --- */
-header {
-    background-color: var(--dark-blue-header);
-    padding: 15px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+/* --- HEADER & BACKLIGHT HOVER EFFECTS --- */
+header { 
+    position: sticky; top: 0; width: 100%; 
+    background-color: var(--dark-blue-header); 
+    display: flex; justify-content: space-between; 
+    align-items: center; padding: 10px 50px; 
+    z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.5); 
 }
 
-.logo-wrapper img { 
-    width: 50px; 
-    height: 50px; 
-    border-radius: 8px; 
+.logo-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.logo-wrapper::before { 
+    content:""; position: absolute; top:-10px; left:-10px; width: calc(100% + 20px); height: calc(100% + 20px); 
+    border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); 
+    background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index:-1; 
 }
+.logo-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
+.logo-wrapper img { width:50px; height:50px; border-radius:8px; transition: transform 0.25s ease; }
+.logo-wrapper:hover img { transform: scale(1.08); }
 
-/* The Magic Wrapper for Glow + Scale */
-.gradient-wrapper {
-    position: relative;
-    display: inline-block;
-    border-radius: 20px;
-    transition: transform 0.25s ease;
-    z-index: 1;
-}
+nav { display: flex; align-items: center; gap: 14px; }
 
-.gradient-wrapper::before {
-    content: "";
-    position: absolute;
-    inset: -2px; 
-    border-radius: 22px; 
-    background: linear-gradient(120deg, var(--pink), var(--purp), var(--sky-blue), var(--purp), var(--pink));
-    z-index: -1;
-    opacity: 0; 
-    transition: opacity 0.3s ease;
+/* The Backlight Container */
+.gradient-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.gradient-wrapper::before { 
+    content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); 
+    border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); 
+    background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index: 0; 
 }
+.gradient-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
 
-.gradient-wrapper:hover {
-    transform: scale(1.05); 
+a.button { 
+    display: inline-block; padding: 10px 20px; background: var(--button-bg); color: white; 
+    text-decoration: none; border-radius: 20px; font-size: 1rem; position: relative; z-index: 1; 
+    transition: transform 0.25s ease; border: 1px solid rgba(255,255,255,0.05);
 }
+a.button:hover { transform: scale(1.06); }
 
-.gradient-wrapper:hover::before {
-    opacity: 1; 
-}
-
-a.button, .footer-button {
-    display: block; 
-    padding: 10px 20px;
-    background: var(--button-bg);
-    color: white;
-    text-decoration: none;
-    border-radius: 20px;
-    font-size: 1rem;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-/* --- HERO SECTION --- */
-.hero-label {
-    display: block;
-    color: var(--sky-blue);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    font-size: 13px;
-    margin-bottom: 10px;
-}
-
-.hero-title {
-    font-size: 64px;
-    font-weight: 800;
-    text-transform: uppercase;
-    line-height: 1.1;
-    color: white;
-}
-
-.gradient-text {
-    background: linear-gradient(to right, var(--sky-blue), var(--pink));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+/* --- HERO --- */
+.hero-label { display: block; color: var(--sky-blue); font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; font-size: 13px; margin-bottom: 10px; }
+.hero-title { font-size: 64px; font-weight: 800; text-transform: uppercase; line-height: 1.1; color: white; }
+.gradient-text { background: linear-gradient(to right, var(--sky-blue), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
 /* --- DOCUMENTATION CARDS --- */
-.doc-card {
-    background-color: var(--card-bg);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 12px;
-    margin-bottom: 16px;
-    overflow: hidden;
-}
+.doc-card { background-color: var(--card-bg); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+.section-header { cursor: pointer; user-select: none; padding: 24px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); transition: background 0.2s; }
+.section-header:hover { background: rgba(255,255,255,0.05); }
+.section-number { color: var(--purp); font-family: monospace; font-weight: bold; margin-right: 12px; }
+.section-title { font-weight: 800; text-transform: uppercase; font-size: 1.25rem; }
 
-.section-header {
-    cursor: pointer;
-    user-select: none;
-    padding: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(255,255,255,0.02);
-    transition: background 0.2s;
-}
+code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 0.9em; }
 
-.section-header:hover {
-    background: rgba(255,255,255,0.05);
-}
+/* --- FOOTER (WITH BACKLIGHT) --- */
+footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-top: 100px; text-align: center; }
+.footer-container { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
 
-.section-number {
-    color: var(--purp);
-    font-family: monospace;
-    font-weight: bold;
-    margin-right: 12px;
-    font-size: 1.1em;
+.footer-button-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.footer-button-wrapper::before { 
+    content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); 
+    border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); 
+    background-size: 400%; filter: blur(12px); opacity: 0; transition: opacity 0.6s ease; z-index: 0; 
 }
+.footer-button-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
 
-.section-title {
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 1.25rem;
+.footer-button { 
+    display: flex; align-items: center; gap: 8px; position: relative; z-index: 1; 
+    padding: 12px 24px; border-radius: 20px; background: var(--button-bg); color: white; 
+    text-decoration: none; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.05); 
 }
+.footer-button:hover { transform: scale(1.06); }
+.footer-button img { width: 20px; height: 20px; }
 
-code {
-    background: #0b1522;
-    color: var(--sky-blue);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: 'Consolas', monospace;
-    font-size: 0.9em;
-}
-
-/* --- FOOTER (PORTED EXACTLY) --- */
-footer {
-    background-color: var(--dark-blue-header);
-    padding: 50px 20px;
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    margin-top: 100px;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto 30px auto;
-}
-
-.footer-button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-}
-
-.footer-button img {
-    width: 20px;
-    height: 20px;
-}
-
-.copyright {
-    color: #555;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
+@keyframes gradient-shift { 0% { background-position:0% 50%; } 100% { background-position:400% 50%; } }
 </style>
 </head>
 <body>
@@ -213,16 +116,16 @@ footer {
         <div class="logo-wrapper">
             <a href="index.html"><img src="../../Images/logo.png" alt="Stefai Games Logo"></a>
         </div>
-        <nav style="display: flex; gap: 15px;">
-            <div class="gradient-wrapper"><a href="assets.html" class="button">Assets</a></div>
-            <div class="gradient-wrapper"><a href="games.html" class="button">Games</a></div>
+        <nav>
+            <div class="gradient-wrapper"><a href="#/assets" class="button">Assets</a></div>
+            <div class="gradient-wrapper"><a href="#/games" class="button">Games</a></div>
         </nav>
     </header>
 
     <div class="max-w-4xl mx-auto pt-24 pb-16 text-center px-4">
         <span class="hero-label">Technical Manual</span>
         <h1 class="hero-title">TreeUI <span class="gradient-text">Manual</span></h1>
-        <p class="text-slate-400 mt-6 max-w-xl mx-auto font-medium">The comprehensive service book for the TreeUI framework. Structured for rapid implementation and production-grade stability.</p>
+        <p class="text-slate-400 mt-6 max-w-xl mx-auto font-medium">Professional-grade menu management for Unity developers. Modular, scalable, and optimized for Zero-GC runtime.</p>
     </div>
 
     <main class="max-w-4xl mx-auto px-6 pb-20">
@@ -230,12 +133,11 @@ footer {
         <div x-data="{ open: true }" class="doc-card">
             <div @click="open = !open" class="section-header">
                 <h2 class="section-title"><span class="section-number">01.</span> Overview</h2>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-700">▼</span>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
             </div>
-            <div x-show="open" x-collapse.duration.400ms class="border-t border-white/5">
+            <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-4">
-                    <p>TreeUI handles menu navigation using a high-performance tree structure. It extends Unity's native parent-child hierarchy to create a modular system with <strong>Dictionary-based O(n) traversal</strong>.</p>
-                    <p>Features include Zero-GC runtime, integrated Scene Management, and self-healing hierarchy guardrails.</p>
+                    <p>TreeUI manages menu navigation using a high-performance tree architecture. It eliminates traditional search overhead by utilizing a <strong>Dictionary-based O(n) traversal</strong> system.</p>
                 </div>
             </div>
         </div>
@@ -243,17 +145,13 @@ footer {
         <div x-data="{ open: false }" class="doc-card">
             <div @click="open = !open" class="section-header">
                 <h2 class="section-title"><span class="section-number">02.</span> Menu System Quick Start</h2>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-700">▼</span>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
             </div>
-            <div x-show="open" x-collapse.duration.400ms class="border-t border-white/5">
+            <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-6">
                     <div>
                         <h4 class="text-white font-bold uppercase text-xs tracking-widest mb-2">Creating the Network</h4>
-                        <p class="text-sm">Right-click in Hierarchy: <code>GameObject -> UI -> TreeUI -> Menu Network</code>. This automates the creation of the Manager, Canvas, and Transitions root.</p>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold uppercase text-xs tracking-widest mb-2">Adding Menus</h4>
-                        <p class="text-sm">Select a parent and use <code>UI -> TreeUI -> Menu</code>. A setup wizard will manage naming and automated registration.</p>
+                        <p class="text-sm">Right-click in Hierarchy: <code>GameObject -> UI -> TreeUI -> Menu Network</code>.</p>
                     </div>
                 </div>
             </div>
@@ -262,15 +160,11 @@ footer {
         <div x-data="{ open: false }" class="doc-card">
             <div @click="open = !open" class="section-header">
                 <h2 class="section-title"><span class="section-number">03.</span> Transitions</h2>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-700">▼</span>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
             </div>
-            <div x-show="open" x-collapse.duration.400ms class="border-t border-white/5">
+            <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-4">
-                    <p class="text-sm">Designer-friendly Animator workflow:</p>
-                    <ol class="list-decimal list-inside text-sm space-y-2 pl-2">
-                        <li>Add a <code>StartTransition</code> Trigger to your Animator.</li>
-                        <li>Call <code>Transition.OpenMenu</code> via an Animation Event on your swap frame.</li>
-                    </ol>
+                    <p class="text-sm">Animator workflow: Use the <code>StartTransition</code> trigger and call <code>Transition.OpenMenu</code> via Animation Events.</p>
                 </div>
             </div>
         </div>
@@ -278,11 +172,11 @@ footer {
         <div x-data="{ open: false }" class="doc-card">
             <div @click="open = !open" class="section-header">
                 <h2 class="section-title"><span class="section-number">04.</span> Interactions</h2>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-700">▼</span>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
             </div>
-            <div x-show="open" x-collapse.duration.400ms class="border-t border-white/5">
+            <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-4">
-                    <p class="text-sm">The system provides event hooks for modular logic. You can hook into <code>OnMenuOpen</code> and <code>OnMenuClose</code> via the Inspector to trigger sounds, analytics, or gameplay state changes.</p>
+                    <p class="text-sm">Hook into <code>OnMenuOpen</code> and <code>OnMenuClose</code> UnityEvents for modular logic.</p>
                 </div>
             </div>
         </div>
@@ -290,19 +184,12 @@ footer {
         <div x-data="{ open: false }" class="doc-card">
             <div @click="open = !open" class="section-header">
                 <h2 class="section-title"><span class="section-number">05.</span> MenuManager - Script</h2>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-700">▼</span>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
             </div>
-            <div x-show="open" x-collapse.duration.400ms class="border-t border-white/5">
+            <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-6">
-                    <div>
-                        <h4 class="text-sky-400 font-bold uppercase text-xs tracking-widest mb-2">Core API</h4>
-                        <p class="text-xs mb-2"><code>OpenMenu(string path, int sceneIndex)</code>: The primary navigation method.</p>
-                        <p class="text-xs text-gray-400 italic">Update: Now supports additive scene loading for complex UI architectures.</p>
-                    </div>
-                    <div>
-                        <h4 class="text-sky-400 font-bold uppercase text-xs tracking-widest mb-2">History API</h4>
-                        <p class="text-xs"><code>LoadLastMenu()</code>: Automatically traverses back one step in the navigation history stack.</p>
-                    </div>
+                    <p class="text-xs"><code>OpenMenu(string path, int sceneIndex)</code>: Core navigation API.</p>
+                    <p class="text-xs"><code>LoadLastMenu()</code>: Traverses back using the history stack.</p>
                 </div>
             </div>
         </div>
@@ -310,12 +197,11 @@ footer {
         <div x-data="{ open: false }" class="doc-card">
             <div @click="open = !open" class="section-header">
                 <h2 class="section-title"><span class="section-number">06.</span> Menu Script</h2>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-700">▼</span>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
             </div>
-            <div x-show="open" x-collapse.duration.400ms class="border-t border-white/5">
+            <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-4">
-                    <p class="text-sm">Attached to every UI Page. Handles visibility state and stores references to children/parents for the search algorithm.</p>
-                    <p class="text-xs font-mono text-pink-400">public UnityEvent OnMenuOpen;</p>
+                    <p class="text-sm">Attached to every UI Page. Stores local search dictionaries for high-speed child lookup.</p>
                 </div>
             </div>
         </div>
@@ -323,11 +209,11 @@ footer {
         <div x-data="{ open: false }" class="doc-card">
             <div @click="open = !open" class="section-header">
                 <h2 class="section-title"><span class="section-number">07.</span> Transition - Script</h2>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-700">▼</span>
+                <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
             </div>
-            <div x-show="open" x-collapse.duration.400ms class="border-t border-white/5">
+            <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-4">
-                    <p class="text-sm">Acts as the bridge between Unity's Animator state machine and the MenuManager. Must be placed under the 'Transitions' root object.</p>
+                    <p class="text-sm">The bridge between Animator states and the MenuManager logic.</p>
                 </div>
             </div>
         </div>
@@ -342,7 +228,7 @@ footer {
             <div class="footer-button-wrapper"><a href="https://www.reddit.com/user/stefai_games/" class="footer-button"><img src="../../Images/reddit.png" alt="Reddit"> Reddit</a></div>
             <div class="footer-button-wrapper"><a href="#" class="footer-button"><img src="../../Images/linkedin.png" alt="LinkedIn"> LinkedIn</a></div>
         </div>
-        <p class="copyright">© 2025 STEFAI GAMES. ALL RIGHTS RESERVED.</p>
+        <p style="margin-top: 25px; font-size: 12px; color: #555; text-transform: uppercase; letter-spacing: 1px;">© 2025 STEFAI GAMES. ALL RIGHTS RESERVED.</p>
     </footer>
 
 </body>
