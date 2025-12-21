@@ -30,76 +30,36 @@ body {
     background-color: var(--dark-blue-feed); 
     color: white; 
     line-height: 1.6;
-    /* Grid Pattern */
     background-image: 
         linear-gradient(rgba(126, 200, 227, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(126, 200, 227, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
+    background-size: 60px 60px;
 }
 
-/* --- HEADER & GLOW BUTTONS (PORTED EXACTLY) --- */
-header {
-    background-color: var(--dark-blue-header);
-    padding: 15px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
+/* --- HEADER & LOGO (EXACT COPY FROM INDEX.HTML) --- */
+header { position: sticky; top: 0; width: 100%; background-color: var(--dark-blue-header); display: flex; justify-content: space-between; align-items: center; padding: 10px 50px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
-.logo-wrapper img { 
-    width: 50px; 
-    height: 50px; 
-    border-radius: 8px; 
-}
+.logo-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.logo-wrapper::before { content:""; position: absolute; top:-10px; left:-10px; width: calc(100% + 20px); height: calc(100% + 20px); border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index:-1; }
+.logo-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
+.logo-wrapper img { width:50px; height:50px; border-radius:8px; transition: transform 0.25s ease; }
+.logo-wrapper:hover img { transform: scale(1.08); }
 
-/* The Magic Wrapper for Glow + Scale */
-.gradient-wrapper {
-    position: relative;
-    display: inline-block;
-    border-radius: 20px;
-    transition: transform 0.25s ease;
-    z-index: 1;
-}
+/* --- NAV BUTTONS (EXACT BACKLIGHT LOGIC) --- */
+nav { display: flex; align-items: center; gap: 14px; }
 
-/* The Gradient Glow Behind */
-.gradient-wrapper::before {
-    content: "";
-    position: absolute;
-    inset: -2px; /* 2px larger than the button */
-    border-radius: 22px; 
-    background: linear-gradient(45deg, var(--pink), var(--purp), var(--sky-blue));
-    z-index: -1;
-    opacity: 0; /* Hidden by default */
-    transition: opacity 0.3s ease;
-}
+.gradient-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.gradient-wrapper::before { content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index: -1; }
+.gradient-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
 
-/* Hover States */
-.gradient-wrapper:hover {
-    transform: scale(1.05); /* Scale Up */
+a.button { 
+    display: inline-block; padding: 10px 20px; background: var(--button-bg); color: white; 
+    text-decoration: none; border-radius: 20px; font-size: 1rem; position: relative; z-index: 1; 
+    transition: transform 0.25s ease; border: 1px solid rgba(255,255,255,0.05);
 }
+a.button:hover { transform: scale(1.06); }
 
-.gradient-wrapper:hover::before {
-    opacity: 1; /* Glow On */
-}
-
-/* The Actual Button Style */
-a.button, .footer-button {
-    display: block; /* Fills wrapper */
-    padding: 10px 20px;
-    background: var(--button-bg);
-    color: white;
-    text-decoration: none;
-    border-radius: 20px;
-    font-size: 1rem;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-/* --- HERO SECTION --- */
+/* --- HERO TYPOGRAPHY (PLAIN & BOLD AS REQUESTED) --- */
 .hero-label {
     display: block;
     color: var(--sky-blue);
@@ -115,7 +75,7 @@ a.button, .footer-button {
     font-weight: 800;
     text-transform: uppercase;
     line-height: 1.1;
-    color: white;
+    color: white; /* Plain white as per SS2 */
 }
 
 .gradient-text {
@@ -124,7 +84,7 @@ a.button, .footer-button {
     -webkit-text-fill-color: transparent;
 }
 
-/* --- DOCUMENTATION CARDS --- */
+/* --- DOCUMENTATION CONTENT STYLES --- */
 .doc-card {
     background-color: var(--card-bg);
     border: 1px solid rgba(255,255,255,0.05);
@@ -143,24 +103,10 @@ a.button, .footer-button {
     background: rgba(255,255,255,0.02);
     transition: background 0.2s;
 }
+.section-header:hover { background: rgba(255,255,255,0.05); }
 
-.section-header:hover {
-    background: rgba(255,255,255,0.05);
-}
-
-.section-number {
-    color: var(--purp);
-    font-family: monospace;
-    font-weight: bold;
-    margin-right: 12px;
-    font-size: 1.1em;
-}
-
-.section-title {
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 1.25rem;
-}
+.section-number { color: var(--purp); font-family: monospace; font-weight: bold; margin-right: 12px; font-size: 1.1em; }
+.section-title { font-weight: 800; text-transform: uppercase; font-size: 1.25rem; }
 
 code {
     background: #0b1522;
@@ -171,42 +117,19 @@ code {
     font-size: 0.9em;
 }
 
-/* --- FOOTER (PORTED EXACTLY) --- */
-footer {
-    background-color: var(--dark-blue-header);
-    padding: 50px 20px;
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    margin-top: 100px;
-}
+/* --- FOOTER (EXACT COPY FROM INDEX.HTML) --- */
+footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-top: 40px; text-align: center; position: relative; z-index: 10; }
+.footer-container { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
 
-.footer-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto 30px auto;
-}
+.footer-button-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.footer-button-wrapper::before { content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); background-size: 400%; filter: blur(12px); opacity: 0; transition: opacity 0.6s ease; z-index: 0; }
+.footer-button-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
 
-.footer-button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-}
+.footer-button { display: flex; align-items: center; gap: 6px; position: relative; z-index: 1; padding: 12px 24px; border-radius: 20px; background: var(--button-bg); color: white; text-decoration: none; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.05); }
+.footer-button:hover { transform: scale(1.06); }
 
-.footer-button img {
-    width: 20px;
-    height: 20px;
-}
+@keyframes gradient-shift { 0% { background-position:0% 50%; } 100% { background-position:400% 50%; } }
 
-.copyright {
-    color: #555;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
 </style>
 </head>
 <body>
@@ -215,7 +138,7 @@ footer {
         <div class="logo-wrapper">
             <a href="index.html"><img src="../../Images/logo.png" alt="Stefai Games Logo"></a>
         </div>
-        <nav style="display: flex; gap: 15px;">
+        <nav>
             <div class="gradient-wrapper"><a href="assets.html" class="button">Assets</a></div>
             <div class="gradient-wrapper"><a href="games.html" class="button">Games</a></div>
         </nav>
@@ -235,8 +158,12 @@ footer {
                 <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
             </div>
             <div x-show="open" x-collapse class="p-8 text-slate-300 space-y-4 border-t border-white/5">
-                <p>TreeUI handles menu navigation using a high-performance tree structure. It extends Unity's native parent-child hierarchy to create a modular system with <strong>Dictionary-based O(n) traversal</strong>.</p>
-                <p>Features include Zero-GC runtime, integrated Scene Management, and self-healing hierarchy guardrails.</p>
+                <p>TreeUI manages menu navigation using a high-performance tree architecture. It eliminates traditional search overhead by utilizing a <strong>Dictionary-based O(n) traversal</strong> system.</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>Zero Runtime GC Allocations</li>
+                    <li>Integrated Scene Management (Additive Support)</li>
+                    <li>Full Editor Undo/Redo Integration</li>
+                </ul>
             </div>
         </div>
 
@@ -277,7 +204,11 @@ footer {
                 <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
             </div>
             <div x-show="open" x-collapse class="p-8 text-slate-300 space-y-4 border-t border-white/5">
-                <p class="text-sm">The system provides event hooks for modular logic. You can hook into <code>OnMenuOpen</code> and <code>OnMenuClose</code> via the Inspector to trigger sounds, analytics, or gameplay state changes.</p>
+                <p class="text-sm">Hook into modular events via the Inspector:</p>
+                <ul class="list-disc list-inside text-sm space-y-2">
+                    <li><code>OnMenuOpen</code>: Triggered when the menu becomes active.</li>
+                    <li><code>OnMenuClose</code>: Triggered when the menu is disabled.</li>
+                </ul>
             </div>
         </div>
 
@@ -289,8 +220,8 @@ footer {
             <div x-show="open" x-collapse class="p-8 text-slate-300 space-y-6 border-t border-white/5">
                 <div>
                     <h4 class="text-sky-400 font-bold uppercase text-xs tracking-widest mb-2">Core API</h4>
-                    <p class="text-xs mb-2"><code>OpenMenu(string path, int sceneIndex)</code>: The primary navigation method.</p>
-                    <p class="text-xs text-gray-400 italic">Update: Now supports additive scene loading for complex UI setups.</p>
+                    <p class="text-xs mb-2"><code>OpenMenu(string path, int sceneIndex)</code>: Navigation with additive scene support.</p>
+                    <p class="text-xs text-gray-400 italic">Supports LoadSceneMode.Additive for multi-scene UI architectures.</p>
                 </div>
                 <div>
                     <h4 class="text-sky-400 font-bold uppercase text-xs tracking-widest mb-2">History API</h4>
@@ -316,7 +247,7 @@ footer {
                 <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
             </div>
             <div x-show="open" x-collapse class="p-8 text-slate-300 space-y-4 border-t border-white/5">
-                <p class="text-sm">Acts as the bridge between Unity's Animator state machine and the MenuManager. Must be placed under the 'Transitions' root object.</p>
+                <p class="text-sm">Acts as the bridge between Unity's Animator and MenuManager. Must be placed under the 'Transitions' root object.</p>
             </div>
         </div>
 
@@ -324,13 +255,13 @@ footer {
 
     <footer>
         <div class="footer-container">
-            <div class="gradient-wrapper"><a href="mailto:stefai.games.unity@gmail.com" class="footer-button"><img src="../../Images/gmail.png" alt="Gmail"> Email</a></div>
-            <div class="gradient-wrapper"><a href="https://www.instagram.com/stefaigames/" class="footer-button"><img src="../../Images/instagram.png" alt="Instagram"> Instagram</a></div>
-            <div class="gradient-wrapper"><a href="https://www.youtube.com/@StefaiGames" class="footer-button"><img src="../../Images/youtube.png" alt="YouTube"> YouTube</a></div>
-            <div class="gradient-wrapper"><a href="https://www.reddit.com/user/stefai_games/" class="footer-button"><img src="../../Images/reddit.png" alt="Reddit"> Reddit</a></div>
-            <div class="gradient-wrapper"><a href="#" class="footer-button"><img src="Images/linkedin.png" alt="LinkedIn"> LinkedIn</a></div>
+            <div class="footer-button-wrapper"><a href="mailto:stefai.games.unity@gmail.com" class="footer-button"><img src="../../Images/gmail.png" alt="Gmail" style="width:20px;"> Email</a></div>
+            <div class="footer-button-wrapper"><a href="https://www.instagram.com/stefaigames/" class="footer-button"><img src="../../Images/instagram.png" alt="Instagram" style="width:20px;"> Instagram</a></div>
+            <div class="footer-button-wrapper"><a href="https://www.youtube.com/@StefaiGames" class="footer-button"><img src="../../Images/youtube.png" alt="YouTube" style="width:20px;"> YouTube</a></div>
+            <div class="footer-button-wrapper"><a href="https://www.reddit.com/user/stefai_games/" class="footer-button"><img src="../../Images/reddit.png" alt="Reddit" style="width:20px;"> Reddit</a></div>
+            <div class="footer-button-wrapper"><a href="#" class="footer-button"><img src="../../Images/linkedin.png" alt="LinkedIn" style="width:20px;"> LinkedIn</a></div>
         </div>
-        <p class="copyright">© 2025 STEFAI GAMES. ALL RIGHTS RESERVED.</p>
+        <p style="margin-top: 25px; font-size: 0.9rem; color: #718096; text-align: center;">© 2025 Stefai Games. All rights reserved.</p>
     </footer>
 
 </body>
