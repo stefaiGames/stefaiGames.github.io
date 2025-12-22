@@ -114,11 +114,11 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 
     <header>
         <div class="logo-wrapper">
-            <a href="index.html"><img src="../../Images/logo.png" alt="Stefai Games Logo"></a>
+            <a href="stefaigames.github.io"><img src="../../Images/logo.png" alt="Stefai Games Logo"></a>
         </div>
         <nav>
-            <div class="gradient-wrapper"><a href="#/assets" class="button">Assets</a></div>
-            <div class="gradient-wrapper"><a href="#/games" class="button">Games</a></div>
+            <div class="gradient-wrapper"><a href="stefaigames.github.io/assets" class="button">Assets</a></div>
+            <div class="gradient-wrapper"><a href="stefaigames.github.io/games" class="button">Games</a></div>
         </nav>
     </header>
 
@@ -132,7 +132,7 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 
         <div x-data="{ open: true }" class="doc-card">
             <div @click="open = !open" class="section-header">
-                <h2 class="section-title"><span class="section-number">?</span> Technical Info</h2>
+                <h2 class="section-title"><span class="section-number">??</span> Technical Info</h2>
                 <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
             </div>
             <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
@@ -168,9 +168,12 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 					<li> <strong>Menu System</strong> </li>
 					<li> Integrated <strong>scene management</strong> (singular and additive scene loading supported)</li>
 					<li> <strong>Menu opening history</strong>, allowing for easy interation of the Back buttons</li>
+					<li> <strong>Fuzzy Search</strong> on misspelt menu names</li>
 					<li> <strong>Transition Logic</strong></li>
 					<li> <strong>Demo Scenes</strong></li>
 					<li> <strong>3 pre-made transitions</strong> that cover most of the transitions for games</li>
+					<li> <strong>Defensive hierarchy enforcement</strong></li>
+					<li> Fully covered by <strong>custom error messages</strong></li>
 					</ul>
 					</p>
                 </div>
@@ -222,9 +225,15 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 						<li>if no object is selected, the menu will be created as the child object of the MenuManager</li>
 						<li>if the MenuManager or another menu is selected, the menu will be created as the child object of the selected object</li>
 						<li>any other case, the menu will be created as the child object of the selected object</li>
-						</ul>
+						</ul><br>
+						Let's talk about how the search algorithm works. There are 2 main functions that are used throughout the system:<br>
+						<code>MenuManager -> OpenMenu(string menuPath)</code> and <br>
+						<code>MenuManager -> TransitionToMenu(string menuPath)</code><br>
+						<br>
+						The <code>menuPath</code> variable functions like a folder path, <br>
+						where each menu name is separated by a splitter character (defined in the MenuManager inspector, default <code>'/'</code>)<br>
+						example: <code>mainMenu/optionsMenu</code>
 						</p>
-						
                     </div>
                 </div>
             </div>
@@ -237,7 +246,20 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
             </div>
             <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-4">
-                    <p class="text-sm">Animator workflow: Use the <code>StartTransition</code> trigger and call <code>Transition.OpenMenu</code> via Animation Events.</p>
+                    <p>
+					Transitions are a very powerful tool, which allows users to esthetically boost the opening of the menus.<br>
+					The Transitions are <strong>Animator</strong> based, which allows for full customizability of them. <br>
+					
+					Let's start by creating a transition object:<br>
+					Right click on the hierarchy, and open <code>GameObject -> UI -> TreeUI -> Transition</code><br>
+					This will open a setup wizard for the transitions, which looks like this:
+					<img src="Images/ss3" class="w-[250px]"><br>
+					where:<br><ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+					<li><strong>Transition Preset</strong> - prefab of the transition. Useful if you already created a transition that you want to use</li>
+					<li><strong>Object Name</strong> - Name of the transition scene object</li>
+					</ul>
+					Within the object, you will have the <code>Transition</code> component, along with the <code>Animator</code> component. 
+					</p>
                 </div>
             </div>
         </div>
@@ -249,7 +271,37 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
             </div>
             <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-4">
-                    <p class="text-sm">Hook into <code>OnMenuOpen</code> and <code>OnMenuClose</code> UnityEvents for modular logic.</p>
+					<p>
+					This asset supports 3 different workflows: <br>
+					<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+					<li><strong>Script based</strong> - allows for controlling the system through scripts</li>
+					<li><strong>Event based</strong> - allows for controlling the system through events</li>
+					<li><strong>Visual Scripting</strong> - complete visual scripting integration</li>
+					</ul><br>
+					<strong>note</strong>: all 3 interaction workflows are created to be equally powerful, utlizing overload functions for futher ease of use<br>
+					<br>
+					let's break down each workflow individually:<br>
+					<br>
+					<h1><strong>1. Script based workflow</strong></h1><br>
+					Let's explain this workflow with an example of the pause menu. <br>
+					Create the menu architecture that looks like this:<br>
+					<img src="Images/ss4" class="w-[250px]">
+					<br>
+					Now, with this setup, we can start creating the <strong>logic</strong>.<br>
+					Create a script called <code>UIManager</code><br>
+					In the script, add the following code to the Update function:<br>
+					<code><pre>if(Input.GetKeyDown(KeyCode.Escape))
+{
+    MenuManager.Instance.OpenMenu(
+		MenuManager.Instance.GetMenu("gameMenu/pauseMenu").isOpen ? 
+		"gameMenu" : 
+		"gameMenu/pauseMenu");
+}
+					</pre></code>
+					What this does? <code>MenuManager.Instance.GetMenu</code> function returns a reference to the menu. <br>
+					<code>isOpen</code> is a boolean which returns the state of the menu, IE. Is it open or closed. 
+					<code>MenuManager.OpenMenu</code> is a function which opens a menu under the specified path.<br>
+					</p>
                 </div>
             </div>
         </div>
@@ -269,7 +321,7 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 
         <div x-data="{ open: false }" class="doc-card">
             <div @click="open = !open" class="section-header">
-                <h2 class="section-title"><span class="section-number">06.</span> Menu Script</h2>
+                <h2 class="section-title"><span class="section-number">06.</span> Menu - Script</h2>
                 <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
             </div>
             <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
