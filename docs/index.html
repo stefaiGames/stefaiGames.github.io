@@ -5,53 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Documentation Hub | Stefai Games</title>
 <link rel="icon" href="../Images/logo.png" type="image/png">
+<link rel="stylesheet" href="https://stefaigames.github.io/design.css">
 
 <style>
-/* 1:1 PARITY WITH LANDING PAGE ROOT & GLOBALS */
-:root {
-    --pink: #ff3366;
-    --purp: #7a3fd1;
-    --sky-blue: #7ec8e3;
-    --dark-blue-header: #0B1522;
-    --dark-blue-feed: #101b2b;
-    --dark-blue-alt: #121f33;
-    --intro-bg: #0f1a27;
-    --card-bg: #16243a;
-    --button-bg: rgba(16,27,43,0.9);
-}
-
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body { 
-    font-family: 'Arial', sans-serif; 
-    background-color: var(--dark-blue-feed); 
-    color: white; 
-    overflow-x: hidden; 
-    line-height: 1.6;
-    background-image: 
-        linear-gradient(rgba(126, 200, 227, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(126, 200, 227, 0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-}
-
-/* HEADER */
-header { position: sticky; top: 0; width: 100%; background-color: var(--dark-blue-header); display: flex; justify-content: space-between; align-items: center; padding: 10px 50px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-.logo-wrapper { position: relative; display: inline-block; border-radius: 20px; }
-.logo-wrapper img { width:50px; height:50px; border-radius:8px; transition: transform 0.25s ease; }
-.logo-wrapper:hover img { transform: scale(1.08); }
-
-nav { display: flex; align-items: center; gap: 14px; }
-.gradient-wrapper { position: relative; display: inline-block; border-radius: 20px; }
-.gradient-wrapper::before { content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index: -1; }
-.gradient-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
-
-a.button { 
-    display: inline-block; padding: 10px 20px; background: var(--button-bg); color: white; 
-    text-decoration: none; border-radius: 20px; font-size: 1rem; position: relative; z-index: 1; 
-    transition: transform 0.25s ease; border: 1px solid rgba(255,255,255,0.05);
-}
-a.button:hover { transform: scale(1.06); }
-
 /* HUB CONTENT SECTION */
 .hub-hero { padding: 80px 20px 40px; text-align: center; }
 .hub-hero h1 { font-size: 2.8rem; margin-bottom: 10px; color: var(--sky-blue); }
@@ -150,7 +106,7 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 
 <header id="main-header"></header>
 
-<section class="hub-hero">
+<section class="hero-vanta">
     <h1>Documentation Hub</h1>
     <p>Technical specifications, workflow guides, and API references for the Stefai Games modernization ecosystem.</p>
 </section>
@@ -160,11 +116,11 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 
 <footer>
         <div class="footer-container">
-            <div class="footer-button-wrapper"><a href="mailto:stefai.games.unity@gmail.com" class="footer-button"><img src="../../Images/gmail.png" alt="Gmail"> Email</a></div>
-            <div class="footer-button-wrapper"><a href="https://www.instagram.com/stefaigames/" class="footer-button"><img src="../../Images/instagram.png" alt="Instagram"> Instagram</a></div>
-            <div class="footer-button-wrapper"><a href="https://www.youtube.com/@StefaiGames" class="footer-button"><img src="../../Images/youtube.png" alt="YouTube"> YouTube</a></div>
-            <div class="footer-button-wrapper"><a href="https://www.reddit.com/user/stefai_games/" class="footer-button"><img src="../../Images/reddit.png" alt="Reddit"> Reddit</a></div>
-            <div class="footer-button-wrapper"><a href="#" class="footer-button"><img src="../../Images/linkedin.png" alt="LinkedIn"> LinkedIn</a></div>
+            <div class="footer-button-wrapper"><a href="mailto:stefai.games.unity@gmail.com" class="footer-button"><img src="../Images/gmail.png" alt="Gmail"> Email</a></div>
+            <div class="footer-button-wrapper"><a href="https://www.instagram.com/stefaigames/" class="footer-button"><img src="../Images/instagram.png" alt="Instagram"> Instagram</a></div>
+            <div class="footer-button-wrapper"><a href="https://www.youtube.com/@StefaiGames" class="footer-button"><img src="../Images/youtube.png" alt="YouTube"> YouTube</a></div>
+            <div class="footer-button-wrapper"><a href="https://www.reddit.com/user/stefai_games/" class="footer-button"><img src="../Images/reddit.png" alt="Reddit"> Reddit</a></div>
+            <div class="footer-button-wrapper"><a href="#" class="footer-button"><img src="../Images/linkedin.png" alt="LinkedIn"> LinkedIn</a></div>
         </div>
         <p style="margin-top: 25px; font-size: 12px; color: #555; text-transform: uppercase; letter-spacing: 1px;">© 2025 STEFAI GAMES. ALL RIGHTS RESERVED.</p>
     </footer>
