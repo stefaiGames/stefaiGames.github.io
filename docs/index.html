@@ -123,11 +123,25 @@ a.button:hover { transform: scale(1.06); }
     gap: 8px;
 }
 
-/* FOOTER */
-footer { background-color: var(--dark-blue-header); padding: 50px 20px; text-align: center; margin-top: 40px; }
+/* --- FOOTER (WITH BACKLIGHT) --- */
+footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-top: 100px; text-align: center; }
 .footer-container { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-.footer-button { display: flex; align-items: center; gap: 6px; padding: 12px 24px; border-radius: 20px; background: var(--button-bg); color: white; text-decoration: none; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.05); }
+
+.footer-button-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.footer-button-wrapper::before { 
+    content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); 
+    border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); 
+    background-size: 400%; filter: blur(12px); opacity: 0; transition: opacity 0.6s ease; z-index: 0; 
+}
+.footer-button-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
+
+.footer-button { 
+    display: flex; align-items: center; gap: 8px; position: relative; z-index: 1; 
+    padding: 12px 24px; border-radius: 20px; background: var(--button-bg); color: white; 
+    text-decoration: none; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.05); 
+}
 .footer-button:hover { transform: scale(1.06); }
+.footer-button img { width: 20px; height: 20px; }
 
 @keyframes gradient-shift { 0% { background-position:0% 50%; } 100% { background-position:400% 50%; } }
 </style>
@@ -146,13 +160,15 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; text-ali
     </div>
 
 <footer>
-    <div class="footer-container">
-        <a href="mailto:stefai.games.unity@gmail.com" class="footer-button"><img src="../Images/gmail.png" alt="Gmail" style="width:20px;"> Email</a>
-        <a href="https://www.instagram.com/stefaigames/" class="footer-button"><img src="../Images/instagram.png" alt="Instagram" style="width:20px;"> Instagram</a>
-        <a href="https://www.youtube.com/@StefaiGames" class="footer-button"><img src="../Images/youtube.png" alt="YouTube" style="width:20px;"> YouTube</a>
-    </div>
-    <p style="margin-top: 25px; font-size: 0.9rem; color: #718096; text-align: center;">© 2025 Stefai Games. All rights reserved.</p>
-</footer>
+        <div class="footer-container">
+            <div class="footer-button-wrapper"><a href="mailto:stefai.games.unity@gmail.com" class="footer-button"><img src="../../Images/gmail.png" alt="Gmail"> Email</a></div>
+            <div class="footer-button-wrapper"><a href="https://www.instagram.com/stefaigames/" class="footer-button"><img src="../../Images/instagram.png" alt="Instagram"> Instagram</a></div>
+            <div class="footer-button-wrapper"><a href="https://www.youtube.com/@StefaiGames" class="footer-button"><img src="../../Images/youtube.png" alt="YouTube"> YouTube</a></div>
+            <div class="footer-button-wrapper"><a href="https://www.reddit.com/user/stefai_games/" class="footer-button"><img src="../../Images/reddit.png" alt="Reddit"> Reddit</a></div>
+            <div class="footer-button-wrapper"><a href="#" class="footer-button"><img src="../../Images/linkedin.png" alt="LinkedIn"> LinkedIn</a></div>
+        </div>
+        <p style="margin-top: 25px; font-size: 12px; color: #555; text-transform: uppercase; letter-spacing: 1px;">© 2025 STEFAI GAMES. ALL RIGHTS RESERVED.</p>
+    </footer>
 
 <script>
     async function loadDocs() {
