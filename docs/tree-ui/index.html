@@ -119,6 +119,7 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
         <nav>
             <div class="gradient-wrapper"><a href="https://stefaigames.github.io/assets" class="button">Assets</a></div>
             <div class="gradient-wrapper"><a href="httsps://stefaigames.github.io/games" class="button">Games</a></div>
+            <div class="gradient-wrapper"><a href="httsps://stefaigames.github.io/docs" class="button">Docs</a></div>
         </nav>
     </header>
 
@@ -199,7 +200,7 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 						<p>
 						Right-click in Hierarchy: <code>GameObject -> UI -> TreeUI -> Menu Network</code><br>.
 						You will see this structure in your hierarchy:<br>
-						<img src="Images/ss1.png" class="w-[250px]"><br>
+						<img src="Images/ss1.png" alt="tree-ui-hierarchy"><br>
 						Where:<br>
 						<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
 						<li><strong>Canvas</strong> - Root object of the entire UI</li>
@@ -211,7 +212,7 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 						<p>
 						Creating a menu is as easy as right click in the Hierarchy: <code>GameObject -> UI -> TreeUI -> Menu</code><br>
 						This opens a setup window, which looks like this:
-						<img src="Images/ss2" class="w-[250px]"><br>
+						<img src="Images/ss2.png" alt="menu-setup-wizard"><br>
 						Where:
 						<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
 						<li><strong>Menu Preset</strong> - Prefab of the menu. Leave empty if creating the menu from scratch</li>
@@ -253,12 +254,12 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 					Let's start by creating a transition object:<br>
 					Right click on the hierarchy, and open <code>GameObject -> UI -> TreeUI -> Transition</code><br>
 					This will open a setup wizard for the transitions, which looks like this:
-					<img src="Images/ss3" class="w-[250px]"><br>
+					<img src="Images/ss3.png" alt="transition-wizard"><br>
 					where:<br><ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
 					<li><strong>Transition Preset</strong> - prefab of the transition. Useful if you already created a transition that you want to use</li>
 					<li><strong>Object Name</strong> - Name of the transition scene object</li>
 					</ul>
-					Within the object, you will have the <code>Transition</code> component, along with the <code>Animator</code> component. 
+					Within the object, you will have the <code>Transition</code> component, along with the <code>Animator</code> component.
 					</p>
                 </div>
             </div>
@@ -285,7 +286,7 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 					<h1><strong>1. Script based workflow</strong></h1><br>
 					Let's explain this workflow with an example of the pause menu. <br>
 					Create the menu architecture that looks like this:<br>
-					<img src="Images/ss4" class="w-[250px]">
+					<img src="Images/ss4.png" alt="example-architecture-1">
 					<br>
 					Now, with this setup, we can start creating the <strong>logic</strong>.<br>
 					Create a script called <code>UIManager</code><br>
@@ -298,7 +299,8 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 		"gameMenu/pauseMenu");
 }
 					</pre></code>
-					What this does? <code>MenuManager.Instance.GetMenu</code> function returns a reference to the menu. <br>
+					What's happening? <br>
+					<code>MenuManager.Instance.GetMenu</code> function returns a reference to the menu. <br>
 					<code>isOpen</code> is a boolean which returns the state of the menu, IE. Is it open or closed. 
 					<code>MenuManager.OpenMenu</code> is a function which opens a menu under the specified path.<br>
 					</p>
@@ -313,8 +315,19 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
             </div>
             <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-6">
-                    <p class="text-xs"><code>OpenMenu(string path, int sceneIndex)</code>: Core navigation API.</p>
-                    <p class="text-xs"><code>LoadLastMenu()</code>: Traverses back using the history stack.</p>
+				<p>
+				Menu Manager script handles the menus on a global level. <br>
+				This script is a singleton, meaning that there <strong>must</strong> be only a single instance of this script in the entire project.<br>
+				<br>
+				Let's first look at the inspector of this script, which looks like this:<br>
+				<img src="Images/ss5.png" alt="menu-manager-inspector"><br>
+				Where:
+				<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+				<li><strong>Transitions</strong> - list of all the transitions, in the function <code>SetTargetTransition(int index)</code>, the index refers to the placement within this list</li>
+				<li><strong>Max History Length</strong> - integer, maximum count of menus opened which the history keeps track of. Used for the function <code>OpenLastMenu()</code></li>
+				<li><strong>Splitter</strong> - character used to parse the menu names from the menu path. Defaulted to <code>'/'</code> and is used in the <code>OpenMenu(string menuPath)</code></li>
+				</ul>
+				</p>
                 </div>
             </div>
         </div>
