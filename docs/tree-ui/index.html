@@ -147,7 +147,7 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
             </div>
         </div>
 
-		<div x-data="{ open: true }" class="doc-card">
+		<div x-data="{ open: false }" class="doc-card">
             <div @click="open = !open" class="section-header">
                 <h2 class="section-title"><span class="section-number">01.</span> Overview</h2>
                 <span :class="open ? 'rotate-180' : ''" class="transition-transform duration-300">▼</span>
@@ -164,12 +164,14 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 					Optimized, easy to setup and use, user-oriented;<br>
 					<br>
 					This asset includes:<br>
-					1. <strong>Menu System</strong><br>
-					2. Integrated <strong>scene management</strong> (singular and additive scene loading supported)<br>
-					3. <strong>Menu opening history</strong>, allowing for easy interation of the Back buttons<br>
-					4. <strong>Transition Logic</strong><br>
-					5. <strong>Demo Scenes</strong><br>
-					6. <strong>3 pre-made transitions</strong> that cover most of the transitions for games
+					<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+					<li> <strong>Menu System</strong> </li>
+					<li> Integrated <strong>scene management</strong> (singular and additive scene loading supported)</li>
+					<li> <strong>Menu opening history</strong>, allowing for easy interation of the Back buttons</li>
+					<li> <strong>Transition Logic</strong></li>
+					<li> <strong>Demo Scenes</strong></li>
+					<li> <strong>3 pre-made transitions</strong> that cover most of the transitions for games</li>
+					</ul>
 					</p>
                 </div>
             </div>
@@ -189,16 +191,25 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 						In the assets folder, you will see a new folder called "StefaiGames", which holds all the data linked to this asset<br>
 						<br>
 						Now, we can start with creating the menu system<br>
-						
+						<br>
 						<h4 class="text-white font-bold uppercase text-xs tracking-widest mb-2">Creating the Network</h4>
 						<p class="text-sm">
 						Right-click in Hierarchy: <code>GameObject -> UI -> TreeUI -> Menu Network</code><br>.
 						You will see this structure in your hierarchy:<br>
-						<img src="Images/ss1.png" class="w-[100px]"><br>
+						<img src="Images/ss1.png" class="w-[250px]"><br>
 						Where:<br>
-						<strong>Canvas</strong> - Root object of the entire UI<br>
-						<strong>MenuManager</strong> - Root object of all the menus<br>
-						<strong>Transitions</strong> - Root object of all the transitions<br>
+						<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+						<li><strong>Canvas</strong> - Root object of the entire UI</li>
+						<li><strong>MenuManager</strong> - Root object of all the menus</li>
+						<li><strong>Transitions</strong> - Root object of all the transitions</li>
+						</ul>
+						</p>
+						<h4 class="text-white font-bold uppercase text-xs tracking-widest mb-2">Creating A Menu</h4><br>
+						<p>
+						Creating a menu is as easy as right click in the Hierarchy: <code>GameObject -> UI -> TreeUI -> Menu</code><br>
+						This opens a setup window, which looks like this:
+						<img src="Images/ss2" class="w-[250px]"><br>
+						Where:
 						</p>
 						
                     </div>
