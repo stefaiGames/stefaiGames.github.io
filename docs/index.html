@@ -7,99 +7,6 @@
 <link rel="icon" href="../Images/logo.png" type="image/png">
 <link rel="stylesheet" href="https://stefaigames.github.io/design.css">
 
-<style>
-/* HUB CONTENT SECTION */
-.hub-hero { padding: 80px 20px 40px; text-align: center; }
-.hub-hero h1 { font-size: 2.8rem; margin-bottom: 10px; color: var(--sky-blue); }
-.hub-hero p { color: #a0aec0; max-width: 600px; margin: 0 auto; }
-
-.docs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 30px;
-    max-width: 1100px;
-    margin: 40px auto 100px;
-    padding: 0 20px;
-}
-
-/* UNIFIED CARD STYLE */
-.doc-card {
-    text-decoration: none;
-    color: white;
-    background: var(--card-bg);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    /* Maintain brand-consistent scale animation */
-    transition: transform 0.25s ease, border-color 0.25s ease;
-}
-
-/* Rule 1 & 2: Scale-only hover for ALL cards */
-.doc-card:hover {
-    transform: scale(1.02);
-}
-
-/* Interaction Logic */
-.doc-card.active:hover {
-    border-color: var(--sky-blue);
-}
-
-.doc-card.disabled {
-    opacity: 0.5;
-    border-style: dashed;
-}
-
-.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
-.asset-icon { width: 60px; height: 60px; border-radius: 12px; background: #2a3d5a; }
-.version-tag {
-    background: rgba(126, 200, 227, 0.1);
-    color: var(--sky-blue);
-    padding: 4px 10px;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    border: 1px solid rgba(126, 200, 227, 0.2);
-}
-
-.doc-card h2 { font-size: 1.5rem; margin-bottom: 10px; }
-.doc-card p { color: #a0aec0; font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
-
-.card-footer {
-    border-top: 1px solid rgba(255,255,255,0.05);
-    padding-top: 15px;
-    font-size: 0.85rem;
-    color: var(--sky-blue);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* --- FOOTER (WITH BACKLIGHT) --- */
-footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-top: 100px; text-align: center; }
-.footer-container { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-
-.footer-button-wrapper { position: relative; display: inline-block; border-radius: 20px; }
-.footer-button-wrapper::before { 
-    content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); 
-    border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); 
-    background-size: 400%; filter: blur(12px); opacity: 0; transition: opacity 0.6s ease; z-index: 0; 
-}
-.footer-button-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
-
-.footer-button { 
-    display: flex; align-items: center; gap: 8px; position: relative; z-index: 1; 
-    padding: 12px 24px; border-radius: 20px; background: var(--button-bg); color: white; 
-    text-decoration: none; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.05); 
-}
-.footer-button:hover { transform: scale(1.06); }
-.footer-button img { width: 20px; height: 20px; }
-
-@keyframes gradient-shift { 0% { background-position:0% 50%; } 100% { background-position:400% 50%; } }
-</style>
 </head>
 
 <body>
@@ -145,13 +52,13 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
                 }
                 
                 card.innerHTML = `
-                    <div class="card-header">
-                        <img src="../${asset.icon || asset.image.replace('../', '')}" class="asset-icon" alt="${asset.name}">
-                        <span class="version-tag">${asset.hasDocs ? 'v' + asset.version : 'Planned'}</span>
+                    <div class="doc-card-header">
+                        <img src="../${asset.icon || asset.image.replace('../', '')}" class="doc-asset-icon" alt="${asset.name}">
+                        <span class="doc-version-tag">${asset.hasDocs ? 'v' + asset.version : 'Planned'}</span>
                     </div>
                     <h2>${asset.name}</h2>
                     <p>${asset.description}</p>
-                    <div class="card-footer">
+                    <div class="doc-card-footer">
                         <span>${asset.hasDocs ? 'Explore Manual →' : 'Documentation Coming Soon'}</span>
                     </div>
                 `;

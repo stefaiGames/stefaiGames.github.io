@@ -176,3 +176,72 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
 .landing-action-btn:hover {
     transform: scale(1.06); /* Matched to main buttons */
 }
+
+/*----------------------------DOCUMENTATION HUB--------------------------------*/
+
+/* HUB CONTENT SECTION */
+
+.docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 40px auto 100px;
+    padding: 0 20px;
+}
+
+/* UNIFIED CARD STYLE */
+.doc-card {
+    text-decoration: none;
+    color: white;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    /* Maintain brand-consistent scale animation */
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+/* Rule 1 & 2: Scale-only hover for ALL cards */
+.doc-card:hover {
+    transform: scale(1.02);
+}
+
+/* Interaction Logic */
+.doc-card.active:hover {
+    border-color: var(--sky-blue);
+}
+
+.doc-card.disabled {
+    opacity: 0.5;
+    border-style: dashed;
+}
+
+.doc-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+.doc-asset-icon { width: 60px; height: 60px; border-radius: 12px; background: #2a3d5a; }
+.doc-version-tag {
+    background: rgba(126, 200, 227, 0.1);
+    color: var(--sky-blue);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border: 1px solid rgba(126, 200, 227, 0.2);
+}
+
+.doc-card h2 { font-size: 1.5rem; margin-bottom: 10px; }
+.doc-card p { color: #a0aec0; font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
+
+.doc-card-footer {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 15px;
+    font-size: 0.85rem;
+    color: var(--sky-blue);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
