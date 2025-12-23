@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TreeUI Technical Manual | Stefai Games</title>
-<link rel="icon" href="Images/logo.png" type="image/png">
+<link rel="icon" href="./../Images/logo.png" type="image/png">
 <link rel="stylesheet" href="https://stefaigames.github.io/design.css">
 
 <script src="https://cdn.tailwindcss.com"></script>
@@ -229,7 +229,8 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 					<br>
 					For the menuPath parameter, set <code>gameMenu/base</code> where base menu is here to show the possibility of a nested architecture of the Menus.<br>
 					<br>
-					That's it, you can open the menu with a button. <br><br>
+					That's it, you can open the menu with a button. <br>
+					<br>
 					Now, let's say you want to use a transition instead of plain opening of the menus. You can easily do that by adding a listener before the one we added.<br>
 					All the functions come from the MenuManager script, and the first function called should be <code>MenuManager -> SetTargetTransition(int)</code><br>
 					Set the index to 0<br>
@@ -238,6 +239,30 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 					Right click in the hierarchy, <code>UI -> TreeUI -> Transition</code>. <br>
 					For the transition Preset, drag and drop the <strong>Fade Transition</strong> prefab found in the <code>StefaiGames/TreeUI/demos/Transitions/Fade</code><br>
 					After finishing up the transition setup, you are good to go. The transition will trigger as wanted.
+					<br><br>
+					<strong>3. Visual Scripting</strong><br>
+					Before setting up our script graphs, make sure to import the <strong>StefaiGames assembly definition</strong> into the <code>edit -> project settings -> visual scripting -> Node library</code>, and click on "<strong>Regenerate Nodes</strong>"<br>
+					After doing this, you're ready to interact with the menu system. <br>
+					<br>
+					We will use the same example of the <strong>pause menu</strong> opening logic. <br>
+					We will need the same hierarchy as in the first example, it should look like this:<br>
+					<img src="Images/ss4.png" alt="example-arcitecture-3"><br>
+					Once that's done, add a component <code>Script Machine</code> to the Canvas object.<br>
+					within that component, click the "<strong>New</strong>" button. This will open the folder view, allowing you to save the script graph to the desired location<br>
+					Open that script graph by clicking on the field next to the button you just clicked.<br>
+					Now, let's create the logic. First let's add the variable for the menu manager. On the right, you will see the variables tab. Select the object variables, and add one called <strong>MenuManager</strong><br>
+					For the type, select <code>StefaiGames -> TreeUI -> MenuSystem -> MenuManager</code><br>
+					For the value of the variable, drag the <code>MenuManager</code> object into the field<br>
+					Now, we are ready to create the actual node setup. It should look something like this:<br>
+					<img src="Images/ss8.png" alt="example-node-setup-1"><br>
+					Now, I know this looks like a lot, but let's explain what each part does:<br>
+					<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+					<li><code>On Update</code> - this is the node that kickstarts the chain. It's telling the engine to run this node tree every frame</li>
+					<li><code>On Update -> Get Menu -> isOpen</code> - this flow allows us to access the state of the menu, IE, is it open<br> 
+					The <code>GetMenu</code> node returns the Menu object, while the <code>isOpen</code> node returns it's state</li>
+					<li><code>if node</code> - allows us to split the logic depending on the state of the menu.</li>
+					<li><code>Open Menu</code> - opens the actual menu. We have 2 <code>Open Menu</code> nodes, which fire depending on what state the menu is in</li>
+					</ul>
 					</p>
                 </div>
             </div>
@@ -278,8 +303,8 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 				for event based interactions, this asset includes some helper functions that bypass the unity's current one-parameter limitation for event listeners:
 				<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
 				<li><code>SetTargetTransition(int transitionIndex)</code> [return type: <strong>void</strong>] - <br>sets the target transition. Used for inspector events</li>
-				<li><code>SetTargetScene(int targetBuildIndex)</code> [return type: <strong>void</strong>] - <br>sets the target scene for the next menu opening, under the specified build index. <strong>NOTE:</strong> make sure that the scene is added to the build settings!</li>
-				<li><code>SetTargetScene(string sceneName)</code> [return type: <strong>void</strong>] - <br>sets the target scene for the next menu opening, under the specified scene name. <strong>NOTE:</strong> make sure that the scene is added to the build settings!</li>
+				<li><code>SetTargetScene(int targetBuildIndex)</code> [return type: <strong>void</strong>] - <br>sets the target scene for the next menu opening, under the specified build index. <strong>NOTE:</strong> make sure that the scene is added to the <code>file -> build settings</code>!</li>
+				<li><code>SetTargetScene(string sceneName)</code> [return type: <strong>void</strong>] - <br>sets the target scene for the next menu opening, under the specified scene name. <strong>NOTE:</strong> make sure that the scene is added to the <code>file -> build settings</code>!</li>
 				<li><code>SetTransitionLoadSceneMode(LoadSceneMode mode)</code> [return type: <strong>void</strong>] - <br>sets the target scene loading mode for the next menu opening, under the specified mode</li>
 				</ul>
 				</p>
