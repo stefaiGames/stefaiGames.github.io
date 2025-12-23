@@ -5,55 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TreeUI Technical Manual | Stefai Games</title>
 <link rel="icon" href="Images/logo.png" type="image/png">
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://stefaigames.github.io/design.css">
 
+<script src="https://cdn.tailwindcss.com"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <style>
-/* --- CORE VARIABLES --- */
-:root {
-    --pink: #ff3366;
-    --purp: #7a3fd1;
-    --sky-blue: #7ec8e3;
-    --dark-blue-header: #0B1522;
-    --dark-blue-feed: #101b2b;
-    --dark-blue-alt: #121f33;
-    --card-bg: #16243a;
-    --button-bg: rgba(16,27,43,0.9);
-}
-
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body { 
-    font-family: 'Arial', sans-serif; 
-    background-color: var(--dark-blue-feed); 
-    color: white; 
-    line-height: 1.6;
-    background-image: 
-        linear-gradient(rgba(126, 200, 227, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(126, 200, 227, 0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-}
-
-/* --- HEADER & BACKLIGHT HOVER EFFECTS --- */
-header { 
-    position: sticky; top: 0; width: 100%; 
-    background-color: var(--dark-blue-header); 
-    display: flex; justify-content: space-between; 
-    align-items: center; padding: 10px 50px; 
-    z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.5); 
-}
-
-.logo-wrapper { position: relative; display: inline-block; border-radius: 20px; }
-.logo-wrapper::before { 
-    content:""; position: absolute; top:-10px; left:-10px; width: calc(100% + 20px); height: calc(100% + 20px); 
-    border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); 
-    background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index:-1; 
-}
-.logo-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
-.logo-wrapper img { width:50px; height:50px; border-radius:8px; transition: transform 0.25s ease; }
-.logo-wrapper:hover img { transform: scale(1.08); }
 
 nav { display: flex; align-items: center; gap: 14px; }
 
@@ -124,9 +82,9 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
     </header>
 
     <div class="max-w-4xl mx-auto pt-24 pb-16 text-center px-4">
-        <span class="hero-label">Technical Manual</span>
-        <h1 class="hero-title">TreeUI <span class="gradient-text">Manual</span></h1>
-        <p class="text-slate-400 mt-6 max-w-xl mx-auto font-medium">Professional-grade menu management for Unity developers. Modular, scalable, and optimized for Zero-GC runtime</p>
+        <p class="hero-vanta">Technical Manual</p>
+        <h1 class="hero-vanta">TreeUI Manual</h1>
+        <p class="hero-vanta">Professional-grade menu management for Unity developers. Modular, scalable, and optimized for Zero-GC runtime</p>
     </div>
 
     <main class="max-w-4xl mx-auto px-6 pb-20">
