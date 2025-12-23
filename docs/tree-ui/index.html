@@ -32,8 +32,8 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
         </div>
         <nav>
             <div class="gradient-wrapper"><a href="https://stefaigames.github.io/assets" class="button">Assets</a></div>
-            <div class="gradient-wrapper"><a href="httsps://stefaigames.github.io/games" class="button">Games</a></div>
-            <div class="gradient-wrapper"><a href="httsps://stefaigames.github.io/docs" class="button">Docs</a></div>
+            <div class="gradient-wrapper"><a href="https://stefaigames.github.io/games" class="button">Games</a></div>
+            <div class="gradient-wrapper"><a href="https://stefaigames.github.io/docs" class="button">Docs</a></div>
         </nav>
     </header>
 
@@ -86,7 +86,7 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 					<li> <strong>Fuzzy Search</strong> on misspelt menu names</li>
 					<li> <strong>Transition Logic</strong></li>
 					<li> <strong>Demo Scenes</strong></li>
-					<li> <strong>3 pre-made transitions</strong> that cover most of the transitions for games</li>
+					<li> <strong>3 pre-made, game-ready transitions</strong> that cover most of the transitions for games</li>
 					<li> <strong>Defensive hierarchy enforcement</strong></li>
 					<li> Fully covered by <strong>custom error messages</strong></li>
 					</ul>
@@ -109,7 +109,7 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 						In the assets folder, you will see a new folder called "StefaiGames", which holds all the data linked to this asset<br>
 						<br>
 						Now, we can start with creating the menu system<br>
-						<br>
+						</p><br>
 						<h1><strong>Creating the Menu Network</strong></h1>
 						<p>
 						Right-click in Hierarchy: <code>GameObject -> UI -> TreeUI -> Menu Network</code><br>.
@@ -131,7 +131,7 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 						<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
 						<li><strong>Menu Preset</strong> - Prefab of the menu. Leave empty if creating the menu from scratch</li>
 						<li><strong>Object Name</strong> - Name of the object in the scene. Defaulting to "New Menu"</li>
-						<li><strong>Object Name</strong> - Name of the menu, used in the seach algorythm. Defaulting to object name, if both are empty, default is "NewMenu"</li>
+						<li><strong>Menu Name</strong> - Name of the menu, used in the seach algorythm. Defaulting to object name, if both are empty, default is "NewMenu"</li>
 						</ul><br>
 						Once you setup the menu, click on "Create Menu" to finish it. This will create the Menu object in the hierachy<br><br>
 						
@@ -216,7 +216,7 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 					What's happening? <br>
 					<code>MenuManager.Instance.GetMenu</code> function returns a reference to the menu. <br>
 					<code>isOpen</code> is a boolean which returns the state of the menu, IE. Is it open or closed. 
-					<code>MenuManager.OpenMenu</code> is a function which opens a menu under the specified path.<br>
+					<code>MenuManager.OpenMenu</code> is a function which opens a menu under the specified path, and closes all the other ones.<br>
 					</p>
                 </div>
             </div>
@@ -230,7 +230,7 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
             <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-6">
 				<p>
-				Menu Manager script handles the menus on a global level. <br>
+				<strong>Menu Manager</strong> script handles the menus on a global level, and is attached to the root object of all the Menus. <br>
 				This script is a singleton, meaning that there <strong>must</strong> be only a single instance of this script in the entire project.<br>
 				<br>
 				Let's first look at the inspector of this script, which looks like this:<br>
@@ -240,6 +240,26 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 				<li><strong>Transitions</strong> - list of all the transitions, in the function <code>SetTargetTransition(int index)</code>, the index refers to the placement within this list</li>
 				<li><strong>Max History Length</strong> - integer, maximum count of menus opened which the history keeps track of. Used for the function <code>OpenLastMenu()</code></li>
 				<li><strong>Splitter</strong> - character used to parse the menu names from the menu path. Defaulted to <code>'/'</code> and is used in the <code>OpenMenu(string menuPath)</code></li>
+				</ul><br>
+				Now, let's get to the functions:<br>
+				<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+				<li><code>OpenMenu(string menuPath)</code> [return type: <strong>void</strong>] -<br> Closes all the menus, and opens the one under the specified path</li>
+				<li><code>OpenLastMenu()</code> [return type: <strong>void</strong>] - <br>Closes all the menus, and opens the last menu in history</li>
+				<li><code>TransitionToMenu(string menuPath)</code> [return type: <strong>void</strong>] - <br>triggers the transition animation. Used in pair with the <code>SetTargetTransition(int index)</code> to define the target transition. This overload exists for event friendliness</li>
+				<li><code>TransitionToMenu(string menuPath, int transitionIndex)</code> [return type: <strong>void</strong>] - <br>triggers the transition animation.</li>
+				<li><code>LoadSceneSingle(int buildIndex)</code> [return type: <strong>void</strong>] - <br>loads the scene under the specified build index in the singular scene loading mode</li>
+				<li><code>LoadSceneAdditive(int buildIndex)</code> [return type: <strong>void</strong>] - <br>loads the scene under the specified build index in the additive scene loading mode</li>
+				<li><code>LoadSceneSingle(string sceneName)</code> [return type: <strong>void</strong>] - <br>loads the scene under the specified scene name in the singular scene loading mode</li>
+				<li><code>LoadSceneAdditive(string sceneName)</code> [return type: <strong>void</strong>] - <br>loads the scene under the specified scene name in the additive scene loading mode</li>
+				<li><code>GetMenu(string menuPath)</code> [return type: <strong>Menu</strong>] - <br>returns the menu under the specified path</li>
+				</ul><br>
+				<br>
+				for event based interactions, this asset includes some helper functions that bypass the unity's current one-parameter limitation for event listeners:
+				<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+				<li><code>SetTargetTransition(int transitionIndex)</code> [return type: <strong>void</strong>] - <br>sets the target transition. Used for inspector events</li>
+				<li><code>SetTargetScene(int targetBuildIndex)</code> [return type: <strong>void</strong>] - <br>sets the target scene for the next menu opening, under the specified build index. <strong>NOTE:</strong> make sure that the scene is added to the build settings!</li>
+				<li><code>SetTargetScene(string sceneName)</code> [return type: <strong>void</strong>] - <br>sets the target scene for the next menu opening, under the specified scene name. <strong>NOTE:</strong> make sure that the scene is added to the build settings!</li>
+				<li><code>SetTransitionLoadSceneMode(LoadSceneMode mode)</code> [return type: <strong>void</strong>] - <br>sets the target scene loading mode for the next menu opening, under the specified mode</li>
 				</ul>
 				</p>
                 </div>
