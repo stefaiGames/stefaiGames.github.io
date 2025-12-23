@@ -215,7 +215,7 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
                             </div>
                             <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                                 <a href="${asset.link}" class="button">Get on Asset Store</a>
-                                <a href="{asset.hasDocs ? 'https://stefaigames.github.io/docs/{asset.id} : #'}" class="button disabled">View Docs</a>
+                                <a href=`{asset.hasDocs ? 'https://stefaigames.github.io/docs/{asset.id} : #'}` class="button disabled">View Docs</a>
                                 <a href="#" class="button disabled">WebGL Demo</a>
                             </div>
                         </div>
