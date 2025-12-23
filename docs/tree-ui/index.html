@@ -13,29 +13,6 @@
 
 <style>
 
-nav { display: flex; align-items: center; gap: 14px; }
-
-/* The Backlight Container */
-.gradient-wrapper { position: relative; display: inline-block; border-radius: 20px; }
-.gradient-wrapper::before { 
-    content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); 
-    border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); 
-    background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index: 0; 
-}
-.gradient-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
-
-a.button { 
-    display: inline-block; padding: 10px 20px; background: var(--button-bg); color: white; 
-    text-decoration: none; border-radius: 20px; font-size: 1rem; position: relative; z-index: 1; 
-    transition: transform 0.25s ease; border: 1px solid rgba(255,255,255,0.05);
-}
-a.button:hover { transform: scale(1.06); }
-
-/* --- HERO --- */
-.hero-label { display: block; color: var(--sky-blue); font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; font-size: 13px; margin-bottom: 10px; }
-.hero-title { font-size: 64px; font-weight: 800; text-transform: uppercase; line-height: 1.1; color: white; }
-.gradient-text { background: linear-gradient(to right, var(--sky-blue), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
 /* --- DOCUMENTATION CARDS --- */
 .doc-card { background-color: var(--card-bg); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
 .section-header { cursor: pointer; user-select: none; padding: 24px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); transition: background 0.2s; }
@@ -45,27 +22,6 @@ a.button:hover { transform: scale(1.06); }
 
 code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 0.9em; }
 
-/* --- FOOTER (WITH BACKLIGHT) --- */
-footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-top: 100px; text-align: center; }
-.footer-container { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-
-.footer-button-wrapper { position: relative; display: inline-block; border-radius: 20px; }
-.footer-button-wrapper::before { 
-    content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); 
-    border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); 
-    background-size: 400%; filter: blur(12px); opacity: 0; transition: opacity 0.6s ease; z-index: 0; 
-}
-.footer-button-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
-
-.footer-button { 
-    display: flex; align-items: center; gap: 8px; position: relative; z-index: 1; 
-    padding: 12px 24px; border-radius: 20px; background: var(--button-bg); color: white; 
-    text-decoration: none; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.05); 
-}
-.footer-button:hover { transform: scale(1.06); }
-.footer-button img { width: 20px; height: 20px; }
-
-@keyframes gradient-shift { 0% { background-position:0% 50%; } 100% { background-position:400% 50%; } }
 </style>
 </head>
 <body>
@@ -81,10 +37,10 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
         </nav>
     </header>
 
-    <div class="max-w-4xl mx-auto pt-24 pb-16 text-center px-4">
-        <p class="hero-vanta">Technical Manual</p>
-        <h1 class="hero-vanta">TreeUI Manual</h1>
-        <p class="hero-vanta">Professional-grade menu management for Unity developers. Modular, scalable, and optimized for Zero-GC runtime</p>
+    <div class="hero-vanta">
+        <p>Technical Manual</p>
+        <h1>TreeUI Manual</h1>
+        <p>Professional-grade menu management for Unity developers. Modular, scalable, and optimized for Zero-GC runtime</p>
     </div>
 
     <main class="max-w-4xl mx-auto px-6 pb-20">
