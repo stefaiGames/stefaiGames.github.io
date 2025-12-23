@@ -217,6 +217,27 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 					<code>MenuManager.Instance.GetMenu</code> function returns a reference to the menu. <br>
 					<code>isOpen</code> is a boolean which returns the state of the menu, IE. Is it open or closed. 
 					<code>MenuManager.OpenMenu</code> is a function which opens a menu under the specified path, and closes all the other ones.<br>
+					<br>
+					<strong>2. Event based workflow</strong><br>
+					Let's explain this workflow with an example of a button opening the game menu.<br>
+					Create the menu architecture that looks like this:<br>
+					<img src="Images/ss6.png" alt="example-architecture-2"><br>
+					Now, with this setup, create a button within the <code>mainMenu</code>, and name it <code>StartGameButton</code><br>
+					Within the button OnClick event, add a listener. Set the MenuManager object as the target, and set the <code>MenuManager -> OpenMenu(string)</code> as the function<br>
+					It should look something like this:
+					<img src="Images/ss7.png" alt="example-event-setup-1">
+					<br>
+					For the menuPath parameter, set <code>gameMenu/base</code> where base menu is here to show the possibility of a nested architecture of the Menus.<br>
+					<br>
+					That's it, you can open the menu with a button. <br><br>
+					Now, let's say you want to use a transition instead of plain opening of the menus. You can easily do that by adding a listener before the one we added.<br>
+					All the functions come from the MenuManager script, and the first function called should be <code>MenuManager -> SetTargetTransition(int)</code><br>
+					Set the index to 0<br>
+					The second function will be <code>MenuManager -> TransitionToMenu(string)</code>. Set the parameter to <code>gameMenu/base</code>.<br>
+					After that's done, you need to add the transition to the Transitions list. In our example, we will use the included <strong>Fade</strong> transition.<br>
+					Right click in the hierarchy, <code>UI -> TreeUI -> Transition</code>. <br>
+					For the transition Preset, drag and drop the <strong>Fade Transition</strong> prefab found in the <code>StefaiGames/TreeUI/demos/Transitions/Fade</code><br>
+					After finishing up the transition setup, you are good to go. The transition will trigger as wanted.
 					</p>
                 </div>
             </div>
