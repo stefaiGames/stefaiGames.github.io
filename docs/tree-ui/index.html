@@ -83,6 +83,9 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 					<li> <strong>Menu System</strong> </li>
 					<li> Integrated <strong>scene management</strong> (singular and additive scene loading supported)</li>
 					<li> <strong>Menu opening history</strong>, allowing for easy interation of the Back buttons</li>
+					<li> One-click creation of menu and transition objects, with custom setup wizards</li>
+					<li> Utility features: Ping Menu and Open Menu in the inspector</li>
+					<li> One-click creation of menu network</li>
 					<li> <strong>Fuzzy Search</strong> on misspelt menu names</li>
 					<li> <strong>Transition Logic</strong></li>
 					<li> <strong>Demo Scenes</strong></li>
@@ -173,7 +176,56 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 					<li><strong>Transition Preset</strong> - prefab of the transition. Useful if you already created a transition that you want to use</li>
 					<li><strong>Object Name</strong> - Name of the transition scene object</li>
 					</ul>
-					Within the object, you will have the <code>Transition</code> component, along with the <code>Animator</code> component.
+					Within the object, you will have the <code>Transition</code> component, along with the <code>Animator</code> component.<br>
+					<br>
+					<strong>Scene Setup</strong><br>
+					Add a child <strong>Panel</strong> object to the transition you just created by right clicking on the tansition object in the scene, and selecting <code>UI -> Panel</code>, and name it "<strong>Background</strong>" for example<br>
+					When that's done, you're ready to start with the animator setup.<br>
+					<br>
+					<strong>Animator setup</strong><br>
+					Create the animator controller by right clicking in the project folder, and select <code>Create -> Animation -> Animator Controller</code><br>
+					While you're there, create the animation clip for the transition, by selecting <code>Create -> Animation -> Animation Clip</code><br>
+					Link the animator controller to the transition you just created by dragging it into the animator controller field within the Animator on the transition object<br>
+					In this example, we will create a fade transition, which is already included in the demos, so you can view the setup if you need more details.<br>
+					<br>
+					Double click on the newly created Animator controller, which will open the <strong>Animator</strong> window.<br>
+					Now, in that window, right click -> <code>Create state -> Empty</code>. This state is going to be the idle state.<br>
+					Best practice is to name it "<strong>Idle</strong>". You set that at the top of the inspector, when that state is selected.<br>
+					At this point, the animator should look like this:<br>
+					<img src="Images/ss4.png" alt="Example-Animator-1"><br>
+					Now, open the parameters section at the top left, and add a <strong>trigger</strong> parameter called "<strong>StartTransition</strong>"<br>
+					You do that by clicking the "+" icon at top left section, and selecting <code>Trigger</code>.<br>
+					<strong>IMPORTANT NOTE</strong>: this is case sensitive. Make sure that the name is exactly the same, including the uppercase and lowercase letters.<br>
+					Now, we can create the animation itself.<br>
+					<br>
+					Now, we can head back to the project folder, where you can create the animation clip by right click -> <code>Create -> Animation -> Animation Clip</code><br>
+					Drag that newly created animation clip into the animator window, where it will pop up as a new block.<br> 
+					Now, right click on the <strong>Idle</strong> block, and select <code>Make Transition</code>, and then click the newly added animation block to link them.<br>
+					Do the same in the opposite way: right click on the animation, <code>Make Transition</code>, and click on the idle animation. With that, you created the transition loop.<br>
+					At this point, the animator should look something like this:<br>
+					<img src="Images/ss10.png" alt="Example-Animator-2">
+					The idea is this: Idle animation runs most of the time on loop, up until we trigger the <strong>StartTransition</strong> trigger, <br>
+					at which point the transition clip will play, and then return to <strong>Idle</strong> state.<BR>
+					Now, let's setup the transitions themselves. Select the transition from the <strong>Idle</strong> state to the transition animation (indicated by the arrow direction), and add the condition.<br>
+					Unity will automatically set it to the StartTransition trigger we created, because it's the only parameter we currently have.<br>
+					Now, we can start setting up the look of the transition<br>
+					<br>
+					<strong>Animation Config</strong><br>
+					Double click the newly created clip to open the <strong>Animation</strong> window.<br>
+					Now, we can setup the animation flow.<br>
+					Since the animator is setup, we can just select the transition object in the scene, and the animation will be automatically opened.<br>
+					We can click on the "<strong>Record</strong>" button, which allows you to automatically create animation keyframes while you're editing the oject.<br>
+					After adding a few keyframes (which you will see later how it should look), you have to decide at which frame the menu should open.<br>
+					When you decide, set the time to that frame, and add an animation event (left side of the animation window, the icon looks like a shield).<br>
+					That will create the event, and open it's view in the inspector. Set the function to <code>Transition -> Methods -> OpenMenu</code><br>
+					When all that's done, the animation should look like this:<br>
+					<img src="Images/ss11.png" alt="Example-Animation-1"><br>
+					Where:<br>
+					<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+					<li><strong>Beginning</strong> - the panel is fully transparent</li>
+					<li><strong>Middle</strong> - the panel is fully opaque, and the menu opens (visible at the top, with a shield icon)</li>
+					<li><strong>End</strong> - the panel is fully transparent again</li>
+					</ul>
 					</p>
                 </div>
             </div>
@@ -200,7 +252,7 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 					<h1><strong>1. Script based workflow</strong></h1><br>
 					Let's explain this workflow with an example of the pause menu. <br>
 					Create the menu architecture that looks like this:<br>
-					<img src="Images/ss4.png" alt="example-architecture-1">
+					<img src="Images/ss5.png" alt="example-architecture-1">
 					<br>
 					Now, with this setup, we can start creating the <strong>logic</strong>.<br>
 					Create a script called <code>UIManager</code><br>
@@ -211,11 +263,10 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 		MenuManager.Instance.GetMenu("gameMenu/pauseMenu").isOpen ? 
 		"gameMenu" : 
 		"gameMenu/pauseMenu");
-}
-					</pre></code>
+}</pre></code>
 					What's happening? <br>
 					<code>MenuManager.Instance.GetMenu</code> function returns a reference to the menu. <br>
-					<code>isOpen</code> is a boolean which returns the state of the menu, IE. Is it open or closed. 
+					<code>isOpen</code> is a boolean which returns the state of the menu, IE. Is it open or closed. <br>
 					<code>MenuManager.OpenMenu</code> is a function which opens a menu under the specified path, and closes all the other ones.<br>
 					<br>
 					<strong>2. Event based workflow</strong><br>
@@ -246,7 +297,7 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 					<br>
 					We will use the same example of the <strong>pause menu</strong> opening logic. <br>
 					We will need the same hierarchy as in the first example, it should look like this:<br>
-					<img src="Images/ss4.png" alt="example-arcitecture-3"><br>
+					<img src="Images/ss5.png" alt="example-arcitecture-3"><br>
 					Once that's done, add a component <code>Script Machine</code> to the Canvas object.<br>
 					within that component, click the "<strong>New</strong>" button. This will open the folder view, allowing you to save the script graph to the desired location<br>
 					Open that script graph by clicking on the field next to the button you just clicked.<br>
@@ -280,7 +331,7 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 				This script is a singleton, meaning that there <strong>must</strong> be only a single instance of this script in the entire project.<br>
 				<br>
 				Let's first look at the inspector of this script, which looks like this:<br>
-				<img src="Images/ss5.png" alt="menu-manager-inspector"><br>
+				<img src="Images/ss9.png" alt="menu-manager-inspector"><br>
 				Where:
 				<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
 				<li><strong>Transitions</strong> - list of all the transitions, in the function <code>SetTargetTransition(int index)</code>, the index refers to the placement within this list</li>
@@ -319,7 +370,23 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
             </div>
             <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-4">
-                    <p class="text-sm">Attached to every UI Page. Stores local search dictionaries for high-speed child lookup.</p>
+					<p>
+						<strong>Menu</strong> script is attached to every Menu object. It handles the menu opening and closing on a local level.<br>
+						It also contains it's submenus, which allows for infinitely deep menu structures.<br>
+						Every <strong>Menu</strong> should be a child object of the <strong>MenuManager</strong> or another <strong>Menu</strong><br>
+						When talking about the inspector, it looks like this:<br>
+						<img src="Images/ss12.png" alt="menu-inspector"><br>
+						where:<br>
+						<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+						<li><strong>Menu Name</strong> - sting, name of the menu, which is used in the search algorithm</li>
+						<li><strong>On Menu Open</strong> - unity event, which allows for custom behaviour when this menu is opened</li>
+						<li><strong>On Menu Close</strong> - unity event, which allows for custom behaviour when this menu is closed</li>
+						</ul><br>
+						When talking about public functions, there is only 1, and that's:<br>
+						<code>RenameMenu(string newName)</code> - renames the menu, and updates the internal Dictionary's reference.<br>
+						<strong>Note</strong>: the RenameMenu function is only needed for runtime updates through script.<br>
+						When updating the menu name through the inspector, the internal dictionaries are handled by a custom inspector.
+					</p>
                 </div>
             </div>
         </div>
@@ -331,7 +398,11 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
             </div>
             <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-4">
-                    <p class="text-sm">The bridge between Animator states and the MenuManager logic.</p>
+                    <p>
+					The <strong>Transition</strong> script is the glue between the MenuManager and the animator.<br>
+					There are no inspector variables for this script, and no script-called functions<br>
+					The only function is <code>OpenMenu</code> which is called in the previously mentioned <strong>animation event</strong> (see section 3)<br>
+					</p>
                 </div>
             </div>
         </div>
@@ -343,7 +414,63 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
             </div>
             <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-4">
-                    <p class="text-sm">The bridge between Animator states and the MenuManager logic.</p>
+                    <p>
+					As this is a complex system, the entire menu system is covered with custom error messages.<br>
+					Those messages would not only tell you that something is wrong, but explain to you how to fix it.<br>
+					Let's break them down one by one:<br>
+					<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+					<li><code>There is no menu network to search through!</code><br>
+					<strong>Cause</strong>: Trying to ping/open a menu from the inspector before the menu network is created.<br>
+					</li>
+					<li> message: <code>There is already a menu network in the project, you must have only one in the entire project</code><br>
+					<strong>Cause</strong>: trying to create a second instance of the menu manager.<br>
+					<strong>Reason</strong>: MenuManager is a singleton, and thus there must be only 1 instance of it in the entire project<br>
+					To allow for scene handling, the system moves the entire <strong>Menu network</strong> into the <code>DontDestroyOnLoad</code><br>
+					Which persists over scene loads.
+					</li>
+					<li>
+					<code>There is no subMenu of {menu parent} that bears the menu name {menu name}</code><br>
+					<strong>Cause</strong>: The search algorithm found no matches to the needed menu<br>
+					<strong>Reason</strong>: There are multiple possibilities, you either didn't create that menu yet, or you misspelt the menu name.<br>
+					The fuzzy search prevents minor spelling errors, but for larger mistakes, it can't compensate.<br>
+					Another reason can be that you put the menu into the wrong layer, or you mixed up the layers.<br>
+					<strong>Fix</strong> Find the action which called the OpenMenu function, and update the menu path
+					</li>
+					<li>
+					<code>There is no menu {current menu name} in the menu manager list, did you mean {closest match}? If so, please spell the menu name correctly in the function which tried to open this menu</code><br>
+					<strong>Cause</strong>: search algorithm didn't find any exact matches, but the fuzzy search found a close match.<br>
+					<strong>Reason</strong>: As previously stated, there can be multiple reasons: misspelt menu name is the most common one.<br>
+					<strong>Fix</strong>: Find the function call, and update the spelling on the menu
+					</li>
+					<li>
+					<code>There is no menu {Menu Name} and we couldn't find the closest match, please check that you input the correct naming order, and that you spelled the name correctly!</code><br>
+					<strong>Cause</strong>: search algorithm didn't find any exact matches, and the fuzzy search wasn't able to compensate<br>
+					<strong>Reason</strong>: As previously stated, multiple reasons exist: misspelt menu name, missed layer, you didn't create the menu yet, etc.<br>
+					<strong>Fix</strong>: Find out which of the reasons was the problem, and fix them (either creating the wanted menu or updating the menu path in the function call)<br>
+					</li>
+					<li>
+					<code>the transition is not setup correctly. Please add the trigger parameter called 'StartTransition'</code><br>
+					<strong>Cause</strong>: the "<strong>StartTransition</strong>" parameter in the target transition wasn't setup.
+					<strong>Reason</strong>: You didn't follow the steps for transition setup outlined in the <strong>section 03</strong>.<br>
+					<strong>Fix</strong>: Add the parameter "<strong>StartTransition</strong>". Check out the <strong>Section 03</strong> for details
+					</li>
+					<li>
+					<code>Duplicate menu name detected on the same branch. '{originalName}' was renamed to '{menuName}'.</code><br>
+					<strong>Cause</strong>: When renaming the menu, there was already one in the same layer with the same name.<br>
+					<strong>Fix</strong>: No fix needed, the program automatically handled the duplication, as evident in the message.
+					</li>
+					<li>
+					<code>A menu can't have an empty name! Renaming the menu to 'New Menu'</code><br>
+					<strong>Cause</strong>: You tried to rename a menu to an empty string. That's not allowed in this system.<br>
+					<strong>Fix</strong>: No fix needed, the menu was automatically renamed to "<strong>New Menu</strong>", as evident in the message
+					</li>
+					<li>
+					<code>Every Menu must be a direct or indirect child of the menu manager!</code><br>
+					<strong>Cause</strong>: moving the menu outside the MenuManager parent.<br>
+					<strong>Fix</strong>: No fix needed, the system automatically reverted the reparenting of the object.
+					</li>
+					</ul>
+					</p>
                 </div>
             </div>
         </div>
