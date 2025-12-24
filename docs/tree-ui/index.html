@@ -469,6 +469,11 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
 					<strong>Cause</strong>: moving the menu outside the MenuManager parent.<br>
 					<strong>Fix</strong>: No fix needed, the system automatically reverted the reparenting of the object.
 					</li>
+					<li>
+					<code>There can be either the Transition or the Menu component on a single object. Not both. Destroying the Transition component</code><br>
+					<strong>Cause</strong>: conflict between the menu and transition parenting. This is a preventative measure to stop a stack overflow<br>
+					<strong>Fix</strong>: No fix needed, the transition component is automatically destroyed.
+					</li>
 					</ul>
 					</p>
                 </div>
