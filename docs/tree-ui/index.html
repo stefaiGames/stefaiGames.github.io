@@ -487,8 +487,26 @@ code { background: #0b1522; color: var(--sky-blue); padding: 2px 6px; border-rad
             </div>
             <div x-show="open" x-collapse.duration.250ms class="border-t border-white/5">
                 <div class="p-8 text-slate-300 space-y-4">
-                    <p class="text-sm">The bridge between Animator states and the MenuManager logic.</p>
-                </div>
+                    <p>
+					Of course, any complex system has its best practices.<br>
+					Let's break them down.<br>
+					<br>
+					<ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+					<li>
+					<strong>Create a separate scene for the UI, that will be unloaded at start, and never loaded again.</strong><br>
+					This has a reason, and that's because the MenuManager is a singleton.<br>
+					This skips over a problem with the second scene loading of the scene which contains the Menu system.<br>
+					If this isn't done, you might get errors related to the singleton of the MenuManager.
+					</li>
+					<li>
+					<strong> Create a naming convention for the menus, and keep menu names sensible</strong><br>
+					This is a general recommendation for projects, but keep the menu names within a single naming convention.<br>
+					When setting up that way, the menu name referencing is much easier.
+					</li>
+					</ul>
+					</p>
+                
+				</div>
             </div>
         </div>
 		
