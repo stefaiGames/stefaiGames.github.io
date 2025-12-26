@@ -6,7 +6,7 @@
       "version": "1.0",
       "status": "active",
       "hasDocs": true,
-      "image": "treeUILogo.png",
+      "image": "Images/assets/tree-ui.png",
       "description": "Manage complex UI hierarchies via string-paths. A lightweight, ultra-scalable solution for dynamic navigation and automated UI management.",
       "link": "https://assetstore.unity.com",
       "size": "644 KB",
