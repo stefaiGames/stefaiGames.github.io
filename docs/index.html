@@ -53,7 +53,7 @@
                 
                 card.innerHTML = `
                     <div class="doc-card-header">
-                        <img src="../${asset.icon || asset.image.replace('../', '')}" class="doc-asset-icon" alt="${asset.name}">
+                        <img src="../Images/assetLogos/${asset.image}">
                         <span class="doc-version-tag">${asset.hasDocs ? 'v' + asset.version : 'Planned'}</span>
                     </div>
                     <h2>${asset.name}</h2>
