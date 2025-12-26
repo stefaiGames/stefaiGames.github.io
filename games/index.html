@@ -3,397 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stefai Games</title>
-<style>
-:root {
-    --pink: #ff3366;
-    --purp: #7a3fd1;
-    --dark-blue-header: #0B1522;
-    --dark-blue-feed: #101b2b;
-    --sky-blue: #7ec8e3;
-}
+<title>Stefai Games | Studio Roadmap</title>
+<link rel="icon" href="Images/logo.png" type="image/png">
+<link rel="stylesheet" href="https://stefaigames.github.io/design.css">
 
-/* Reset */
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: var(--dark-blue-feed);
-    color: white;
-    overflow-x: hidden;
-}
-
-/* Sticky Header */
-header {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    background-color: var(--dark-blue-header);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 50px;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
-
-/* Logo */
-.logo-wrapper {
-    position: relative;
-    display: inline-block;
-    border-radius: 20px;
-}
-.logo-wrapper::before {
-    content:"";
-    position: absolute;
-    top:-10px; left:-10px;
-    width: calc(100% + 20px);
-    height: calc(100% + 20px);
-    border-radius: 20px;
-    background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink));
-    background-size: 400%;
-    filter: blur(10px);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index:-1;
-}
-.logo-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
-
-.logo-wrapper a img {
-    width: 50px; height: 50px; border-radius:8px;
-    transition: transform 0.25s ease;
-}
-.logo-wrapper:hover img { transform: scale(1.08); }
-
-/* Navigation */
-nav {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    justify-content: flex-end;
-}
-
-/* Generic button wrapper for underglow */
-.nav-button-wrapper {
-    position: relative;
-    display: inline-block;
-    border-radius: 20px;
-}
-.nav-button-wrapper::before {
-    content:"";
-    position: absolute;
-    top:-5px; left:-5px;
-    width: calc(100% + 10px);
-    height: calc(100% + 10px);
-    border-radius: 20px;
-    background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink));
-    background-size: 400%;
-    filter: blur(10px);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index: -1;
-}
-.nav-button-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
-
-nav button {
-    background: rgba(16,27,43,0.9);
-    border: none;
-    color: white;
-    font-size: 1rem;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    position: relative;
-    z-index:1;
-    transition: transform 0.25s ease, box-shadow 0.3s ease;
-}
-.nav-button-wrapper:hover button {
-    transform: scale(1.06);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-}
-
-/* Banner section */
-.banner {
-    text-align: center;
-    padding: 40px 20px;
-    background-color: var(--dark-blue-header);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-}
-.banner img { width: 420px; max-width: 90%; height: auto; border-radius:6px; }
-.banner p { max-width: 900px; color:#ddd; line-height:1.5; }
-
-/* Landing page blocks backlight wrapper */
-.backlight-wrapper {
-    position: relative;
-    display: block;
-    border-radius: 12px;
-    transition: transform 0.3s ease;
-    width: 100%;
-    margin-bottom: 30px;
-}
-.backlight-wrapper::before {
-    content:"";
-    position: absolute;
-    top:-15px; left:-15px;
-    width: calc(100% + 30px);
-    height: calc(100% + 30px);
-    border-radius:16px;
-    background: linear-gradient(120deg, var(--pink), var(--purp), var(--sky-blue), var(--purp), var(--pink));
-    background-size: 400%;
-    filter: blur(30px);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index:-1;
-}
-.backlight-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
-.backlight-wrapper:hover > * { transform: translateY(-3px) scale(1.01); }
-
-/* Sections */
-.section {
-    width: 100%;
-    padding: 42px 20px;
-    display: flex;
-    justify-content: center;
-}
-.container {
-    width: 100%;
-    max-width: 1100px;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-}
-
-/* Assets & games blocks */
-.feature {
-    display:flex;
-    gap:18px;
-    align-items:center;
-    background: rgba(16,27,43,0.9);
-    padding:16px;
-    border-radius:12px;
-    transition:transform .28s ease;
-    text-decoration:none;
-    color:white;
-}
-.feature img { width: 200px; height: auto; flex-shrink:0; }
-.feature .text { flex:1; }
-
-.feature.reverse { flex-direction: row-reverse; }
-
-/* Product cards */
-.product-card {
-    display:flex;
-    gap:18px;
-    align-items:center;
-    background: rgba(16,27,43,0.9);
-    padding:16px;
-    border-radius:12px;
-    transition:transform .28s ease;
-    text-decoration:none;
-    color:white;
-}
-.product-card img { width:200px; height:auto; flex-shrink:0; }
-.product-card .product-text { flex:1; }
-
-.product-card.reverse { flex-direction: row-reverse; }
-
-/* Footer */
-footer {
-    background-color: var(--dark-blue-header);
-    padding: 40px 20px;
-    margin-top: 40px;
-}
-footer .footer-container {
-    max-width: 1000px;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-}
-
-/* Footer button wrapper for gradient */
-footer .footer-button-wrapper {
-    position: relative;
-    display: inline-block;
-    border-radius: 20px;
-}
-footer .footer-button-wrapper::before {
-    content:"";
-    position: absolute;
-    top:-5px; left:-5px;
-    width: calc(100% + 10px);
-    height: calc(100% + 10px);
-    border-radius: 20px;
-    background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink));
-    background-size: 400%;
-    filter: blur(12px);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index: 0;
-}
-footer .footer-button-wrapper:hover::before {
-    opacity: 0.85;
-    animation: gradient-shift 10s linear infinite;
-}
-
-footer .footer-button {
-    position: relative;
-    z-index: 1;
-    padding: 12px 24px;
-    border-radius: 20px;
-    background: rgba(16,27,43,0.9);
-	color: white; /* Add this line */
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-footer .footer-button-wrapper:hover .footer-button {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-}
-
-footer p {
-    margin-top: 20px;
-    font-size: 0.9rem;
-    text-align: center;
-    color: #aaa;
-}
-
-/* Utilities */
-.h1 { font-size:1.8rem; text-align:center; margin:12px 0 6px; }
-.lead { color:#ddd; text-align:center; margin-bottom:8px; }
-
-@keyframes gradient-shift { 0% { background-position:0% 50%; } 100% { background-position:400% 50%; } }
-
-/* Responsive */
-@media (max-width:900px) {
-    .feature, .product-card { flex-direction: column; text-align:center; }
-    .feature.reverse, .product-card.reverse { flex-direction: column; }
-    .feature img, .product-card img { width:90%; height:auto; }
-    header { padding:12px 18px }
-    nav { gap:10px; flex-wrap: wrap; justify-content: center; }
-}
-</style>
 </head>
+
 <body>
 
 <header>
     <div class="logo-wrapper">
-        <a href="https://stefaigames.github.io/"><img src="Images/logo.png" alt="Stefai Games logo"></a>
+        <a href="https://stefaigames.github.io/"><img src="../Images/logo.png" alt="Stefai Games logo"></a>
     </div>
     <nav>
-        <div class="nav-button-wrapper"><button onclick="location.href='https://stefaigames.com/assets/'">Assets</button></div>
-        <div class="nav-button-wrapper"><button onclick="location.href='https://stefaigames.com/games/'">Games</button></div>
+        <div class="gradient-wrapper"><a href="https://stefaigames.github.io/assets/" class="button">Assets</a></div>
+        <div class="gradient-wrapper"><a href="https://stefaigames.github.io/games/" class="button">Games</a></div>
+        <div class="gradient-wrapper"><a href="https://stefaigames.github.io/docs/" class="button">Docs</a></div>
     </nav>
 </header>
 
-<section class="banner">
-    <img src="Images/banner.png" alt="Stefai Games Banner">
-    <p>Whether you want to build or play games, we’ve got you covered. Our tools make development easier, while our games help you unwind.</p>
+<section class="hero-vanta">
+    <img src="Images/banner.png" class="main-banner" alt="Stefai Games Banner">
+    <h1>Studio Roadmap</h1>
+    <p>We are building a studio in reverse. First, we forge the tools. Next, we build the ecosystem. Finally, we prove them in production.</p>
 </section>
 
-<section class="section">
-    <div class="container">
-        <h2 class="h1">Build With Us</h2>
-        <a href="https://assets.stefaigames.com" class="backlight-wrapper">
-            <div class="feature" style="padding: 50px 40px;">
-                <img src="Images/assets.png" alt="Assets preview">
-                <div class="text"><p>High-quality Unity tools and workflow helpers to speed up development.</p></div>
-            </div>
-        </a>
+<div class="landing-trust-ribbon">
+    <div class="landing-ribbon-container">
+        <div class="landing-stat-box"><span>Phase 1</span><strong>Core Frameworks</strong></div>
+        <div class="landing-stat-box"><span>Phase 2</span><strong>Ecosystem</strong></div>
+        <div class="landing-stat-box"><span>Phase 3</span><strong>Studio Production</strong></div>
     </div>
-</section>
+</div>
 
-<section class="section">
-    <div class="container">
-        <h2 class="h1">Play With Us</h2>
-        <a href="https://games.stefaigames.com" class="backlight-wrapper">
-            <div class="feature reverse" style="padding: 50px 40px;">
-                <img src="Images/games.png" alt="Games preview">
-                <div class="text"><p>Our racing games were made with love and passion, created by car guys, for car guys</p></div>
-            </div>
-        </a>
-    </div>
-</section>
+<div class="landing-section-tag">
+    <div class="landing-badge">CURRENT FOCUS: PHASE 1</div>
+</div>
 
-<section class="section">
-    <div class="container">
-        <h2 class="h1">Hero Product</h2>
-        <a href="https://hero.stefaigames.com" class="backlight-wrapper">
-            <div class="product-card" style="padding: 50px 40px;">
-                <img src="Images/hero.png" alt="Hero product">
-                <div class="product-text"><p>TreeUI — tree-structure based menu system with integrated animator transitions and scene management. Documented, optimized, lightweight.</p></div>
+<div class="landing-portal-grid">
+    <div class="backlight-card" style="grid-column: span 2;"> <div class="landing-inner-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:15px;">
+                <h2 style="margin:0;">TreeUI</h2>
+                <span style="background: rgba(100, 255, 218, 0.1); color: #64ffda; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; border: 1px solid rgba(100, 255, 218, 0.3);">ACTIVE DEVELOPMENT</span>
             </div>
-        </a>
+            <p>The foundation of our roadmap. Before we can build complex games, we need a UI system that doesn't fight the designer. TreeUI is being built to solve the fragmentation of Unity's interface logic.</p>
+            <ul style="color: #a0aec0; margin-bottom: 20px; line-height: 1.6;">
+                <li>• Visual Node Graph integration</li>
+                <li>• Decoupled Event System</li>
+                <li>• Zero-allocation runtime performance</li>
+            </ul>
+            <div class="landing-button-container">
+                <a href="https://stefaigames.github.io/assets/" class="landing-action-btn">View Asset Progress</a>
+            </div>
+        </div>
     </div>
-</section>
+</div>
 
-<section class="section">
-    <div class="container">
-        <h2 class="h1">Newest Product</h2>
-        <a href="https://newest.stefaigames.com" class="backlight-wrapper">
-            <div class="product-card reverse" style="padding: 50px 40px;">
-                <img src="Images/newest.png" alt="Newest product">
-                <div class="product-text">
-                    <p>MiniTool — small helper utility focused on ergonomic tools and rapid iteration.</p>
-                </div>
+<div class="landing-section-tag" style="margin-top: 50px;">
+    <div class="landing-badge">UP NEXT: PHASE 2</div>
+</div>
+
+<div class="landing-portal-grid">
+    <div class="backlight-card">
+        <div class="landing-inner-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:15px;">
+                <h2 style="margin:0;">Logic & State</h2>
+                <span style="background: rgba(100, 200, 255, 0.1); color: #64d2ff; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; border: 1px solid rgba(100, 200, 255, 0.3);">PLANNED</span>
             </div>
-        </a>
+            <p>Expanding beyond UI. We will introduce systems for high-performance state management and entity interaction, designed to plug directly into TreeUI.</p>
+        </div>
     </div>
-</section>
+
+    <div class="backlight-card">
+        <div class="landing-inner-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:15px;">
+                <h2 style="margin:0;">Tooling</h2>
+                <span style="background: rgba(100, 200, 255, 0.1); color: #64d2ff; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; border: 1px solid rgba(100, 200, 255, 0.3);">PLANNED</span>
+            </div>
+            <p>Workflow enhancements to speed up the editor experience. Focus on reducing iteration time for designers and artists.</p>
+        </div>
+    </div>
+</div>
+
+<div class="landing-section-tag" style="margin-top: 50px;">
+    <div class="landing-badge">THE HORIZON: PHASE 3</div>
+</div>
+
+<div class="landing-trinity-section" style="margin-bottom: 50px;">
+    <div class="landing-trinity-card" style="width: 100%; text-align: left;">
+        <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:15px;">
+            <h3 style="margin:0;"><strong>Studio Titles</strong></h3>
+             <span style="background: rgba(255, 255, 255, 0.1); color: #fff; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; border: 1px solid rgba(255, 255, 255, 0.3);">LONG TERM</span>
+        </div>
+        <p>Once the ecosystem is mature, Stefai Games shifts to production. We will use our own tools to build commercial titles.</p>
+        <p style="margin-top: 15px;">This "Dogfooding" process ensures that every asset we sell is battle-tested in a real shipping environment, not just a demo scene. If our tools aren't good enough for us to ship a game, they aren't good enough for you.</p>
+    </div>
+</div>
 
 <footer>
     <div class="footer-container">
-
-        <div class="footer-button-wrapper">
-            <a href="mailto:stefai.games.unity@gmail.com">
-                <div class="footer-button">
-                    <img src="Images/gmail.png" style="width:20px; vertical-align:middle; margin-right:0px;">
-                    Email
-                </div>
-            </a>
-        </div>
-
-        <div class="footer-button-wrapper">
-            <a href="https://www.instagram.com/stefaigames/">
-                <div class="footer-button">
-                    <img src="Images/instagram.png" style="width:20px; vertical-align:middle; margin-right:0px;">
-                    Instagram
-                </div>
-            </a>
-        </div>
-
-        <div class="footer-button-wrapper">
-            <a href="https://www.youtube.com/@StefaiGames">
-                <div class="footer-button">
-                    <img src="Images/youtube.png" style="width:20px; vertical-align:middle; margin-right:0px;">
-                    YouTube
-                </div>
-            </a>
-        </div>
-
-        <div class="footer-button-wrapper">
-            <a href="https://www.reddit.com/user/stefai_games/">
-                <div class="footer-button">
-                    <img src="Images/reddit.png" style="width:20px; vertical-align:middle; margin-right:0px;">
-                    Reddit
-                </div>
-            </a>
-        </div>
-
-        <div class="footer-button-wrapper">
-            <a href="#">
-                <div class="footer-button">
-                    <img src="Images/linkedin.png" style="width:20px; vertical-align:middle; margin-right:0px;">
-                    LinkedIn
-                </div>
-            </a>
-        </div>
-
+        <div class="footer-button-wrapper"><a href="mailto:stefai.games.unity@gmail.com" class="footer-button"><img src="../Images/gmail.png" alt="Gmail" style="width:20px;"> Email</a></div>
+        <div class="footer-button-wrapper"><a href="https://www.instagram.com/stefaigames/" class="footer-button"><img src="../Images/instagram.png" alt="Instagram" style="width:20px;"> Instagram</a></div>
+        <div class="footer-button-wrapper"><a href="https://www.youtube.com/@StefaiGames" class="footer-button"><img src="../Images/youtube.png" alt="YouTube" style="width:20px;"> YouTube</a></div>
+        <div class="footer-button-wrapper"><a href="https://www.reddit.com/user/stefai_games/" class="footer-button"><img src="../Images/reddit.png" alt="Reddit" style="width:20px;"> Reddit</a></div>
+        <div class="footer-button-wrapper"><a href="#" class="footer-button"><img src="../Images/linkedin.png" alt="LinkedIn" style="width:20px;"> LinkedIn</a></div>
     </div>
-
-    <p>© 2025 Stefai Games. All rights reserved.</p>
+    <p style="margin-top: 25px; font-size: 0.9rem; color: #718096; text-align: center;">© 2025 Stefai Games. All rights reserved.</p>
 </footer>
+
 </body>
 </html>
