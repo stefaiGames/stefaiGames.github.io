@@ -370,16 +370,18 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
         max-width: 400px;
     }
 
-    /* 5. Footer: Make it finger-friendly */
+    /* 5. Footer: Fixed centering for odd-numbered items (5 contact options) */
     .footer-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for icons */
-        gap: 10px;
+        display: flex;            /* Switch from grid to flex */
+        flex-wrap: wrap;          /* Allow items to wrap to the next line */
+        justify-content: center;  /* Center all items, including the lone 5th item */
+        gap: 15px;                /* Consistent spacing */
         padding: 0 15px;
     }
 
     .footer-button-wrapper {
-        width: 100%;
+        width: calc(50% - 10px);  /* Keep them roughly 2-per-row */
+        min-width: 140px;         /* Prevent buttons from getting too squished */
     }
 	
     /* Assets Page Specific Mobile */
