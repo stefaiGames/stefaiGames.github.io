@@ -395,10 +395,10 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
         grid-template-columns: 1fr;
         margin-top: 20px;
     }
-    .docs-card {
+    .doc-card {
         padding: 20px;
     }
-    .docs-card h2 {
+    .doc-card h2 {
         font-size: 1.3rem;
     }
 
