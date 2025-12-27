@@ -45,20 +45,20 @@
                 
                 if (asset.hasDocs) {
                     card.href = `${asset.id}/index.html`;
-                    card.className = 'doc-card active';
+                    card.className = 'docs-card active';
                 } else {
                     card.href = "javascript:void(0)"; // Non-functional link
-                    card.className = 'doc-card disabled';
+                    card.className = 'docs-card disabled';
                 }
                 
                 card.innerHTML = `
                     <div class="doc-card-header">
 						<img src="../${asset.image}" style="width:40px" alt="asset logo">
-                        <span class="doc-version-tag">${asset.hasDocs ? 'v' + asset.version : 'Planned'}</span>
+                        <span class="docs-version-tag">${asset.hasDocs ? 'v' + asset.version : 'Planned'}</span>
                     </div>
                     <h2>${asset.name}</h2>
                     <p>${asset.description}</p>
-                    <div class="doc-card-footer">
+                    <div class="docs-card-footer">
                         <span>${asset.hasDocs ? 'Explore Manual →' : 'Documentation Coming Soon'}</span>
                     </div>
                 `;
