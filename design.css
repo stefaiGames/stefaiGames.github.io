@@ -245,3 +245,206 @@ footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-t
     align-items: center;
     gap: 8px;
 }
+
+/*---------------------mobile---------------------*/
+/* Mobile Adaptations - Only triggers for screens smaller than 768px */
+@media screen and (max-width: 768px) {
+    
+    
+}
+
+/*----------------------GENERAL-------------------------*/
+
+:root {
+    --pink: #ff3366;
+    --purp: #7a3fd1;
+    --sky-blue: #7ec8e3;
+    --dark-blue-header: #0B1522;
+    --dark-blue-feed: #101b2b;
+    --dark-blue-alt: #121f33;
+    --intro-bg: #0f1a27;
+    --card-bg: #16243a;
+    --button-bg: rgba(16,27,43,0.9);
+}
+
+/* RESET */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body { 
+    font-family: 'Arial', sans-serif; 
+    background-color: var(--dark-blue-feed); 
+    color: white; 
+    overflow-x: hidden; 
+    line-height: 1.6;
+    background-image: 
+        linear-gradient(rgba(126, 200, 227, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126, 200, 227, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+}
+
+/* HEADER */
+header { position: sticky; top: 0; width: 100%; background-color: var(--dark-blue-header); display: flex; justify-content: space-between; align-items: center; padding: 10px 50px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.logo-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.logo-wrapper::before { content:""; position: absolute; top:-10px; left:-10px; width: calc(100% + 20px); height: calc(100% + 20px); border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index:-1; }
+.logo-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
+.logo-wrapper img { width:50px; height:50px; border-radius:8px; transition: transform 0.25s ease; }
+.logo-wrapper:hover img { transform: scale(1.08); }
+
+nav { display: flex; align-items: center; gap: 14px; }
+.gradient-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.gradient-wrapper::before { content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); background-size: 400%; filter: blur(10px); opacity: 0; transition: opacity 0.6s ease; z-index: -1; }
+.gradient-wrapper:hover::before { opacity: 0.9; animation: gradient-shift 10s linear infinite; }
+
+a.button { 
+    display: inline-block; padding: 10px 20px; background: var(--button-bg); color: white; 
+    text-decoration: none; border-radius: 20px; font-size: 1rem; position: relative; z-index: 1; 
+    transition: transform 0.25s ease, opacity 0.3s ease; border: 1px solid rgba(255,255,255,0.05);
+}
+a.button:hover { transform: scale(1.06); }
+a.button.disabled { opacity: 0.4; cursor: not-allowed; border: 1px solid rgba(255,255,255,0.1); }
+
+@keyframes gradient-shift { 0% { background-position:0% 50%; } 100% { background-position:400% 50%; } }
+
+/*------------------FOOTER-------------------*/
+
+footer { background-color: var(--dark-blue-header); padding: 50px 20px; margin-top: 40px; text-align: center; }
+.footer-container { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+.footer-button-wrapper { position: relative; display: inline-block; border-radius: 20px; }
+.footer-button-wrapper::before { content:""; position: absolute; top:-5px; left:-5px; width: calc(100% + 10px); height: calc(100% + 10px); border-radius: 20px; background: linear-gradient(120deg,var(--pink),var(--purp),var(--sky-blue),var(--purp),var(--pink)); background-size: 400%; filter: blur(12px); opacity: 0; transition: opacity 0.6s ease; z-index: 0; }
+.footer-button-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
+.footer-button { display: flex; align-items: center; gap: 6px; position: relative; z-index: 1; padding: 12px 24px; border-radius: 20px; background: var(--button-bg); color: white; text-decoration: none; transition: transform 0.2s; }
+
+
+/*------------------LANDING PAGE-------------------*/
+
+.hero-vanta { padding: 100px 20px 40px; background: radial-gradient(circle at center, var(--intro-bg) 0%, transparent 80%); text-align: center; }
+.hero-vanta h1 { font-size: 3.5rem; font-weight: 800; background: linear-gradient(to right, var(--sky-blue), var(--pink)); -webkit-background-clip: text; color: transparent; margin-bottom: 15px; }
+.hero-vanta p { max-width: 850px; margin: 0 auto; color: #a0aec0; font-size: 1.15rem; }
+
+.landing-trinity-section { max-width: 1100px; margin: 0 auto 100px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 0 20px; }
+.landing-trinity-card { background: rgba(16, 27, 43, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 25px; border-radius: 16px; text-align: center; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: default; }
+.landing-trinity-card:hover { transform: scale(1.05); background: rgba(16, 27, 43, 0.9); }
+
+/*------------------ASSETS PAGE-------------------*/
+
+.assets-top-banner { padding: 100px 20px; background: var(--intro-bg); text-align: center; border-bottom: 2px solid rgba(255,255,255,0.06); margin-bottom: 80px; }
+.assets-top-banner h1 { font-size: 3.5rem; background: linear-gradient(to right, var(--sky-blue), var(--pink)); -webkit-background-clip: text; color: transparent; font-weight: 800; }
+
+.assets-hero-wrapper { position: relative; border-radius: 24px; margin-bottom: 80px; }
+.assets-hero-wrapper::before {
+    content:""; position: absolute; top:-20px; left:-20px; width: calc(100% + 40px); height: calc(100% + 40px);
+    border-radius: 24px; background: linear-gradient(120deg, var(--pink), var(--purp), var(--sky-blue), var(--purp), var(--pink));
+    background-size: 400%; filter: blur(35px); opacity: 0.25; transition: opacity 0.8s ease; z-index: 0;
+}
+.assets-hero-wrapper:hover::before { opacity:0.85; animation:gradient-shift 10s linear infinite; }
+
+.assets-featured-card { position: relative; z-index: 1; background: var(--card-bg); border-radius: 21px; display: grid; grid-template-columns: 1fr 1.2fr; overflow: hidden; }
+.assets-visuals { background: #080f1a; display: flex; align-items: center; justify-content: center; padding: 40px; }
+.assets-main-preview { width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.assets-info { padding: 50px; }
+
+.assets-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; background: rgba(126, 200, 227, 0.1); color: var(--sky-blue); font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; border: 1px solid rgba(126, 200, 227, 0.3); text-transform: uppercase; }
+
+.assets-stats-bar { display: flex; gap: 10px; margin: 25px 0; }
+.assets-stat-item { background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); flex: 1; text-align: center; }
+.assets-stat-item span { display: block; font-size: 0.65rem; color: var(--sky-blue); text-transform: uppercase; }
+.assets-stat-item strong { font-size: 1rem; }
+
+.assets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; }
+.assets-card-wrapper { position: relative; border-radius: 16px; transition: transform 0.25s ease, opacity 0.3s ease; }
+.assets-card-wrapper::before {
+    content:""; position: absolute; top:-10px; left:-10px; width: calc(100% + 20px); height: calc(100% + 20px);
+    border-radius: 16px; background: linear-gradient(120deg, var(--pink), var(--purp), var(--sky-blue), var(--purp), var(--pink));
+    background-size: 400%; filter: blur(20px); opacity: 0; transition: opacity 0.4s ease; z-index: 0;
+}
+.assets-card-wrapper.active:hover::before { opacity: 0.7; animation: gradient-shift 10s linear infinite; }
+.assets-card-wrapper:hover { transform: scale(1.05); }
+
+.assets-mini-card { position: relative; z-index: 1; background: var(--card-bg); padding: 25px; border-radius: 12px; height: 100%; display: flex; flex-direction: column; }
+.assets-action-label { position: absolute; bottom: 15px; right: 15px; padding: 5px 12px; border-radius: 20px; background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255,255,255,0.15); color: var(--sky-blue); font-size: 0.7rem; font-weight: bold; text-transform: uppercase; z-index: 3; opacity: 0; transition: opacity 0.3s ease; }
+.assets-card-wrapper.active:hover .assets-action-label { opacity: 1; }
+.assets-status-badge { position: absolute; bottom: 15px; right: 15px; padding: 5px 12px; border-radius: 20px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.2); color: white; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; z-index: 3; }
+.assets-card-wrapper.upcoming { opacity: 0.4; filter: grayscale(0.8); }
+
+/*------------------MOBILE OVERRIDES-------------------*/
+
+@media screen and (max-width: 768px) {
+    
+	/* 1. Fix the Header: Stack or Shrink */
+    header {
+        flex-direction: column;
+        padding: 15px 10px;
+        gap: 15px;
+    }
+
+    nav {
+        width: 100%;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .button {
+        padding: 8px 15px; /* Slightly smaller buttons for mobile thumbs */
+        font-size: 0.9rem;
+    }
+
+    /* 2. Hero Section: Scale the Text */
+    .hero-vanta h1 {
+        font-size: 2.5rem; /* Prevents title from breaking onto 3 lines */
+    }
+
+    .hero-vanta p {
+        padding: 0 20px;
+        font-size: 1rem;
+    }
+
+    /* 3. The Ribbon: Allow wrapping so stats don't disappear */
+    .landing-ribbon-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .landing-stat-box {
+        min-width: 120px; /* Ensures they stack neatly 2x1 or 1x3 */
+    }
+
+    /* 4. The Trinity & Portal Grids: Stack vertically */
+    .landing-trinity-section, 
+    .landing-portal-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .landing-trinity-card, 
+    .backlight-card {
+        width: 100% !important; /* Force cards to take full width */
+        max-width: 400px;
+    }
+
+    /* 5. Footer: Make it finger-friendly */
+    .footer-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for icons */
+        gap: 10px;
+        padding: 0 15px;
+    }
+
+    .footer-button-wrapper {
+        width: 100%;
+    }
+	
+    /* Assets Page Specific Mobile */
+    .assets-featured-card { grid-template-columns: 1fr; }
+    .assets-visuals { padding: 20px; }
+    .assets-info { padding: 30px 20px; text-align: center; }
+    .assets-info h2 { font-size: 1.8rem !important; }
+    .assets-stats-bar { flex-wrap: wrap; justify-content: center; }
+    .assets-stat-item { min-width: 80px; }
+    
+    /* Layout stacks */
+    .landing-trinity-section, .assets-grid { grid-template-columns: 1fr; padding: 0 15px; }
+}
